@@ -186,13 +186,48 @@
     <div id="contador" style="font-weight: bold; margin-bottom: 10px;">Registros pendientes: 0</div>
     
     <!-- Transmisión de Red final -->
-    <button type="button" class="btn-sync" onclick="sincronizarGSheets()">🔄 Sincronizar a Google Sheets</button>
+    <button type="button" class="btn-sync" onclick="    async function sincronizarGSheets() {
+        const status = document.getElementById('status');
+        let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
+
+        if (datosLocales.length === 0) {
+            status.innerText = "No hay registros pendientes por enviar.";
+            return;
+        }
+        if (!navigator.onLine) {
+            status.innerText = "Sin internet. No puedes sincronizar todavía.";
+            return;
+        }
+
+        status.innerText = "Sincronizando registros...";
+
+        // Usamos un formato de formulario plano para saltar bloqueos de Google
+        const formData = new URLSearchParams();
+        formData.append('datos', JSON.stringify(datosLocales));
+
+        try {
+            await fetch(WEB_APP_URL, {
+                method: "POST",
+                mode: "no-cors", 
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: formData.toString()
+            });
+
+            // Limpiar memoria interna tras enviar con éxito
+            localStorage.removeItem('visitas_vcxc');
+            status.innerText = "¡Sincronización exitosa! Revisa tu Google Sheets VCXC.";
+            actualizarContador();
+        } catch (error) {
+            status.innerText = "Error en la conexión de red.";
+        }
+    }
+">🔄 Sincronizar a Google Sheets</button>
     
     <div id="status" style="margin-top: 15px; font-weight: bold; color: #333;"></div>
 </div>
 <script>
     // IMPORTANTE: REEMPLAZA ESTA URL POR LA QUE TE DA GOOGLE APPS SCRIPT
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzzo1YOrPg6iu7FkRJTtQj5De3ofvJaVYeV6i6_AroTxQ5Ek_eHS1Z8GHdgMOTtEx0L/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxY4EDM0EzHZZmhpJkaIGz1K-VRx1ObsXoJiKKMRwAAYWnVWLgBSoVBUYSrQbrFlIIW/exec";
 
     let latitudActual = "";
     let longitudActual = "";
