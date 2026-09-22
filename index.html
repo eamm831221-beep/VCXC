@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Captura de Visitas VCXC</title>
+    <title>Registro Completo VCXC</title>
     <style>
         body { font-family: Arial, sans-serif; padding: 15px; background-color: #f4f7f6; text-align: center; }
         .card { max-width: 480px; margin: 0 auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.12); }
         h2, h3 { color: #0f342e; margin-bottom: 20px; }
-        h3 { border-bottom: 2px solid #b2dfdb; padding-bottom: 5px; margin-top: 30px; text-align: left; }
+        h3 { border-bottom: 2px solid #b2dfdb; padding-bottom: 5px; margin-top: 35px; text-align: left; }
         .form-group { margin-bottom: 20px; text-align: left; }
         label { display: block; font-weight: bold; margin-bottom: 6px; color: #263238; }
-        input[type="text"], input[type="tel"], input[type="list"], select { width: 100%; padding: 12px; font-size: 16px; border-radius: 5px; border: 1px solid #cfd8dc; box-sizing: border-box; }
+        input[type="text"], input[type="tel"], select, textarea { width: 100%; padding: 12px; font-size: 16px; border-radius: 5px; border: 1px solid #cfd8dc; box-sizing: border-box; font-family: Arial, sans-serif; }
         
         .radio-tile-group { display: flex; gap: 10px; margin-top: 5px; }
         .radio-tile-group.vertical { flex-direction: column; gap: 8px; }
@@ -40,7 +40,8 @@
             Latitud: <span id="lat-txt">-</span> | Longitud: <span id="lon-txt">-</span>
         </div>
     </div>
-    <!-- 2. Servidor Público con Buscador Inteligente -->
+
+    <!-- 2. Servidor Público -->
     <div class="form-group">
         <label for="servidor">2. Servidor Público (Escribe para buscar)</label>
         <input list="lista-servidores" id="servidor" placeholder="Escribe el nombre del trabajador..." required>
@@ -191,54 +192,88 @@
 
     <!-- DATOS DE LA PERSONA ENTREVISTADA -->
     <h3>DATOS DE LA PERSONA ENTREVISTADA</h3>
-    
-    <div class="form-group">
-        <label for="nombre">3. Nombre</label>
-        <input type="text" id="nombre">
-    </div>
-    <div class="form-group">
-        <label for="apellido_paterno">4. Apellido paterno</label>
-        <input type="text" id="apellido_paterno">
-    </div>
-    <div class="form-group">
-        <label for="apellido_materno">5. Apellido materno</label>
-        <input type="text" id="apellido_materno">
-    </div>
-    <div class="form-group">
-        <label for="telefono">6. Teléfono</label>
-        <input type="tel" id="telefono" pattern="[0-9]{10}" placeholder="Ej. 6181234567">
-    </div>
+    <div class="form-group"><label for="nombre">3. Nombre</label><input type="text" id="nombre"></div>
+    <div class="form-group"><label for="apellido_paterno">4. Apellido paterno</label><input type="text" id="apellido_paterno"></div>
+    <div class="form-group"><label for="apellido_materno">5. Apellido materno</label><input type="text" id="apellido_materno"></div>
+    <div class="form-group"><label for="telefono">6. Teléfono</label><input type="tel" id="telefono" pattern="[0-9]{10}" placeholder="10 dígitos"></div>
 
     <div class="form-group">
         <label>7. Sexo</label>
         <div class="radio-tile-group">
-            <label class="radio-tile">
-                <input type="radio" name="sexo" value="Hombre">
-                <span>Hombre</span>
-            </label>
-            <label class="radio-tile">
-                <input type="radio" name="sexo" value="Mujer">
-                <span>Mujer</span>
-            </label>
+            <label class="radio-tile"><input type="radio" name="sexo" value="Hombre"><span>Hombre</span></label>
+            <label class="radio-tile"><input type="radio" name="sexo" value="Mujer"><span>Mujer</span></label>
         </div>
     </div>
 
     <div class="form-group">
         <label>8. Grupo de edad</label>
         <div class="radio-tile-group vertical">
-            <label class="radio-tile">
-                <input type="radio" name="grupo_edad" value="Joven de 15 a 29 años">
-                <span>Joven de 15 a 29 años</span>
-            </label>
-            <label class="radio-tile">
-                <input type="radio" name="grupo_edad" value="Adulto de 30 a 64 años">
-                <span>Adulto de 30 a 64 años</span>
-            </label>
-            <label class="radio-tile">
-                <input type="radio" name="grupo_edad" value="Adulto Mayor de 65 años">
-                <span>Adulto Mayor de 65 años</span>
-            </label>
+            <label class="radio-tile"><input type="radio" name="grupo_edad" value="Joven de 15 a 29 años"><span>Joven de 15 a 29 años</span></label>
+            <label class="radio-tile"><input type="radio" name="grupo_edad" value="Adulto de 30 a 64 años"><span>Adulto de 30 a 64 años</span></label>
+            <label class="radio-tile"><input type="radio" name="grupo_edad" value="Adulto Mayor de 65 años"><span>Adulto Mayor de 65 años</span></label>
         </div>
+    </div>
+    <!-- DOMICILIO -->
+    <h3>DOMICILIO</h3>
+    <div class="form-group">
+        <label for="domicilio">9. Calle, Numero, Colonia</label>
+        <textarea id="domicilio" rows="3" placeholder="Ingresa gran cantidad de texto..."></textarea>
+    </div>
+    <div class="form-group"><label for="localidad">10. Localidad</label><input type="text" id="localidad"></div>
+    <div class="form-group"><label for="zona">11. Zona</label><input type="text" id="zona" pattern="[0-9]{3}" maxlength="3" placeholder="Ej. 012"></div>
+    <div class="form-group"><label for="seccion">12. Sección</label><input type="text" id="seccion" pattern="[0-9]{4}" maxlength="4" placeholder="Ej. 1405"></div>
+
+    <!-- PROGRAMA Y MENSAJE -->
+    <h3>INFORMACIÓN COMPLEMENTARIA</h3>
+    <div class="form-group">
+        <label for="programa">13. Programa al que pertenece</label>
+        <select id="programa">
+            <option value="">Selecciona una opción...</option>
+            <option value="Adulto Mayor">Adulto Mayor</option>
+            <option value="Discapacidad">Discapacidad</option>
+            <option value="Mujeres Bienestar">Mujeres Bienestar</option>
+            <option value="Beca Benito Juarez">Beca Benito Juarez</option>
+            <option value="Beca Rita Cetina">Beca Rita Cetina</option>
+            <option value="Jovenes Construyendo el Futuro">Jovenes Construyendo el Futuro</option>
+            <option value="Boxeando por la Paz">Boxeando por la Paz</option>
+            <option value="Ninguno">Ninguno</option>
+            <option value="Otro">Otro</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="recepcion">14. ¿Cómo califica la recepción del mensaje?</label>
+        <select id="recepcion">
+            <option value="">Selecciona una opción...</option>
+            <option value="Excelente">Excelente</option>
+            <option value="Bueno">Bueno</option>
+            <option value="Regular">Regular</option>
+            <option value="Mala">Mala</option>
+            <option value="Muy mala">Muy mala</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="problematica">15. Problemática detectada</label>
+        <select id="problematica">
+            <option value="">Selecciona una opción...</option>
+            <option value="AGUA">AGUA</option>
+            <option value="ELECTRICIDAD">ELECTRICIDAD</option>
+            <option value="VIVIENDA">VIVIENDA</option>
+            <option value="SALUD">SALUD</option>
+            <option value="EDUCACION">EDUCACION</option>
+            <option value="TRANSPORTE">TRANSPORTE</option>
+            <option value="SERVICIOS PUBLICOS">SERVICIOS PUBLICOS</option>
+            <option value="MEDIO AMBIENTE">MEDIO AMBIENTE</option>
+            <option value="PROGRAMAS SOCIALES">PROGRAMAS SOCIALES</option>
+            <option value="TRAMITES">TRAMITES</option>
+            <option value="OTRO">OTRO</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="observacion">16. OBSERVACION/INCIDENCIA</label>
+        <textarea id="observacion" rows="3" placeholder="Texto abierto para incidencias..."></textarea>
     </div>
 
     <hr>
@@ -250,7 +285,7 @@
 </div>
 <script>
     // IMPORTANTE: REEMPLAZA ESTA URL POR LA QUE TE DA GOOGLE APPS SCRIPT
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx2cAqiwSSXyYSvPErF0zaKJJsfi2YbYVN95UMIKLhEUON9Z6Jo58Uy8CEh0j2WjxFB/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxuBU6WLk0xtky7QJtJdWuvtLATT5tX1pXhl4zrxOl1fQzudYrEWpIbnxWvMxs0sZDR/exec";
 
     let latitudActual = "";
     let longitudActual = "";
@@ -279,17 +314,7 @@
     function guardarOffline() {
         const status = document.getElementById('status');
         const servidor = document.getElementById('servidor').value;
-        const nombre = document.getElementById('nombre').value;
-        const appat = document.getElementById('apellido_paterno').value;
-        const apmat = document.getElementById('apellido_materno').value;
-        const tel = document.getElementById('telefono').value;
         
-        const radioSexo = document.querySelector('input[name="sexo"]:checked');
-        const radioEdad = document.querySelector('input[name="grupo_edad"]:checked');
-        
-        const sexo = radioSexo ? radioSexo.value : "";
-        const edad = radioEdad ? radioEdad.value : "";
-
         if (!latitudActual || !longitudActual) {
             status.innerText = "Primero debes buscar la georreferencia.";
             return;
@@ -299,25 +324,37 @@
             return;
         }
 
+        const radioSexo = document.querySelector('input[name="sexo"]:checked');
+        const radioEdad = document.querySelector('input[name="grupo_edad"]:checked');
         const ahora = new Date();
+
         const nuevoRegistro = {
             fecha: ahora.toLocaleDateString('es-MX'),
             hora: ahora.toLocaleTimeString('es-MX'),
             lat: latitudActual,
             lon: longitudActual,
             servidor: servidor,
-            nombre: nombre,
-            appat: appat,
-            apmat: apmat,
-            tel: tel,
-            sexo: sexo,
-            edad: edad
+            nombre: document.getElementById('nombre').value,
+            appat: document.getElementById('apellido_paterno').value,
+            apmat: document.getElementById('apellido_materno').value,
+            tel: document.getElementById('telefono').value,
+            sexo: radioSexo ? radioSexo.value : "",
+            edad: radioEdad ? radioEdad.value : "",
+            domicilio: document.getElementById('domicilio').value,
+            localidad: document.getElementById('localidad').value,
+            zona: document.getElementById('zona').value,
+            seccion: document.getElementById('seccion').value,
+            programa: document.getElementById('programa').value,
+            recepcion: document.getElementById('recepcion').value,
+            problematica: document.getElementById('problematica').value,
+            observacion: document.getElementById('observacion').value
         };
 
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
         datosLocales.push(nuevoRegistro);
         localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
 
+        // Limpieza masiva de campos
         latitudActual = ""; longitudActual = "";
         document.getElementById('lat-txt').innerText = "-";
         document.getElementById('lon-txt').innerText = "-";
@@ -326,10 +363,18 @@
         document.getElementById('apellido_paterno').value = "";
         document.getElementById('apellido_materno').value = "";
         document.getElementById('telefono').value = "";
+        document.getElementById('domicilio').value = "";
+        document.getElementById('localidad').value = "";
+        document.getElementById('zona').value = "";
+        document.getElementById('seccion').value = "";
+        document.getElementById('programa').value = "";
+        document.getElementById('recepcion').value = "";
+        document.getElementById('problematica').value = "";
+        document.getElementById('observacion').value = "";
         if(radioSexo) radioSexo.checked = false;
         if(radioEdad) radioEdad.checked = false;
         
-        status.innerText = "¡Registro guardado localmente!";
+        status.innerText = "¡Registro completo guardado localmente!";
         actualizarContador();
     }
 
@@ -365,7 +410,7 @@
             });
 
             localStorage.removeItem('visitas_vcxc');
-            status.innerText = "¡Sincronización exitosa! Datos guardados en la hoja VCXC.";
+            status.innerText = "¡Sincronización masiva exitosa en Google Sheets!";
             actualizarContador();
         } catch (error) {
             status.innerText = "Error al conectar con Google Sheets.";
