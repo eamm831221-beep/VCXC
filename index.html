@@ -17,7 +17,10 @@
             color: #333; 
         }
         .card { max-width: 480px; margin: 20px auto; background: rgba(255, 255, 255, 0.96); padding: 30px; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); border-top: 8px solid #66001c; }
-        .banner-img { width: 100%; max-height: 140px; object-fit: contain; margin-bottom: 15px; }
+        
+        /* Ajustes corregidos para un encabezado institucional más grande */
+        .banner-img { width: 100%; height: auto; max-height: 220px; object-fit: contain; margin-bottom: 20px; display: block; }
+        
         h2 { color: #66001c; margin-bottom: 5px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 24px; }
         .subtitle { color: #8a6d3b; font-size: 14px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
         h3 { color: #66001c; border-bottom: 1px solid #8a6d3b; padding-bottom: 5px; margin-top: 35px; text-align: left; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
@@ -39,15 +42,12 @@
         button { width: 100%; padding: 15px; font-size: 15px; font-weight: bold; border: 1px solid transparent; border-radius: 2px; cursor: pointer; margin-bottom: 15px; box-sizing: border-box; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s ease; }
         .btn-guinda { background-color: #66001c; color: #ffffff; border-color: #66001c; }
         .btn-guinda:hover { background-color: #4a0014; }
-        
-        /* Botón secundario para la descarga de archivos locales */
         .btn-negro { background-color: #1a1a1a; color: #dfb15b; border: 1px solid #8a6d3b; }
         .btn-negro:hover { background-color: #2a2a2a; }
         
         .status-box { background: #fdfaf2; color: #1a1a1a; padding: 14px; font-weight: bold; font-size: 15px; border-radius: 2px; margin-bottom: 20px; border: 1px solid #8a6d3b; border-left: 6px solid #8a6d3b; text-align: left; }
         .error-alert { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 12px; border-radius: 2px; text-align: left; font-size: 14px; margin-top: 15px; display: none; line-height: 1.5; }
         
-        /* Tabla del historial de capturas offline */
         .table-container { width: 100%; overflow-x: auto; margin-top: 10px; background: #fff; border: 1px solid #b3b3b3; border-radius: 2px; }
         table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; }
         th { background: #66001c; color: #dfb15b; padding: 10px; font-weight: bold; text-transform: uppercase; font-size: 11px; }
@@ -58,7 +58,8 @@
 <body>
 
 <div class="card">
-    <img src="https://postimg.cc" alt="Logotipo Institucional" class="banner-img" onerror="this.style.display='none'">
+    <!-- Encabezado Institucional Casa por Casa -->
+    <img src="https://postimg.cc" alt="Logotipo Institucional" class="banner-img">
     
     <h2>Sistema de Registro</h2>
     <div class="subtitle">Visitas Institucionales VCXC</div>
@@ -154,7 +155,7 @@
             <option value="MARTINEZ VALLES EVARISTA MARIA LORENA">
             <option value="MAYA CARRIZALES CECILIA LIZBETH">
             <option value="MEDINA ARELLANO MARIA ISABEL">
-            <option value="MEDRANO VALENZUELA ZAIRAYAMILETH">
+            <option value="MEDRANO VALENZUELA ZAIRA YAMILETH">
             <option value="MENDEZ TOVAR OLGA LETICIA">
             <option value="MOJICA CASTAÑEDA GRISELDA">
             <option value="MOLINA CASTILLO YAZMIN">
@@ -315,7 +316,7 @@
     
     <button type="button" class="btn-guinda" onclick="sincronizarGSheets()">🔄 Sincronizar a Google Sheets VCXC</button>
     
-    <!-- NUEVO: MÓDULO DE REPORTE Y DESCARGA OFFLINE -->
+    <!-- Historial de Auditoría con Tabla -->
     <h3>Historial de Capturas de la Jornada</h3>
     <button type="button" class="btn-negro" onclick="descargarReporteCSV()">📥 Descargar Respaldo de Hoy (.CSV)</button>
     
@@ -329,7 +330,7 @@
                 </tr>
             </thead>
             <tbody id="historial-body">
-                <!-- Se llena dinámicamente con JavaScript -->
+                <!-- Vaciado automático con JS -->
             </tbody>
         </table>
     </div>
@@ -430,7 +431,6 @@
         datosLocales.push(nuevoRegistro);
         localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
 
-        // Limpieza de campos
         latitudActual = ""; longitudActual = "";
         document.getElementById('lat-txt').innerText = "-";
         document.getElementById('lon-txt').innerText = "-";
@@ -454,7 +454,6 @@
         actualizarContador();
     }
 
-    // NUEVO: Renderiza la tabla visual de pendientes
     function actualizarContador() {
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
         document.getElementById('contador').innerText = "📂 Registros sin localizar en base central: " + datosLocales.length;
@@ -478,7 +477,6 @@
         });
     }
 
-    // NUEVO: Genera y descarga un archivo plano (.csv) de respaldo sin internet
     function descargarReporteCSV() {
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
         if (datosLocales.length === 0) {
@@ -486,7 +484,7 @@
             return;
         }
         
-        let csvContent = "\uFEFF"; // BOM para acentos en Excel de Windows
+        let csvContent = "\uFEFF"; 
         csvContent += "Fecha,Hora,Latitud,Longitud,Servidor,Nombre,ApPaterno,ApMaterno,Telefono,Sexo,Edad,Domicilio,Localidad,Zona,Seccion,Programa,Recepcion,Problematica,Observacion\n";
         
         datosLocales.forEach(item => {
