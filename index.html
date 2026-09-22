@@ -5,8 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro Institucional VCXC</title>
     <style>
-        body { font-family: 'Times New Roman', Times, serif, Arial; padding: 15px; background-color: #1a1a1a; text-align: center; color: #333; }
-        .card { max-width: 480px; margin: 20px auto; background: #ffffff; padding: 30px; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); border-top: 8px solid #66001c; }
+        body { 
+            font-family: 'Times New Roman', Times, serif, Arial; 
+            padding: 15px; 
+            /* Imagen aplicada como Fondo de Pantalla */
+            background-image: url('https://google.com'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #1a1a1a; 
+            text-align: center; 
+            color: #333; 
+        }
+        .card { max-width: 480px; margin: 20px auto; background: rgba(255, 255, 255, 0.96); padding: 30px; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); border-top: 8px solid #66001c; }
+        .banner-img { width: 100%; max-height: 120px; object-fit: contain; margin-bottom: 15px; }
         h2 { color: #66001c; margin-bottom: 5px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 24px; }
         .subtitle { color: #8a6d3b; font-size: 14px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
         h3 { color: #66001c; border-bottom: 1px solid #8a6d3b; padding-bottom: 5px; margin-top: 35px; text-align: left; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
@@ -37,6 +49,9 @@
 <body>
 
 <div class="card">
+    <!-- Imagen aplicada como Encabezado Institucional -->
+    <img src="https://google.com" alt="Logotipo Institucional" class="banner-img" onerror="this.style.display='none'">
+    
     <h2>Sistema de Registro</h2>
     <div class="subtitle">Visitas Institucionales VCXC</div>
     
@@ -226,8 +241,8 @@
         <textarea id="domicilio" rows="3" placeholder="Dirección detallada..."></textarea>
     </div>
     <div class="form-group"><label for="localidad">10. Localidad *</label><input type="text" id="localidad"></div>
-    <div class="form-group"><label for="zona">11. Zona *</label><input type="text" id="zona" pattern="[0-9]{3}" maxlength="3" placeholder="3 dígitos numéricos (Ej. 004)"></div>
-    <div class="form-group"><label for="seccion">12. Sección *</label><input type="text" id="seccion" pattern="[0-9]{4}" maxlength="4" placeholder="4 dígitos numéricos (Ej. 1324)"></div>
+    <div class="form-group"><label for="zona">11. Zona *</label><input type="text" id="zona" placeholder="Identificador numérico o texto"></div>
+    <div class="form-group"><label for="seccion">12. Sección *</label><input type="text" id="seccion" placeholder="Identificador numérico o texto"></div>
 
     <!-- PROGRAMA Y MENSAJE -->
     <h3>Información Complementaria</h3>
@@ -291,7 +306,7 @@
     <div id="status" style="margin-top: 15px; font-weight: bold; color: #1a1a1a;"></div>
 </div>
 <script>
-    // IMPORTANTE: REEMPLAZA ESTA URL POR LA QUE TE DA GOOGLE APPS SCRIPT
+    // IMPORTANTE: REEMPLAZA ESTA URL POR LA QUE TE DA GOOGLE APPS SCRIPT EN TU VERSIÓN MÁS RECIENTE
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw1f6W2LPvw5k9hH0lLqP1JVBgFeQDgNFA52Ju0E1OaUpn19F99SVbfkySoVTFqmu16/exec";
 
     let latitudActual = "";
@@ -343,24 +358,14 @@
         if (!radioSexo) errores.push("• 7. Sexo");
         if (!radioEdad) errores.push("• 8. Grupo de edad");
         if (!localidad) errores.push("• 10. Localidad");
-        
-        if (!zona) {
-            errores.push("• 11. Zona (Campo vacío)");
-        } else if (!/^[0-9]{3}$/.test(zona)) {
-            errores.push("• 11. Zona (Debe contener exactamente 3 números)");
-        }
-        
-        if (!seccion) {
-            errores.push("• 12. Sección (Campo vacío)");
-        } else if (!/^[0-9]{4}$/.test(seccion)) {
-            errores.push("• 12. Sección (Debe contener exactamente 4 números)");
-        }
-        
+        if (!zona) errores.push("• 11. Zona");
+        if (!seccion) errores.push("• 12. Sección");
         if (!recepcion) errores.push("• 14. Recepción del mensaje");
 
         if (errores.length > 0) {
             status.innerText = "";
-            errorBox.innerHTML = "<strong>Falta llenar o corregir los siguientes campos obligatorios:</strong><br>" + errores.join("<br>");
+            boxText = "<strong>Falta llenar o corregir los siguientes campos obligatorios:</strong><br>";
+            errorBox.innerHTML = boxText + errores.join("<br>");
             errorBox.style.display = "block";
             errorBox.scrollIntoView({ behavior: 'smooth' });
             return;
