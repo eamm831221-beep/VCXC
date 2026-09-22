@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba GPS VCXC</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f7f6; text-align: center; }
+        .card { max-width: 400px; margin: 0 auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h2 { color: #0f342e; }
+        button { width: 100%; padding: 14px; font-size: 16px; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 15px; }
+        .btn-geo { background-color: #0288d1; color: white; }
+        .btn-save { background-color: #00796b; color: white; }
+        .btn-sync { background-color: #f57c00; color: white; }
+        .info { background: #e9ecef; padding: 10px; border-radius: 5px; font-weight: bold; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Prueba GPS - VCXC</h2>
+    
+    <!-- BOTÓN 1: BUSCAR GEOREFERENCIA -->
+    <button type="button" class="btn-geo" onclick="buscarGPS()">📍 Buscar Georreferencia</button>
+    
+    <div class="info">
+        Latitud: <span id="lat-txt">-</span> <br>
+        Longitud: <span id="lon-txt">-</span>
+    </div>
+
+    <!-- BOTÓN 2: GUARDAR FORMULARIO (OFFLINE) -->
+    <button type="button" class="btn-save" onclick="guardarOffline()">💾 Guardar Formulario</button>
+    
+    <hr>
+    <div id="contador" style="font-weight: bold; margin-bottom: 10px;">Registros pendientes: 0</div>
+    
+    <!-- BOTÓN 3: SINCRONIZAR (AL FINAL DE LA JORNADA) -->
+    <button type="button" class="btn-sync" onclick="sincronizarGSheets()">🔄 Sincronizar a Google Sheets</button>
+    
+    <div id="status" style="margin-top: 15px; font-weight: bold; color: #333;"></div>
+</div>
+
+<script>
+    // Coloca aquí la URL corta/larga de ejecución que te dio Google Apps Script
+    const WEB_APP_URL = "TU_URL_DE_APPS_SCRIPT_AQUI";
+
+    let latitudActual = "";
+    let longitudActual = "";
+
+    // 1. Buscar Coordenadas (Funciona por antena satelital interna sin internet)
+    function buscarGPS() {
+        const status = document.getElementById('status');
+        if (!navigator.geolocation) {
+            status.innerText = "Tu celular no soporta GPS nativo.";
+            return;
+        }
+        status.innerText = "Buscando satélites...";
+        
+        navigator.geolocation.getCurrentPosition(
+            (pos) => {
+                latitudActual = pos.coords.latitude;
+                longitudActual = pos.coords.longitude;
+                document.getElementById('lat-txt').innerText = latitudActual;
+                document.getElementById('lon-txt').innerText = longitudActual;
+                status.innerText = "¡Georreferencia encontrada!";
+            },
+            (err) => { status.innerText = "Error: Activa el GPS de tu celular."; },
+            { enableHighAccuracy: true, timeout: 10000 }
+        );
+    }
+
+    // 2. Guardar en el dispositivo (No requiere Internet)
+    function guardarOffline() {
+        const status = document.getElementById('status');
+        if (!latitudActual || !longitudActual) {
+            status.innerText = "Primero debes buscar la georreferencia.";
+            return;
+        }
+
+        const ahora = new Date();
+        const nuevoRegistro = {
+            fecha: ahora.toLocaleDateString('es-MX'),
+            hora: ahora.toLocaleTimeString('es-MX'),
+            lat: latitudActual,
+            lon: longitudActual
+        };
+
+        // Obtener lo que ya esté guardado en el celular o crear lista vacía
+        let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
+        datosLocales.push(nuevoRegistro);
+        localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
+
+        // Limpiar pantalla y actualizar interfaz
+        latitudActual = ""; longitudActual = "";
+        document.getElementById('lat-txt').innerText = "-";
+        document.getElementById('lon-txt').innerText = "-";
+        status.innerText = "¡Registro guardado en la memoria del celular!";
+        actualizarContador();
+    }
+
+    function actualizarContador() {
+        let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
+        document.getElementById('contador').innerText = "Registros pendientes: " + datosLocales.length;
+    }
+
+    // 3. Enviar todo a Google Sheets (Se hace cuando tengan internet)
+    async function sincronizarGSheets() {
+        const status = document.getElementById('status');
+        let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
+
+        if (datosLocales.length === 0) {
+            status.innerText = "No hay registros pendientes por enviar.";
+            return;
+        }
+        if (!navigator.onLine) {
+            status.innerText = "Sin internet. No puedes sincronizar todavía.";
+            return;
+        }
+
+        status.innerText = "Sincronizando registros...";
+
+        try {
+            await fetch(WEB_APP_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(datosLocales)
+            });
+
+            // Si se envió, borramos la memoria interna del teléfono
+            localStorage.removeItem('visitas_vcxc');
+            status.innerText = "¡Sincronización exitosa! Datos guardados en la hoja VCXC.";
+            actualizarContador();
+        } catch (error) {
+            status.innerText = "Error al conectar con Google Sheets.";
+        }
+    }
+
+    // Cargar contador al abrir la página
+    actualizarContador();
+</script>
+
+</body>
+</html>
