@@ -8,7 +8,7 @@
         body { 
             font-family: 'Times New Roman', Times, serif, Arial; 
             padding: 15px; 
-            background-image: url('https://google.com'); 
+            background-image: url('https://postimg.cc'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -26,6 +26,10 @@
         input[type="text"], input[type="tel"], select, textarea { width: 100%; padding: 12px; font-size: 15px; border-radius: 2px; border: 1px solid #b3b3b3; box-sizing: border-box; font-family: Arial, sans-serif; background-color: #fcfcfc; }
         input[type="text"]:focus, input[type="tel"]:focus, select:focus, textarea:focus { border-color: #66001c; outline: none; background-color: #fff; }
         
+        .geo-grid { display: flex; gap: 10px; margin-top: 10px; }
+        .geo-box { flex: 1; background: #f9f9f9; border: 1px solid #b3b3b3; padding: 10px; border-radius: 2px; font-size: 14px; font-weight: bold; text-align: center; }
+        .geo-label { font-size: 11px; text-transform: uppercase; color: #666; display: block; margin-bottom: 4px; }
+        
         .radio-tile-group { display: flex; gap: 10px; margin-top: 5px; }
         .radio-tile-group.vertical { flex-direction: column; gap: 8px; }
         .radio-tile { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #b3b3b3; padding: 12px; border-radius: 2px; cursor: pointer; text-align: center; background: #f9f9f9; font-weight: bold; font-size: 14px; transition: all 0.2s ease; }
@@ -34,21 +38,10 @@
         
         button { width: 100%; padding: 15px; font-size: 15px; font-weight: bold; border: 1px solid transparent; border-radius: 2px; cursor: pointer; margin-bottom: 15px; box-sizing: border-box; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s ease; }
         
-        /* Botón de Georreferencia en Guinda */
-        .btn-geo { background-color: #66001c; color: #ffffff; border-color: #66001c; }
-        .btn-geo:hover { background-color: #4a0014; }
+        /* Todos los botones unificados en Guinda Institucional */
+        .btn-guinda { background-color: #66001c; color: #ffffff; border-color: #66001c; }
+        .btn-guinda:hover { background-color: #4a0014; }
         
-        .btn-save { background-color: #1a1a1a; color: #ffffff; border-color: #1a1a1a; }
-        .btn-save:hover { background-color: #333333; }
-        
-        /* Botón de Sincronización Destacado Prominente */
-        .btn-sync { background-color: #1a1a1a; color: #dfb15b; border: 2px solid #8a6d3b; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 16px; padding: 16px; }
-        .btn-sync:hover { background-color: #2a2a2a; border-color: #dfb15b; color: #ffffff; }
-        
-        .info { background: #f2f2f2; padding: 12px; border-radius: 2px; font-weight: bold; margin-bottom: 20px; border-left: 4px solid #8a6d3b; font-size: 14px; color: #333; }
-        hr { border: 0; height: 1px; background: #8a6d3b; margin: 25px 0; opacity: 0.5; }
-        
-        /* Nuevo Formato para Registros sin Localizar */
         .status-box { background: #fdfaf2; color: #1a1a1a; padding: 14px; font-weight: bold; font-size: 15px; border-radius: 2px; margin-bottom: 20px; border: 1px solid #8a6d3b; border-left: 6px solid #8a6d3b; text-align: left; }
         .error-alert { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 12px; border-radius: 2px; text-align: left; font-size: 14px; margin-top: 15px; display: none; line-height: 1.5; }
     </style>
@@ -56,7 +49,7 @@
 <body>
 
 <div class="card">
-    <img src="https://google.com" alt="Logotipo Institucional" class="banner-img" onerror="this.style.display='none'">
+    <img src="https://i.postimg.cc/d0vkfb03/SIN-FONDO.png" alt="Logotipo Institucional" class="banner-img" onerror="this.style.display='none'">
     
     <h2>Sistema de Registro</h2>
     <div class="subtitle">Visitas Institucionales VCXC</div>
@@ -64,9 +57,10 @@
     <!-- 1. GPS -->
     <div class="form-group">
         <label>1. Geolocalización (GPS) *</label>
-        <button type="button" class="btn-geo" onclick="buscarGPS()">📍 Buscar Georreferencia</button>
-        <div class="info">
-            Latitud: <span id="lat-txt">-</span> | Longitud: <span id="lon-txt">-</span>
+        <button type="button" class="btn-guinda" onclick="buscarGPS()">📍 Buscar Georreferencia</button>
+        <div class="geo-grid">
+            <div class="geo-box"><span class="geo-label">Latitud</span><span id="lat-txt">-</span></div>
+            <div class="geo-box"><span class="geo-label">Longitud</span><span id="lon-txt">-</span></div>
         </div>
     </div>
     <!-- 2. Servidor Público -->
@@ -305,18 +299,17 @@
 
     <hr>
     
-    <button type="button" class="btn-save" onclick="guardarFormularioValidado()">💾 Guardar Formulario</button>
+    <button type="button" class="btn-guinda" onclick="guardarFormularioValidado()">💾 Guardar Formulario</button>
     <div id="error-box" class="error-alert"></div>
     
-    <!-- Contador estilizado de Registros sin Localizar -->
     <div id="contador" class="status-box">📂 Registros sin localizar en base central: 0</div>
     
-    <button type="button" class="btn-sync" onclick="sincronizarGSheets()">🔄 Sincronizar a Google Sheets VCXC</button>
+    <button type="button" class="btn-guinda" onclick="sincronizarGSheets()">🔄 Sincronizar a Google Sheets VCXC</button>
     <div id="status" style="margin-top: 15px; font-weight: bold; color: #1a1a1a;"></div>
 </div>
 <script>
     // IMPORTANTE: REEMPLAZA ESTA URL POR LA QUE TE DA GOOGLE APPS SCRIPT
-    const WEB_APP_URL = "TU_URL_DE_APPS_SCRIPT_AQUI";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyiY_yOevXLEq-phzMgrSsY7_EeQitZUGnrifZEtrR_txlHfqELGQVX0F7fFKf8mg0c/exec";
 
     let latitudActual = "";
     let longitudActual = "";
