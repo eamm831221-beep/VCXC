@@ -18,8 +18,8 @@
         }
         .card { max-width: 480px; margin: 20px auto; background: rgba(255, 255, 255, 0.96); padding: 30px; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); border-top: 8px solid #66001c; }
         
-        /* Ajuste de escala universal para el Logotipo de Bienestar */
-        .banner-img { width: 100%; height: auto; max-height: 200px; display: block; margin: 0 auto 20px auto; content: url('https://wikimedia.org'); }
+        /* Ajuste de escala institucional para el Logotipo incrustado */
+        .banner-img { width: 100%; height: auto; max-height: 180px; display: block; margin: 0 auto 20px auto; object-fit: contain; }
         
         h2 { color: #66001c; margin-bottom: 5px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 24px; }
         .subtitle { color: #8a6d3b; font-size: 14px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
@@ -58,8 +58,8 @@
 <body>
 
 <div class="card">
-    <!-- Logotipo Institucional de Alta Velocidad -->
-    <div class="banner-img"></div>
+    <!-- Logotipo Oficial Incrustado de manera Local (Garantiza Visualización Offline) -->
+    <img class="banner-img" alt="Secretaría de Bienestar" src="data:image/png;base64,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">
     
     <h2>Sistema de Registro</h2>
     <div class="subtitle">Visitas Institucionales VCXC</div>
@@ -312,7 +312,7 @@
     <button type="button" class="btn-guinda" onclick="guardarFormularioValidado()">💾 Guardar Formulario</button>
     <div id="error-box" class="error-alert"></div>
     
-    <div id="contador" class="status-box">📂 Registros sin localizar en base central: 0</div>
+    <div id="contador" class="status-box">📂 Registros locales sin sincronizar: 0</div>
     
     <button type="button" class="btn-guinda" onclick="sincronizarGSheets()">🔄 Sincronizar a Google Sheets VCXC</button>
     
@@ -330,7 +330,7 @@
                 </tr>
             </thead>
             <tbody id="historial-body">
-                <!-- JS vacía datos aquí -->
+                <!-- El script rellena esta tabla automáticamente -->
             </tbody>
         </table>
     </div>
@@ -456,7 +456,7 @@
 
     function actualizarContador() {
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
-        document.getElementById('contador').innerText = "📂 Registros sin localizar en base central: " + datosLocales.length;
+        document.getElementById('contador').innerText = "📂 Registros locales sin sincronizar: " + datosLocales.length;
         
         const tbody = document.getElementById('historial-body');
         tbody.innerHTML = "";
