@@ -11,9 +11,8 @@
         h3 { border-bottom: 2px solid #b2dfdb; padding-bottom: 5px; margin-top: 30px; text-align: left; }
         .form-group { margin-bottom: 20px; text-align: left; }
         label { display: block; font-weight: bold; margin-bottom: 6px; color: #263238; }
-        input[type="text"], input[type="tel"], select { width: 100%; padding: 12px; font-size: 16px; border-radius: 5px; border: 1px solid #cfd8dc; box-sizing: border-box; }
+        input[type="text"], input[type="tel"], input[type="list"], select { width: 100%; padding: 12px; font-size: 16px; border-radius: 5px; border: 1px solid #cfd8dc; box-sizing: border-box; }
         
-        /* Contenedores para botones estilo Azulejo (Radio Tiles) */
         .radio-tile-group { display: flex; gap: 10px; margin-top: 5px; }
         .radio-tile-group.vertical { flex-direction: column; gap: 8px; }
         .radio-tile { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; border: 2px solid #cfd8dc; padding: 14px; border-radius: 6px; cursor: pointer; text-align: center; background: #fafafa; font-weight: bold; }
@@ -41,153 +40,153 @@
             Latitud: <span id="lat-txt">-</span> | Longitud: <span id="lon-txt">-</span>
         </div>
     </div>
-    <!-- 2. Servidor Público -->
+    <!-- 2. Servidor Público con Buscador Inteligente -->
     <div class="form-group">
-        <label for="servidor">2. Servidor Público</label>
-        <select id="servidor" required>
-            <option value="">Selecciona un servidor...</option>
-            <option value="ALVARADO CORDERO MARIA GUADALUPE">ALVARADO CORDERO MARIA GUADALUPE</option>
-            <option value="ANDRADE GALLEGOS SANDRA GABRIELA">ANDRADE GALLEGOS SANDRA GABRIELA</option>
-            <option value="ARELLANES CASTRO HILDA ARELY">ARELLANES CASTRO HILDA ARELY</option>
-            <option value="ARGUIJO MONTAÑEZ MARIA EDITH">ARGUIJO MONTAÑEZ MARIA EDITH</option>
-            <option value="ARMENDARIZ DE LA O PETRA">ARMENDARIZ DE LA O PETRA</option>
-            <option value="ARREDONDO BUENO TANIA">ARREDONDO BUENO TANIA</option>
-            <option value="ARREDONDO GONZALEZ CARMEN ESPERANZA">ARREDONDO GONZALEZ CARMEN ESPERANZA</option>
-            <option value="ARREOLA HERNANDEZ SANDRA LETICIA">ARREOLA HERNANDEZ SANDRA LETICIA</option>
-            <option value="ARZOLA GONZALEZ SONIA">ARZOLA GONZALEZ SONIA</option>
-            <option value="AVALOS MACHADO ROBERTO">AVALOS MACHADO ROBERTO</option>
-            <option value="AYALA ZAVALA SELMA MARGARITA">AYALA ZAVALA SELMA MARGARITA</option>
-            <option value="BARBOZA GARCIA HECTOR JAIR">BARBOZA GARCIA HECTOR JAIR</option>
-            <option value="BARCENAS MARCHAND LUIS ERNESTO">BARCENAS MARCHAND LUIS ERNESTO</option>
-            <option value="BARRAZA ANDRADE ANTONIO">BARRAZA ANDRADE ANTONIO</option>
-            <option value="BARRAZA REYES FERMIN">BARRAZA REYES FERMIN</option>
-            <option value="BARRETERO PIZAÑA ALMA ELIA">BARRETERO PIZAÑA ALMA ELIA</option>
-            <option value="BECERRA RODRIGUEZ YESICA">BECERRA RODRIGUEZ YESICA</option>
-            <option value="BUSTAMANTE BUSTAMANTE LUIS CARLOS">BUSTAMANTE BUSTAMANTE LUIS CARLOS</option>
-            <option value="BUSTAMANTE CORDOVA ANA JHOSSEMIN">BUSTAMANTE CORDOVA ANA JHOSSEMIN</option>
-            <option value="BUSTAMANTES CORDOVA MARTHA IMELDA">BUSTAMANTES CORDOVA MARTHA IMELDA</option>
-            <option value="CABRALES CASTAÑEDA MARIA DE LOS ANGELES">CABRALES CASTAÑEDA MARIA DE LOS ANGELES</option>
-            <option value="CARRERA CALDERON GUILLERMA GUADALUPE">CARRERA CALDERON GUILLERMA GUADALUPE</option>
-            <option value="CARRETE POSADA IRMA ROCIO">CARRETE POSADA IRMA ROCIO</option>
-            <option value="CARRETE RODRIGUEZ CATALINA">CARRETE RODRIGUEZ CATALINA</option>
-            <option value="CASTOR HOLGUIN ROSA IRENE">CASTOR HOLGUIN ROSA IRENE</option>
-            <option value="CASTRO ALVAREZ ERIKA GUADALUPE">CASTRO ALVAREZ ERIKA GUADALUPE</option>
-            <option value="CASTRO SALCEDO VICTOR MANUEL">CASTRO SALCEDO VICTOR MANUEL</option>
-            <option value="CERVANTES SALGADO MARIA DEL SOCORRO">CERVANTES SALGADO MARIA DEL SOCORRO</option>
-            <option value="CHACON OCHOA MARIA DE JESUS">CHACON OCHOA MARIA DE JESUS</option>
-            <option value="CHAVEZ GAMEZ WENDY YADIRA">CHAVEZ GAMEZ WENDY YADIRA</option>
-            <option value="COMPEAN RAMIREZ JESUS">COMPEAN RAMIREZ JESUS</option>
-            <option value="CORCHADO LEYVA ANA KAREN">CORCHADO LEYVA ANA KAREN</option>
-            <option value="CORDOVA ALCAZAR MARCO ANTONIO">CORDOVA ALCAZAR MARCO ANTONIO</option>
-            <option value="CORTEZ CERVANTES CAROLINA">CORTEZ CERVANTES CAROLINA</option>
-            <option value="CUEVAS RIOS BERTHA ALICIA">CUEVAS RIOS BERTHA ALICIA</option>
-            <option value="DAVILA TOVAR BERENICE">DAVILA TOVAR BERENICE</option>
-            <option value="DE SANTIAGO SAUCEDO LAEYDY KARINA">DE SANTIAGO SAUCEDO LAEYDY KARINA</option>
-            <option value="DIAZ NAVARRETE ESPERANZA">DIAZ NAVARRETE ESPERANZA</option>
-            <option value="DIAZ TRUJILLO RAMON DE JESUS">DIAZ TRUJILLO RAMON DE JESUS</option>
-            <option value="DOMINGUEZ CORCHADO SERGIO ALBERTO">DOMINGUEZ CORCHADO SERGIO ALBERTO</option>
-            <option value="ELIZALDE REYES IVETTE SARAI">ELIZALDE REYES IVETTE SARAI</option>
-            <option value="ESQUIVEL MASCORRO NANCY ACELA">ESQUIVEL MASCORRO NANCY ACELA</option>
-            <option value="ESTRADA MOLINA MIGUEL DE JESUS">ESTRADA MOLINA MIGUEL DE JESUS</option>
-            <option value="EZQUEDA MARIA MAYELA">EZQUEDA MARIA MAYELA</option>
-            <option value="FAVELA SERRANO RAQUEL">FAVELA SERRANO RAQUEL</option>
-            <option value="FIERRO GARCIA MARIA ELIZABETH">FIERRO GARCIA MARIA ELIZABETH</option>
-            <option value="FIGUEROA LOPEZ LAURA YANIRA">FIGUEROA LOPEZ LAURA YANIRA</option>
-            <option value="FLORES ADAME MARGARITA">FLORES ADAME MARGARITA</option>
-            <option value="FLORES TORRES LESLY YAMILETH">FLORES TORRES LESLY YAMILETH</option>
-            <option value="FUENTES HERNANDEZ CITLALI SARAHI">FUENTES HERNANDEZ CITLALI SARAHI</option>
-            <option value="GANDARILLA RAMIREZ LUCILA">GANDARILLA RAMIREZ LUCILA</option>
-            <option value="GARCIA ENCERRADO JUAN JOSE">GARCIA ENCERRADO JUAN JOSE</option>
-            <option value="GARCIA ESPINO GUADALUPE DEL SOCORRO">GARCIA ESPINO GUADALUPE DEL SOCORRO</option>
-            <option value="GUERECA VILLAGRANA GABRIELA">GUERECA VILLAGRANA GABRIELA</option>
-            <option value="GUILLEN PEREZ FELIPE">GUILLEN PEREZ FELIPE</option>
-            <option value="HERNANDEZ CAMPOS BERA TOMASA">HERNANDEZ CAMPOS BERA TOMASA</option>
-            <option value="HERNANDEZ MUÑOZ JOSE RAMON">HERNANDEZ MUÑOZ JOSE RAMON</option>
-            <option value="HERNANDEZ ORTIZ MARY CRUZ">HERNANDEZ ORTIZ MARY CRUZ</option>
-            <option value="HERNANDEZ PUENTES LUIS AGUSTIN">HERNANDEZ PUENTES LUIS AGUSTIN</option>
-            <option value="HERNANDEZ TORRES DIEGO ALFONSO">HERNANDEZ TORRES DIEGO ALFONSO</option>
-            <option value="HERNANDEZ SANTOYO ROCIO">HERNANDEZ SANTOYO ROCIO</option>
-            <option value="JACQUEZ LOPEZ LUIS RENE">JACQUEZ LOPEZ LUIS RENE</option>
-            <option value="LEAL BECERRA MARGARITA">LEAL BECERRA MARGARITA</option>
-            <option value="LIRA HERNANDEZ JESUS ANTONIO">LIRA HERNANDEZ JESUS ANTONIO</option>
-            <option value="LLAMAS DIAZ MARIA GUADALUPE">LLAMAS DIAZ MARIA GUADALUPE</option>
-            <option value="LOPEZ CAZARES JOSE ANGEL">LOPEZ CAZARES JOSE ANGEL</option>
-            <option value="LOPEZ GARCIA RODOLFO">LOPEZ GARCIA RODOLFO</option>
-            <option value="LOZANO MARQUEZ ERIKA LILIANA">LOZANO MARQUEZ ERIKA LILIANA</option>
-            <option value="MACIEL CHAVEZ ANDREA IDALY">MACIEL CHAVEZ ANDREA IDALY</option>
-            <option value="MAGALLANES VERA CLAUDIA JAQUELINE">MAGALLANES VERA CLAUDIA JAQUELINE</option>
-            <option value="MARQUEZ ARREOLA JESUS HERNAN">MARQUEZ ARREOLA JESUS HERNAN</option>
-            <option value="MARTINEZ CAMPOS ALEJANDRA">MARTINEZ CAMPOS ALEJANDRA</option>
-            <option value="MARTINEZ HERRADA GRISELDA YADIRA">MARTINEZ HERRADA GRISELDA YADIRA</option>
-            <option value="MARTINEZ RIOS DIAMAR">MARTINEZ RIOS DIAMAR</option>
-            <option value="MARTINEZ VALLES EVARISTA MARIA LORENA">MARTINEZ VALLES EVARISTA MARIA LORENA</option>
-            <option value="MAYA CARRIZALES CECILIA LIZBETH">MAYA CARRIZALES CECILIA LIZBETH</option>
-            <option value="MEDINA ARELLANO MARIA ISABEL">MEDINA ARELLANO MARIA ISABEL</option>
-            <option value="MEDRANO VALENZUELA ZAIRA YAMILETH">MEDRANO VALENZUELA ZAIRA YAMILETH</option>
-            <option value="MENDEZ TOVAR OLGA LETICIA">MENDEZ TOVAR OLGA LETICIA</option>
-            <option value="MOJICA CASTAÑEDA GRISELDA">MOJICA CASTAÑEDA GRISELDA</option>
-            <option value="MOLINA CASTILLO YAZMIN">MOLINA CASTILLO YAZMIN</option>
-            <option value="MORENO ANDRADE MARTHA PATRICIA">MORENO ANDRADE MARTHA PATRICIA</option>
-            <option value="MORILLON MUÑOZ MARTHA LETICIA">MORILLON MUÑOZ MARTHA LETICIA</option>
-            <option value="MUÑOZ QUIROZ ANGEL">MUÑOZ QUIROZ ANGEL</option>
-            <option value="MUÑOZ SOSA JOSE SANTIAGO">MUÑOZ SOSA JOSE SANTIAGO</option>
-            <option value="NAJERA GARCIA YAMIL">NAJERA GARCIA YAMIL</option>
-            <option value="NAJERA HERNANDEZ KARLA JANETH">NAJERA HERNANDEZ KARLA JANETH</option>
-            <option value="NAVARRETE SIAÑEZ TOMASA">NAVARRETE SIAÑEZ TOMASA</option>
-            <option value="NIÑO ESTRELLA MARIA ELENA">NIÑO ESTRELLA MARIA ELENA</option>
-            <option value="OLIVO SIFUENTES ENRIQUE">OLIVO SIFUENTES ENRIQUE</option>
-            <option value="ORTIZ UZQUIANO JOSE MANUEL">ORTIZ UZQUIANO JOSE MANUEL</option>
-            <option value="PACHECO ROBLES JUSTINO ENRIQUE">PACHECO ROBLES JUSTINO ENRIQUE</option>
-            <option value="PADILLA GARCIA MARIA GUADALUPE">PADILLA GARCIA MARIA GUADALUPE</option>
-            <option value="PALMA GUTIERREZ MA GUADALUPE">PALMA GUTIERREZ MA GUADALUPE</option>
-            <option value="PALOMO CORONADO ARISTEO">PALOMO CORONADO ARISTEO</option>
-            <option value="PEÑA CANO MARIA LUCINA">PEÑA CANO MARIA LUCINA</option>
-            <option value="PEREZ ALANIS JONATHAN">PEREZ ALANIS JONATHAN</option>
-            <option value="PEREZ TOVAR MARIO ALBERTO">PEREZ TOVAR MARIO ALBERTO</option>
-            <option value="PILLADO DURAN ROSA MARIA">PILLADO DURAN ROSA MARIA</option>
-            <option value="PUGA TORRES JUANA MARIA">PUGA TORRES JUANA MARIA</option>
-            <option value="RAMIREZ ARZOLA SONIA INGRID">RAMIREZ ARZOLA SONIA INGRID</option>
-            <option value="RAMOREZ HINOJOSA MISAEL">RAMIREZ HINOJOSA MISAEL</option>
-            <option value="RAMOS GUTIERREZ KARINA">RAMOS GUTIERREZ KARINA</option>
-            <option value="RETANA OLIVAS ARTEMIO">RETANA OLIVAS ARTEMIO</option>
-            <option value="REYES CARRILLO MAELBI BELEN">REYES CARRILLO MAELBI BELEN</option>
-            <option value="REYES CONTRERAS JULIANA IVETTE">REYES CONTRERAS JULIANA IVETTE</option>
-            <option value="REZA MERAZ CINDY PAMELA">REZA MERAZ CINDY PAMELA</option>
-            <option value="RIVAS MERAZ YOSIMAR">RIVAS MERAZ YOSIMAR</option>
-            <option value="RIVERA PEREZ MIRIAM">RIVERA PEREZ MIRIAM</option>
-            <option value="ROCHA ENRIQUEZ BLANCA ESTELA">ROCHA ENRIQUEZ BLANCA ESTELA</option>
-            <option value="RODRIGUEZ DE LA CRUZ FLOR IVET">RODRIGUEZ DE LA CRUZ FLOR IVET</option>
-            <option value="RODRIGUEZ ESQUIVEL CELIA">RODRIGUEZ ESQUIVEL CELIA</option>
-            <option value="RODRIGUEZ FERRER GABRIELA DEL PILAR">RODRIGUEZ FERRER GABRIELA DEL PILAR</option>
-            <option value="RODRIGUEZ NUÑEZ ALMA ANGELICA">RODRIGUEZ NUÑEZ ALMA ANGELICA</option>
-            <option value="RODRIGUEZ NUÑEZ FLOR AIDE">RODRIGUEZ NUÑEZ FLOR AIDE</option>
-            <option value="RODRIGUEZ REYES LUIS">RODRIGUEZ REYES LUIS</option>
-            <option value="RODRIGUEZ SALAZAR NADIA">RODRIGUEZ SALAZAR NADIA</option>
-            <option value="RODRIGUEZ SANCHEZ JESUS GUADALUPE">RODRIGUEZ SANCHEZ JESUS GUADALUPE</option>
-            <option value="RODRIGUEZ SANCHEZ LAURA CECILIA">RODRIGUEZ SANCHEZ LAURA CECILIA</option>
-            <option value="ROJAS MAZUCA BRENDA PATRICIA">ROJAS MAZUCA BRENDA PATRICIA</option>
-            <option value="SALAZAR ROCHA AZUL MICHELLE">SALAZAR ROCHA AZUL MICHELLE</option>
-            <option value="SALAS SAMANIEGO ANA BEATRIZ">SALAS SAMANIEGO ANA BEATRIZ</option>
-            <option value="SALAZAR AROÑA DULCE LILIANA">SALAZAR AROÑA DULCE LILIANA</option>
-            <option value="SANTOYO SERRATO ANA LILIA">SANTOYO SERRATO ANA LILIA</option>
-            <option value="SAUCEDO MARTINEZ ALEJANDRA VIRIDIANA">SAUCEDO MARTINEZ ALEJANDRA VIRIDIANA</option>
-            <option value="SERRANO VEGA FRANCISCA">SERRANO VEGA FRANCISCA</option>
-            <option value="TEJEDA GARCIA ANDREA">TEJEDA GARCIA ANDREA</option>
-            <option value="TORRES MARTINEZ DANIEL">TORRES MARTINEZ DANIEL</option>
-            <option value="SOSA HERNANDEZ FABIOLA LIZETTE">SOSA HERNANDEZ FABIOLA LIZETTE</option>
-            <option value="VALDEZ CHAVEZ BRENDA LILIANA">VALDEZ CHAVEZ BRENDA LILIANA</option>
-            <option value="VALENCIA LAZOS VALENTE">VALENCIA LAZOS VALENTE</option>
-            <option value="VAZQUEZ CARDOZA SILVIA PATRICIA">VAZQUEZ CARDOZA SILVIA PATRICIA</option>
-            <option value="VAZQUEZ MELENDEZ ALMA ROSA">VAZQUEZ MELENDEZ ALMA ROSA</option>
-            <option value="VILLA MORENO MA DE LA LUZ">VILLA MORENO MA DE LA LUZ</option>
-            <option value="VILLELA ACOSTA NORMA KARENTH ARELY">VILLELA ACOSTA NORMA KARENTH ARELY</option>
-            <option value="ZAMARRIPA VELAZQUEZ AGUILERA SEGUNDO">ZAMARRIPA VELAZQUEZ AGUILERA SEGUNDO</option>
-            <option value="VICTOR DANIEL PEREZ PRIETO">VICTOR DANIEL PEREZ PRIETO</option>
-            <option value="LLAJAYRA MAYELA PULIDO MARQUEZ">LLAJAYRA MAYELA PULIDO MARQUEZ</option>
-            <option value="JUAN CARLOS REVELES ANDRADE">JUAN CARLOS REVELES ANDRADE</option>
-            <option value="SALVADOR MELCHOR REYES">SALVADOR MELCHOR REYES</option>
-            <option value="GERARDO REYES">GERARDO REYES</option>
-        </select>
+        <label for="servidor">2. Servidor Público (Escribe para buscar)</label>
+        <input list="lista-servidores" id="servidor" placeholder="Escribe el nombre del trabajador..." required>
+        <datalist id="lista-servidores">
+            <option value="ALVARADO CORDERO MARIA GUADALUPE">
+            <option value="ANDRADE GALLEGOS SANDRA GABRIELA">
+            <option value="ARELLANES CASTRO HILDA ARELY">
+            <option value="ARGUIJO MONTAÑEZ MARIA EDITH">
+            <option value="ARMENDARIZ DE LA O PETRA">
+            <option value="ARREDONDO BUENO TANIA">
+            <option value="ARREDONDO GONZALEZ CARMEN ESPERANZA">
+            <option value="ARREOLA HERNANDEZ SANDRA LETICIA">
+            <option value="ARZOLA GONZALEZ SONIA">
+            <option value="AVALOS MACHADO ROBERTO">
+            <option value="AYALA ZAVALA SELMA MARGARITA">
+            <option value="BARBOZA GARCIA HECTOR JAIR">
+            <option value="BARCENAS MARCHAND LUIS ERNESTO">
+            <option value="BARRAZA ANDRADE ANTONIO">
+            <option value="BARRAZA REYES FERMIN">
+            <option value="BARRETERO PIZAÑA ALMA ELIA">
+            <option value="BECERRA RODRIGUEZ YESICA">
+            <option value="BUSTAMANTE BUSTAMANTE LUIS CARLOS">
+            <option value="BUSTAMANTE CORDOVA ANA JHOSSEMIN">
+            <option value="BUSTAMANTES CORDOVA MARTHA IMELDA">
+            <option value="CABRALES CASTAÑEDA MARIA DE LOS ANGELES">
+            <option value="CARRERA CALDERON GUILLERMA GUADALUPE">
+            <option value="CARRETE POSADA IRMA ROCIO">
+            <option value="CARRETE RODRIGUEZ CATALINA">
+            <option value="CASTOR HOLGUIN ROSA IRENE">
+            <option value="CASTRO ALVAREZ ERIKA GUADALUPE">
+            <option value="CASTRO SALCEDO VICTOR MANUEL">
+            <option value="CERVANTES SALGADO MARIA DEL SOCORRO">
+            <option value="CHACON OCHOA MARIA DE JESUS">
+            <option value="CHAVEZ GAMEZ WENDY YADIRA">
+            <option value="COMPEAN RAMIREZ JESUS">
+            <option value="CORCHADO LEYVA ANA KAREN">
+            <option value="CORDOVA ALCAZAR MARCO ANTONIO">
+            <option value="CORTEZ CERVANTES CAROLINA">
+            <option value="CUEVAS RIOS BERTHA ALICIA">
+            <option value="DAVILA TOVAR BERENICE">
+            <option value="DE SANTIAGO SAUCEDO LAEYDY KARINA">
+            <option value="DIAZ NAVARRETE ESPERANZA">
+            <option value="DIAZ TRUJILLO RAMON DE JESUS">
+            <option value="DOMINGUEZ CORCHADO SERGIO ALBERTO">
+            <option value="ELIZALDE REYES IVETTE SARAI">
+            <option value="ESQUIVEL MASCORRO NANCY ACELA">
+            <option value="ESTRADA MOLINA MIGUEL DE JESUS">
+            <option value="EZQUEDA MARIA MAYELA">
+            <option value="FAVELA SERRANO RAQUEL">
+            <option value="FIERRO GARCIA MARIA ELIZABETH">
+            <option value="FIGUEROA LOPEZ LAURA YANIRA">
+            <option value="FLORES ADAME MARGARITA">
+            <option value="FLORES TORRES LESLY YAMILETH">
+            <option value="FUENTES HERNANDEZ CITLALI SARAHI">
+            <option value="GANDARILLA RAMIREZ LUCILA">
+            <option value="GARCIA ENCERRADO JUAN JOSE">
+            <option value="GARCIA ESPINO GUADALUPE DEL SOCORRO">
+            <option value="GUERECA VILLAGRANA GABRIELA">
+            <option value="GUILLEN PEREZ FELIPE">
+            <option value="HERNANDEZ CAMPOS BERA TOMASA">
+            <option value="HERNANDEZ MUÑOZ JOSE RAMON">
+            <option value="HERNANDEZ ORTIZ MARY CRUZ">
+            <option value="HERNANDEZ PUENTES LUIS AGUSTIN">
+            <option value="HERNANDEZ TORRES DIEGO ALFONSO">
+            <option value="HERNANDEZ SANTOYO ROCIO">
+            <option value="JACQUEZ LOPEZ LUIS RENE">
+            <option value="LEAL BECERRA MARGARITA">
+            <option value="LIRA HERNANDEZ JESUS ANTONIO">
+            <option value="LLAMAS DIAZ MARIA GUADALUPE">
+            <option value="LOPEZ CAZARES JOSE ANGEL">
+            <option value="LOPEZ GARCIA RODOLFO">
+            <option value="LOZANO MARQUEZ ERIKA LILIANA">
+            <option value="MACIEL CHAVEZ ANDREA IDALY">
+            <option value="MAGALLANES VERA CLAUDIA JAQUELINE">
+            <option value="MARQUEZ ARREOLA JESUS HERNAN">
+            <option value="MARTINEZ CAMPOS ALEJANDRA">
+            <option value="MARTINEZ HERRADA GRISELDA YADIRA">
+            <option value="MARTINEZ RIOS DIAMAR">
+            <option value="MARTINEZ VALLES EVARISTA MARIA LORENA">
+            <option value="MAYA CARRIZALES CECILIA LIZBETH">
+            <option value="MEDINA ARELLANO MARIA ISABEL">
+            <option value="MEDRANO VALENZUELA ZAIRA YAMILETH">
+            <option value="MENDEZ TOVAR OLGA LETICIA">
+            <option value="MOJICA CASTAÑEDA GRISELDA">
+            <option value="MOLINA CASTILLO YAZMIN">
+            <option value="MORENO ANDRADE MARTHA PATRICIA">
+            <option value="MORILLON MUÑOZ MARTHA LETICIA">
+            <option value="MUÑOZ QUIROZ ANGEL">
+            <option value="MUÑOZ SOSA JOSE SANTIAGO">
+            <option value="NAJERA GARCIA YAMIL">
+            <option value="NAJERA HERNANDEZ KARLA JANETH">
+            <option value="NAVARRETE SIAÑEZ TOMASA">
+            <option value="NIÑO ESTRELLA MARIA ELENA">
+            <option value="OLIVO SIFUENTES ENRIQUE">
+            <option value="ORTIZ UZQUIANO JOSE MANUEL">
+            <option value="PACHECO ROBLES JUSTINO ENRIQUE">
+            <option value="PADILLA GARCIA MARIA GUADALUPE">
+            <option value="PALMA GUTIERREZ MA GUADALUPE">
+            <option value="PALOMO CORONADO ARISTEO">
+            <option value="PEÑA CANO MARIA LUCINA">
+            <option value="PEREZ ALANIS JONATHAN">
+            <option value="PEREZ TOVAR MARIO ALBERTO">
+            <option value="PILLADO DURAN ROSA MARIA">
+            <option value="PUGA TORRES JUANA MARIA">
+            <option value="RAMIREZ ARZOLA SONIA INGRID">
+            <option value="RAMOREZ HINOJOSA MISAEL">
+            <option value="RAMOS GUTIERREZ KARINA">
+            <option value="RETANA OLIVAS ARTEMIO">
+            <option value="REYES CARRILLO MAELBI BELEN">
+            <option value="REYES CONTRERAS JULIANA IVETTE">
+            <option value="REZA MERAZ CINDY PAMELA">
+            <option value="RIVAS MERAZ YOSIMAR">
+            <option value="RIVERA PEREZ MIRIAM">
+            <option value="ROCHA ENRIQUEZ BLANCA ESTELA">
+            <option value="RODRIGUEZ DE LA CRUZ FLOR IVET">
+            <option value="RODRIGUEZ ESQUIVEL CELIA">
+            <option value="RODRIGUEZ FERRER GABRIELA DEL PILAR">
+            <option value="RODRIGUEZ NUÑEZ ALMA ANGELICA">
+            <option value="RODRIGUEZ NUÑEZ FLOR AIDE">
+            <option value="RODRIGUEZ REYES LUIS">
+            <option value="RODRIGUEZ SALAZAR NADIA">
+            <option value="RODRIGUEZ SANCHEZ JESUS GUADALUPE">
+            <option value="RODRIGUEZ SANCHEZ LAURA CECILIA">
+            <option value="ROJAS MAZUCA BRENDA PATRICIA">
+            <option value="SALAZAR ROCHA AZUL MICHELLE">
+            <option value="SALAS SAMANIEGO ANA BEATRIZ">
+            <option value="SALAZAR AROÑA DULCE LILIANA">
+            <option value="SANTOYO SERRATO ANA LILIA">
+            <option value="SANCODO MARTINEZ ALEJANDRA VIRIDIANA">
+            <option value="SERRANO VEGA FRANCISCA">
+            <option value="TEJEDA GARCIA ANDREA">
+            <option value="TORRES MARTINEZ DANIEL">
+            <option value="SOSA HERNANDEZ FABIOLA LIZETTE">
+            <option value="VALDEZ CHAVEZ BRENDA LILIANA">
+            <option value="VALENCIA LAZOS VALENTE">
+            <option value="VAZQUEZ CARDOZA SILVIA PATRICIA">
+            <option value="VAZQUEZ MELENDEZ ALMA ROSA">
+            <option value="VILLA MORENO MA DE LA LUZ">
+            <option value="VILLELA ACOSTA NORMA KARENTH ARELY">
+            <option value="ZAMARRIPA VELAZQUEZ AGUILERA SEGUNDO">
+            <option value="VICTOR DANIEL PEREZ PRIETO">
+            <option value="LLAJAYRA MAYELA PULIDO MARQUEZ">
+            <option value="JUAN CARLOS REVELES ANDRADE">
+            <option value="SALVADOR MELCHOR REYES">
+            <option value="GERARDO REYES">
+        </datalist>
     </div>
 
     <!-- DATOS DE LA PERSONA ENTREVISTADA -->
@@ -244,7 +243,6 @@
 
     <hr>
     
-    <!-- Botones Finales de Envío -->
     <button type="button" class="btn-save" onclick="guardarOffline()">💾 Guardar Formulario</button>
     <div id="contador" style="font-weight: bold; margin-bottom: 10px;">Registros pendientes: 0</div>
     <button type="button" class="btn-sync" onclick="sincronizarGSheets()">🔄 Sincronizar a Google Sheets</button>
@@ -297,7 +295,7 @@
             return;
         }
         if (!servidor) {
-            status.innerText = "Por favor, selecciona un Servidor Público.";
+            status.innerText = "Por favor, ingresa o selecciona un Servidor Público.";
             return;
         }
 
@@ -320,7 +318,6 @@
         datosLocales.push(nuevoRegistro);
         localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
 
-        // Limpieza de campos tras el guardado exitoso
         latitudActual = ""; longitudActual = "";
         document.getElementById('lat-txt').innerText = "-";
         document.getElementById('lon-txt').innerText = "-";
@@ -332,7 +329,7 @@
         if(radioSexo) radioSexo.checked = false;
         if(radioEdad) radioEdad.checked = false;
         
-        status.innerText = "¡Registro de la persona guardado en el celular!";
+        status.innerText = "¡Registro guardado localmente!";
         actualizarContador();
     }
 
