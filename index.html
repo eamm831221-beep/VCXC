@@ -15,7 +15,6 @@
         input[type="text"], input[type="tel"], select, textarea { width: 100%; padding: 12px; font-size: 15px; border-radius: 2px; border: 1px solid #b3b3b3; box-sizing: border-box; font-family: Arial, sans-serif; background-color: #fcfcfc; }
         input[type="text"]:focus, input[type="tel"]:focus, select:focus, textarea:focus { border-color: #66001c; outline: none; background-color: #fff; }
         
-        /* Botones estilo Azulejo Formales */
         .radio-tile-group { display: flex; gap: 10px; margin-top: 5px; }
         .radio-tile-group.vertical { flex-direction: column; gap: 8px; }
         .radio-tile { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #b3b3b3; padding: 12px; border-radius: 2px; cursor: pointer; text-align: center; background: #f9f9f9; font-weight: bold; font-size: 14px; transition: all 0.2s ease; }
@@ -32,6 +31,7 @@
         .info { background: #f2f2f2; padding: 12px; border-radius: 2px; font-weight: bold; margin-bottom: 20px; border-left: 4px solid #8a6d3b; font-size: 14px; color: #333; }
         hr { border: 0; height: 1px; background: #8a6d3b; margin: 25px 0; opacity: 0.5; }
         .status-box { background: #66001c; color: #ffffff; padding: 10px; font-weight: bold; font-size: 14px; border-radius: 2px; margin-bottom: 20px; border: 1px solid #8a6d3b; }
+        .error-alert { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 12px; border-radius: 2px; text-align: left; font-size: 14px; margin-top: 15px; display: none; line-height: 1.5; }
     </style>
 </head>
 <body>
@@ -42,7 +42,7 @@
     
     <!-- 1. GPS -->
     <div class="form-group">
-        <label>1. Geolocalización (GPS)</label>
+        <label>1. Geolocalización (GPS) *</label>
         <button type="button" class="btn-geo" onclick="buscarGPS()">📍 Buscar Georreferencia</button>
         <div class="info">
             Latitud: <span id="lat-txt">-</span> | Longitud: <span id="lon-txt">-</span>
@@ -50,8 +50,8 @@
     </div>
     <!-- 2. Servidor Público -->
     <div class="form-group">
-        <label for="servidor">2. Servidor Público (Filtro predictivo)</label>
-        <input list="lista-servidores" id="servidor" placeholder="Escriba apellido o nombre para buscar..." required>
+        <label for="servidor">2. Servidor Público (Filtro predictivo) *</label>
+        <input list="lista-servidores" id="servidor" placeholder="Escriba apellido o nombre para buscar...">
         <datalist id="lista-servidores">
             <option value="ALVARADO CORDERO MARIA GUADALUPE">
             <option value="ANDRADE GALLEGOS SANDRA GABRIELA">
@@ -196,16 +196,15 @@
             <option value="GERARDO REYES">
         </datalist>
     </div>
-
     <!-- DATOS DE LA PERSONA ENTREVISTADA -->
     <h3>Datos de la Persona Entrevistada</h3>
-    <div class="form-group"><label for="nombre">3. Nombre(s)</label><input type="text" id="nombre"></div>
-    <div class="form-group"><label for="apellido_paterno">4. Apellido paterno</label><input type="text" id="apellido_paterno"></div>
+    <div class="form-group"><label for="nombre">3. Nombre(s) *</label><input type="text" id="nombre"></div>
+    <div class="form-group"><label for="apellido_paterno">4. Apellido paterno *</label><input type="text" id="apellido_paterno"></div>
     <div class="form-group"><label for="apellido_materno">5. Apellido materno</label><input type="text" id="apellido_materno"></div>
     <div class="form-group"><label for="telefono">6. Teléfono</label><input type="tel" id="telefono" pattern="[0-9]{10}" placeholder="10 dígitos numéricos"></div>
 
     <div class="form-group">
-        <label>7. Sexo</label>
+        <label>7. Sexo *</label>
         <div class="radio-tile-group">
             <label class="radio-tile"><input type="radio" name="sexo" value="Hombre"><span>Hombre</span></label>
             <label class="radio-tile"><input type="radio" name="sexo" value="Mujer"><span>Mujer</span></label>
@@ -213,7 +212,7 @@
     </div>
 
     <div class="form-group">
-        <label>8. Grupo de edad</label>
+        <label>8. Grupo de edad *</label>
         <div class="radio-tile-group vertical">
             <label class="radio-tile"><input type="radio" name="grupo_edad" value="Joven de 15 a 29 años"><span>Joven de 15 a 29 años</span></label>
             <label class="radio-tile"><input type="radio" name="grupo_edad" value="Adulto de 30 a 64 años"><span>Adulto de 30 a 64 años</span></label>
@@ -226,9 +225,9 @@
         <label for="domicilio">9. Calle, Número, Colonia</label>
         <textarea id="domicilio" rows="3" placeholder="Dirección detallada..."></textarea>
     </div>
-    <div class="form-group"><label for="localidad">10. Localidad</label><input type="text" id="localidad"></div>
-    <div class="form-group"><label for="zona">11. Zona</label><input type="text" id="zona" pattern="[0-9]{3}" maxlength="3" placeholder="Ej. 021"></div>
-    <div class="form-group"><label for="seccion">12. Sección</label><input type="text" id="seccion" pattern="[0-9]{4}" maxlength="4" placeholder="Ej. 1354"></div>
+    <div class="form-group"><label for="localidad">10. Localidad *</label><input type="text" id="localidad"></div>
+    <div class="form-group"><label for="zona">11. Zona *</label><input type="text" id="zona" pattern="[0-9]{3}" maxlength="3" placeholder="3 dígitos numéricos (Ej. 004)"></div>
+    <div class="form-group"><label for="seccion">12. Sección *</label><input type="text" id="seccion" pattern="[0-9]{4}" maxlength="4" placeholder="4 dígitos numéricos (Ej. 1324)"></div>
 
     <!-- PROGRAMA Y MENSAJE -->
     <h3>Información Complementaria</h3>
@@ -249,7 +248,7 @@
     </div>
 
     <div class="form-group">
-        <label for="recepcion">14. ¿Cómo califica la recepción del mensaje?</label>
+        <label for="recepcion">14. ¿Cómo califica la recepción del mensaje? *</label>
         <select id="recepcion">
             <option value="">Selecciona una opción...</option>
             <option value="Excelente">Excelente</option>
@@ -285,15 +284,15 @@
 
     <hr>
     
-    <!-- Controles de Almacenamiento -->
-    <button type="button" class="btn-save" onclick="guardarOffline()">💾 Guardar Formulario</button>
+    <button type="button" class="btn-save" onclick="guardarFormularioValidado()">💾 Guardar Formulario</button>
+    <div id="error-box" class="error-alert"></div>
     <div id="contador" class="status-box">Registros locales sin sincronizar: 0</div>
     <button type="button" class="btn-sync" onclick="sincronizarGSheets()">🔄 Sincronizar a Google Sheets</button>
     <div id="status" style="margin-top: 15px; font-weight: bold; color: #1a1a1a;"></div>
 </div>
 <script>
     // IMPORTANTE: REEMPLAZA ESTA URL POR LA QUE TE DA GOOGLE APPS SCRIPT
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxKp0KwlsjpsdwSrPPg0_Yb1jPOBqX03PHsrOHk7623bU4NgbP7VCMB2Y5XOxUFTCw4/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw1f6W2LPvw5k9hH0lLqP1JVBgFeQDgNFA52Ju0E1OaUpn19F99SVbfkySoVTFqmu16/exec";
 
     let latitudActual = "";
     let longitudActual = "";
@@ -313,56 +312,88 @@
                 document.getElementById('lat-txt').innerText = latitudActual;
                 document.getElementById('lon-txt').innerText = longitudActual;
                 status.innerText = "Coordenadas fijadas con éxito.";
+                document.getElementById('error-box').style.display = "none";
             },
             (err) => { status.innerText = "Error: Active la ubicación de su equipo móvil."; },
             { enableHighAccuracy: true, timeout: 10000 }
         );
     }
 
-    function guardarOffline() {
+    function guardarFormularioValidado() {
         const status = document.getElementById('status');
-        const servidor = document.getElementById('servidor').value;
+        const errorBox = document.getElementById('error-box');
         
-        if (!latitudActual || !longitudActual) {
-            status.innerText = "Error: Se requiere buscar la georreferencia primero.";
-            return;
-        }
-        if (!servidor) {
-            status.innerText = "Error: Debe seleccionar un Servidor Público.";
-            return;
-        }
-
+        const servidor = document.getElementById('servidor').value.trim();
+        const nombre = document.getElementById('nombre').value.trim();
+        const appat = document.getElementById('apellido_paterno').value.trim();
+        const localidad = document.getElementById('localidad').value.trim();
+        const zona = document.getElementById('zona').value.trim();
+        const seccion = document.getElementById('seccion').value.trim();
+        const recepcion = document.getElementById('recepcion').value;
+        
         const radioSexo = document.querySelector('input[name="sexo"]:checked');
         const radioEdad = document.querySelector('input[name="grupo_edad"]:checked');
-        const ahora = new Date();
 
+        let errores = [];
+
+        if (!latitudActual || !longitudActual) errores.push("• 1. Geolocalización (Falta pulsar botón GPS)");
+        if (!servidor) errores.push("• 2. Servidor Público");
+        if (!nombre) errores.push("• 3. Nombre(s)");
+        if (!appat) errores.push("• 4. Apellido paterno");
+        if (!radioSexo) errores.push("• 7. Sexo");
+        if (!radioEdad) errores.push("• 8. Grupo de edad");
+        if (!localidad) errores.push("• 10. Localidad");
+        
+        if (!zona) {
+            errores.push("• 11. Zona (Campo vacío)");
+        } else if (!/^[0-9]{3}$/.test(zona)) {
+            errores.push("• 11. Zona (Debe contener exactamente 3 números)");
+        }
+        
+        if (!seccion) {
+            errores.push("• 12. Sección (Campo vacío)");
+        } else if (!/^[0-9]{4}$/.test(seccion)) {
+            errores.push("• 12. Sección (Debe contener exactamente 4 números)");
+        }
+        
+        if (!recepcion) errores.push("• 14. Recepción del mensaje");
+
+        if (errores.length > 0) {
+            status.innerText = "";
+            errorBox.innerHTML = "<strong>Falta llenar o corregir los siguientes campos obligatorios:</strong><br>" + errores.join("<br>");
+            errorBox.style.display = "block";
+            errorBox.scrollIntoView({ behavior: 'smooth' });
+            return;
+        }
+
+        errorBox.style.display = "none";
+        const ahora = new Date();
         const nuevoRegistro = {
             fecha: ahora.toLocaleDateString('es-MX'),
             hora: ahora.toLocaleTimeString('es-MX'),
             lat: latitudActual,
             lon: longitudActual,
             servidor: servidor,
-            nombre: document.getElementById('nombre').value,
-            appat: document.getElementById('apellido_paterno').value,
-            apmat: document.getElementById('apellido_materno').value,
-            tel: document.getElementById('telefono').value,
-            sexo: radioSexo ? radioSexo.value : "",
-            edad: radioEdad ? radioEdad.value : "",
-            domicilio: document.getElementById('domicilio').value,
-            localidad: document.getElementById('localidad').value,
-            zona: document.getElementById('zona').value,
-            seccion: document.getElementById('seccion').value,
+            nombre: nombre,
+            appat: appat,
+            apmat: document.getElementById('apellido_materno').value.trim(),
+            tel: document.getElementById('telefono').value.trim(),
+            sexo: radioSexo.value,
+            edad: radioEdad.value,
+            domicilio: document.getElementById('domicilio').value.trim(),
+            localidad: localidad,
+            zona: zona,
+            seccion: seccion,
             programa: document.getElementById('programa').value,
-            recepcion: document.getElementById('recepcion').value,
+            recepcion: recepcion,
             problematica: document.getElementById('problematica').value,
-            observacion: document.getElementById('observacion').value
+            observacion: document.getElementById('observacion').value.trim()
         };
 
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
         datosLocales.push(nuevoRegistro);
         localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
 
-        // Limpieza y reseteo institucional de campos
         latitudActual = ""; longitudActual = "";
         document.getElementById('lat-txt').innerText = "-";
         document.getElementById('lon-txt').innerText = "-";
@@ -382,7 +413,7 @@
         if(radioSexo) radioSexo.checked = false;
         if(radioEdad) radioEdad.checked = false;
         
-        status.innerText = "Registro guardado correctamente en la memoria local.";
+        status.innerText = "Registro verificado y guardado localmente.";
         actualizarContador();
     }
 
