@@ -8,8 +8,8 @@
         body { 
             font-family: 'Times New Roman', Times, serif, Arial; 
             padding: 15px; 
-            /* Imagen aplicada como Fondo de Pantalla */
-            background-image: url('https://google.com'); 
+            /* Enlace optimizado para el Fondo de Pantalla */
+            background-image: url('https://unsplash.com'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -49,8 +49,8 @@
 <body>
 
 <div class="card">
-    <!-- Imagen aplicada como Encabezado Institucional -->
-    <img src="https://google.com" alt="Logotipo Institucional" class="banner-img" onerror="this.style.display='none'">
+    <!-- Enlace optimizado para el Encabezado Institucional -->
+    <img src="https://ibb.co" alt="Logotipo Institucional" class="banner-img" onerror="this.src='https://placehold.co'">
     
     <h2>Sistema de Registro</h2>
     <div class="subtitle">Visitas Institucionales VCXC</div>
@@ -63,36 +63,71 @@
             Latitud: <span id="lat-txt">-</span> | Longitud: <span id="lon-txt">-</span>
         </div>
     </div>
-    <!-- 2. Servidor Público -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Institucional VCXC</title>
+    <style>
+        body { 
+            font-family: 'Times New Roman', Times, serif, Arial; 
+            padding: 15px; 
+            /* Enlace optimizado para el Fondo de Pantalla */
+            background-image: url('https://unsplash.com'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #1a1a1a; 
+            text-align: center; 
+            color: #333; 
+        }
+        .card { max-width: 480px; margin: 20px auto; background: rgba(255, 255, 255, 0.96); padding: 30px; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); border-top: 8px solid #66001c; }
+        .banner-img { width: 100%; max-height: 120px; object-fit: contain; margin-bottom: 15px; }
+        h2 { color: #66001c; margin-bottom: 5px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 24px; }
+        .subtitle { color: #8a6d3b; font-size: 14px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
+        h3 { color: #66001c; border-bottom: 1px solid #8a6d3b; padding-bottom: 5px; margin-top: 35px; text-align: left; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
+        .form-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; font-weight: bold; margin-bottom: 6px; color: #1a1a1a; font-size: 14px; }
+        input[type="text"], input[type="tel"], select, textarea { width: 100%; padding: 12px; font-size: 15px; border-radius: 2px; border: 1px solid #b3b3b3; box-sizing: border-box; font-family: Arial, sans-serif; background-color: #fcfcfc; }
+        input[type="text"]:focus, input[type="tel"]:focus, select:focus, textarea:focus { border-color: #66001c; outline: none; background-color: #fff; }
+        
+        .radio-tile-group { display: flex; gap: 10px; margin-top: 5px; }
+        .radio-tile-group.vertical { flex-direction: column; gap: 8px; }
+        .radio-tile { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #b3b3b3; padding: 12px; border-radius: 2px; cursor: pointer; text-align: center; background: #f9f9f9; font-weight: bold; font-size: 14px; transition: all 0.2s ease; }
+        .radio-tile input { position: absolute; opacity: 0; }
+        .radio-tile:has(input:checked) { border-color: #66001c; background-color: #66001c; color: #dfb15b; box-shadow: inset 0 0 0 1px #8a6d3b; }
+        
+        button { width: 100%; padding: 14px; font-size: 15px; font-weight: bold; border: 1px solid transparent; border-radius: 2px; cursor: pointer; margin-bottom: 15px; box-sizing: border-box; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s ease; }
+        .btn-geo { background-color: #1a1a1a; color: #dfb15b; border-color: #8a6d3b; }
+        .btn-geo:hover { background-color: #2a2a2a; }
+        .btn-save { background-color: #66001c; color: #ffffff; border-color: #66001c; }
+        .btn-save:hover { background-color: #4a0014; }
+        .btn-sync { background-color: #ffffff; color: #1a1a1a; border-color: #1a1a1a; }
+        .btn-sync:hover { background-color: #f5f5f5; }
+        .info { background: #f2f2f2; padding: 12px; border-radius: 2px; font-weight: bold; margin-bottom: 20px; border-left: 4px solid #8a6d3b; font-size: 14px; color: #333; }
+        hr { border: 0; height: 1px; background: #8a6d3b; margin: 25px 0; opacity: 0.5; }
+        .status-box { background: #66001c; color: #ffffff; padding: 10px; font-weight: bold; font-size: 14px; border-radius: 2px; margin-bottom: 20px; border: 1px solid #8a6d3b; }
+        .error-alert { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 12px; border-radius: 2px; text-align: left; font-size: 14px; margin-top: 15px; display: none; line-height: 1.5; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <!-- Enlace optimizado para el Encabezado Institucional -->
+    <img src="https://ibb.co" alt="Logotipo Institucional" class="banner-img" onerror="this.src='https://placehold.co'">
+    
+    <h2>Sistema de Registro</h2>
+    <div class="subtitle">Visitas Institucionales VCXC</div>
+    
+    <!-- 1. GPS -->
     <div class="form-group">
-        <label for="servidor">2. Servidor Público (Filtro predictivo) *</label>
-        <input list="lista-servidores" id="servidor" placeholder="Escriba apellido o nombre para buscar...">
-        <datalist id="lista-servidores">
-            <option value="ALVARADO CORDERO MARIA GUADALUPE">
-            <option value="ANDRADE GALLEGOS SANDRA GABRIELA">
-            <option value="ARELLANES CASTRO HILDA ARELY">
-            <option value="ARGUIJO MONTAÑEZ MARIA EDITH">
-            <option value="ARMENDARIZ DE LA O PETRA">
-            <option value="ARREDONDO BUENO TANIA">
-            <option value="ARREDONDO GONZALEZ CARMEN ESPERANZA">
-            <option value="ARREOLA HERNANDEZ SANDRA LETICIA">
-            <option value="ARZOLA GONZALEZ SONIA">
-            <option value="AVALOS MACHADO ROBERTO">
-            <option value="AYALA ZAVALA SELMA MARGARITA">
-            <option value="BARBOZA GARCIA HECTOR JAIR">
-            <option value="BARCENAS MARCHAND LUIS ERNESTO">
-            <option value="BARRAZA ANDRADE ANTONIO">
-            <option value="BARRAZA REYES FERMIN">
-            <option value="BARRETERO PIZAÑA ALMA ELIA">
-            <option value="BECERRA RODRIGUEZ YESICA">
-            <option value="BUSTAMANTE BUSTAMANTE LUIS CARLOS">
-            <option value="BUSTAMANTE CORDOVA ANA JHOSSEMIN">
-            <option value="BUSTAMANTES CORDOVA MARTHA IMELDA">
-            <option value="CABRALES CASTAÑEDA MARIA DE LOS ANGELES">
-            <option value="CARRERA CALDERON GUILLERMA GUADALUPE">
-            <option value="CARRETE POSADA IRMA ROCIO">
-            <option value="CARRETE RODRIGUEZ CATALINA">
-            <option value="CASTOR HOLGUIN ROSA IRENE">
+        <label>1. Geolocalización (GPS) *</label>
+        <button type="button" class="btn-geo" onclick="buscarGPS()">📍 Buscar Georreferencia</button>
+        <div class="info">
+            Latitud: <span id="lat-txt">-</span> | Longitud: <span id="lon-txt">-</span>
+        </div>
+    </div>
             <option value="CASTRO ALVAREZ ERIKA GUADALUPE">
             <option value="CASTRO SALCEDO VICTOR MANUEL">
             <option value="CERVANTES SALGADO MARIA DEL SOCORRO">
