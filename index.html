@@ -3,34 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Completo VCXC</title>
+    <title>Registro Institucional VCXC</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 15px; background-color: #f4f7f6; text-align: center; }
-        .card { max-width: 480px; margin: 0 auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.12); }
-        h2, h3 { color: #0f342e; margin-bottom: 20px; }
-        h3 { border-bottom: 2px solid #b2dfdb; padding-bottom: 5px; margin-top: 35px; text-align: left; }
+        body { font-family: 'Times New Roman', Times, serif, Arial; padding: 15px; background-color: #1a1a1a; text-align: center; color: #333; }
+        .card { max-width: 480px; margin: 20px auto; background: #ffffff; padding: 30px; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); border-top: 8px solid #66001c; }
+        h2 { color: #66001c; margin-bottom: 5px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 24px; }
+        .subtitle { color: #8a6d3b; font-size: 14px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
+        h3 { color: #66001c; border-bottom: 1px solid #8a6d3b; padding-bottom: 5px; margin-top: 35px; text-align: left; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
         .form-group { margin-bottom: 20px; text-align: left; }
-        label { display: block; font-weight: bold; margin-bottom: 6px; color: #263238; }
-        input[type="text"], input[type="tel"], select, textarea { width: 100%; padding: 12px; font-size: 16px; border-radius: 5px; border: 1px solid #cfd8dc; box-sizing: border-box; font-family: Arial, sans-serif; }
+        label { display: block; font-weight: bold; margin-bottom: 6px; color: #1a1a1a; font-size: 14px; }
+        input[type="text"], input[type="tel"], select, textarea { width: 100%; padding: 12px; font-size: 15px; border-radius: 2px; border: 1px solid #b3b3b3; box-sizing: border-box; font-family: Arial, sans-serif; background-color: #fcfcfc; }
+        input[type="text"]:focus, input[type="tel"]:focus, select:focus, textarea:focus { border-color: #66001c; outline: none; background-color: #fff; }
         
+        /* Botones estilo Azulejo Formales */
         .radio-tile-group { display: flex; gap: 10px; margin-top: 5px; }
         .radio-tile-group.vertical { flex-direction: column; gap: 8px; }
-        .radio-tile { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; border: 2px solid #cfd8dc; padding: 14px; border-radius: 6px; cursor: pointer; text-align: center; background: #fafafa; font-weight: bold; }
+        .radio-tile { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #b3b3b3; padding: 12px; border-radius: 2px; cursor: pointer; text-align: center; background: #f9f9f9; font-weight: bold; font-size: 14px; transition: all 0.2s ease; }
         .radio-tile input { position: absolute; opacity: 0; }
-        .radio-tile:has(input:checked) { border-color: #00796b; background-color: #e0f2f1; color: #004d40; }
+        .radio-tile:has(input:checked) { border-color: #66001c; background-color: #66001c; color: #dfb15b; box-shadow: inset 0 0 0 1px #8a6d3b; }
         
-        button { width: 100%; padding: 14px; font-size: 16px; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 15px; box-sizing: border-box; }
-        .btn-geo { background-color: #0288d1; color: white; }
-        .btn-save { background-color: #00796b; color: white; }
-        .btn-sync { background-color: #f57c00; color: white; }
-        .info { background: #e9ecef; padding: 10px; border-radius: 5px; font-weight: bold; margin-bottom: 20px; }
-        hr { border: 0; height: 1px; background: #ccc; margin: 25px 0; }
+        button { width: 100%; padding: 14px; font-size: 15px; font-weight: bold; border: 1px solid transparent; border-radius: 2px; cursor: pointer; margin-bottom: 15px; box-sizing: border-box; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s ease; }
+        .btn-geo { background-color: #1a1a1a; color: #dfb15b; border-color: #8a6d3b; }
+        .btn-geo:hover { background-color: #2a2a2a; }
+        .btn-save { background-color: #66001c; color: #ffffff; border-color: #66001c; }
+        .btn-save:hover { background-color: #4a0014; }
+        .btn-sync { background-color: #ffffff; color: #1a1a1a; border-color: #1a1a1a; }
+        .btn-sync:hover { background-color: #f5f5f5; }
+        .info { background: #f2f2f2; padding: 12px; border-radius: 2px; font-weight: bold; margin-bottom: 20px; border-left: 4px solid #8a6d3b; font-size: 14px; color: #333; }
+        hr { border: 0; height: 1px; background: #8a6d3b; margin: 25px 0; opacity: 0.5; }
+        .status-box { background: #66001c; color: #ffffff; padding: 10px; font-weight: bold; font-size: 14px; border-radius: 2px; margin-bottom: 20px; border: 1px solid #8a6d3b; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h2>Registro de Visitas VCXC</h2>
+    <h2>Sistema de Registro</h2>
+    <div class="subtitle">Visitas Institucionales VCXC</div>
     
     <!-- 1. GPS -->
     <div class="form-group">
@@ -40,11 +48,10 @@
             Latitud: <span id="lat-txt">-</span> | Longitud: <span id="lon-txt">-</span>
         </div>
     </div>
-
     <!-- 2. Servidor Público -->
     <div class="form-group">
-        <label for="servidor">2. Servidor Público (Escribe para buscar)</label>
-        <input list="lista-servidores" id="servidor" placeholder="Escribe el nombre del trabajador..." required>
+        <label for="servidor">2. Servidor Público (Filtro predictivo)</label>
+        <input list="lista-servidores" id="servidor" placeholder="Escriba apellido o nombre para buscar..." required>
         <datalist id="lista-servidores">
             <option value="ALVARADO CORDERO MARIA GUADALUPE">
             <option value="ANDRADE GALLEGOS SANDRA GABRIELA">
@@ -191,11 +198,11 @@
     </div>
 
     <!-- DATOS DE LA PERSONA ENTREVISTADA -->
-    <h3>DATOS DE LA PERSONA ENTREVISTADA</h3>
-    <div class="form-group"><label for="nombre">3. Nombre</label><input type="text" id="nombre"></div>
+    <h3>Datos de la Persona Entrevistada</h3>
+    <div class="form-group"><label for="nombre">3. Nombre(s)</label><input type="text" id="nombre"></div>
     <div class="form-group"><label for="apellido_paterno">4. Apellido paterno</label><input type="text" id="apellido_paterno"></div>
     <div class="form-group"><label for="apellido_materno">5. Apellido materno</label><input type="text" id="apellido_materno"></div>
-    <div class="form-group"><label for="telefono">6. Teléfono</label><input type="tel" id="telefono" pattern="[0-9]{10}" placeholder="10 dígitos"></div>
+    <div class="form-group"><label for="telefono">6. Teléfono</label><input type="tel" id="telefono" pattern="[0-9]{10}" placeholder="10 dígitos numéricos"></div>
 
     <div class="form-group">
         <label>7. Sexo</label>
@@ -214,17 +221,17 @@
         </div>
     </div>
     <!-- DOMICILIO -->
-    <h3>DOMICILIO</h3>
+    <h3>Domicilio Geográfico</h3>
     <div class="form-group">
-        <label for="domicilio">9. Calle, Numero, Colonia</label>
-        <textarea id="domicilio" rows="3" placeholder="Ingresa gran cantidad de texto..."></textarea>
+        <label for="domicilio">9. Calle, Número, Colonia</label>
+        <textarea id="domicilio" rows="3" placeholder="Dirección detallada..."></textarea>
     </div>
     <div class="form-group"><label for="localidad">10. Localidad</label><input type="text" id="localidad"></div>
-    <div class="form-group"><label for="zona">11. Zona</label><input type="text" id="zona" pattern="[0-9]{3}" maxlength="3" placeholder="Ej. 012"></div>
-    <div class="form-group"><label for="seccion">12. Sección</label><input type="text" id="seccion" pattern="[0-9]{4}" maxlength="4" placeholder="Ej. 1405"></div>
+    <div class="form-group"><label for="zona">11. Zona</label><input type="text" id="zona" pattern="[0-9]{3}" maxlength="3" placeholder="Ej. 021"></div>
+    <div class="form-group"><label for="seccion">12. Sección</label><input type="text" id="seccion" pattern="[0-9]{4}" maxlength="4" placeholder="Ej. 1354"></div>
 
     <!-- PROGRAMA Y MENSAJE -->
-    <h3>INFORMACIÓN COMPLEMENTARIA</h3>
+    <h3>Información Complementaria</h3>
     <div class="form-group">
         <label for="programa">13. Programa al que pertenece</label>
         <select id="programa">
@@ -272,20 +279,21 @@
     </div>
 
     <div class="form-group">
-        <label for="observacion">16. OBSERVACION/INCIDENCIA</label>
-        <textarea id="observacion" rows="3" placeholder="Texto abierto para incidencias..."></textarea>
+        <label for="observacion">16. OBSERVACIÓN/INCIDENCIA</label>
+        <textarea id="observacion" rows="3" placeholder="Anotaciones de observaciones en campo..."></textarea>
     </div>
 
     <hr>
     
+    <!-- Controles de Almacenamiento -->
     <button type="button" class="btn-save" onclick="guardarOffline()">💾 Guardar Formulario</button>
-    <div id="contador" style="font-weight: bold; margin-bottom: 10px;">Registros pendientes: 0</div>
+    <div id="contador" class="status-box">Registros locales sin sincronizar: 0</div>
     <button type="button" class="btn-sync" onclick="sincronizarGSheets()">🔄 Sincronizar a Google Sheets</button>
-    <div id="status" style="margin-top: 15px; font-weight: bold; color: #333;"></div>
+    <div id="status" style="margin-top: 15px; font-weight: bold; color: #1a1a1a;"></div>
 </div>
 <script>
     // IMPORTANTE: REEMPLAZA ESTA URL POR LA QUE TE DA GOOGLE APPS SCRIPT
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxuBU6WLk0xtky7QJtJdWuvtLATT5tX1pXhl4zrxOl1fQzudYrEWpIbnxWvMxs0sZDR/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxKp0KwlsjpsdwSrPPg0_Yb1jPOBqX03PHsrOHk7623bU4NgbP7VCMB2Y5XOxUFTCw4/exec";
 
     let latitudActual = "";
     let longitudActual = "";
@@ -293,10 +301,10 @@
     function buscarGPS() {
         const status = document.getElementById('status');
         if (!navigator.geolocation) {
-            status.innerText = "Tu celular no soporta GPS nativo.";
+            status.innerText = "El dispositivo no soporta localización GPS.";
             return;
         }
-        status.innerText = "Buscando satélites...";
+        status.innerText = "Conectando con hardware GPS...";
         
         navigator.geolocation.getCurrentPosition(
             (pos) => {
@@ -304,9 +312,9 @@
                 longitudActual = pos.coords.longitude;
                 document.getElementById('lat-txt').innerText = latitudActual;
                 document.getElementById('lon-txt').innerText = longitudActual;
-                status.innerText = "¡Georreferencia encontrada!";
+                status.innerText = "Coordenadas fijadas con éxito.";
             },
-            (err) => { status.innerText = "Error: Activa el GPS de tu celular."; },
+            (err) => { status.innerText = "Error: Active la ubicación de su equipo móvil."; },
             { enableHighAccuracy: true, timeout: 10000 }
         );
     }
@@ -316,11 +324,11 @@
         const servidor = document.getElementById('servidor').value;
         
         if (!latitudActual || !longitudActual) {
-            status.innerText = "Primero debes buscar la georreferencia.";
+            status.innerText = "Error: Se requiere buscar la georreferencia primero.";
             return;
         }
         if (!servidor) {
-            status.innerText = "Por favor, ingresa o selecciona un Servidor Público.";
+            status.innerText = "Error: Debe seleccionar un Servidor Público.";
             return;
         }
 
@@ -354,7 +362,7 @@
         datosLocales.push(nuevoRegistro);
         localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
 
-        // Limpieza masiva de campos
+        // Limpieza y reseteo institucional de campos
         latitudActual = ""; longitudActual = "";
         document.getElementById('lat-txt').innerText = "-";
         document.getElementById('lon-txt').innerText = "-";
@@ -374,13 +382,13 @@
         if(radioSexo) radioSexo.checked = false;
         if(radioEdad) radioEdad.checked = false;
         
-        status.innerText = "¡Registro completo guardado localmente!";
+        status.innerText = "Registro guardado correctamente en la memoria local.";
         actualizarContador();
     }
 
     function actualizarContador() {
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
-        document.getElementById('contador').innerText = "Registros pendientes: " + datosLocales.length;
+        document.getElementById('contador').innerText = "Registros locales sin sincronizar: " + datosLocales.length;
     }
 
     async function sincronizarGSheets() {
@@ -388,15 +396,15 @@
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
 
         if (datosLocales.length === 0) {
-            status.innerText = "No hay registros pendientes por enviar.";
+            status.innerText = "No se localizan registros listos para envío.";
             return;
         }
         if (!navigator.onLine) {
-            status.innerText = "Sin internet. No puedes sincronizar todavía.";
+            status.innerText = "Sincronización suspendida: Dispositivo sin acceso a internet.";
             return;
         }
 
-        status.innerText = "Sincronizando registros...";
+        status.innerText = "Estableciendo conexión y transmitiendo registros masivos...";
 
         const formData = new URLSearchParams();
         formData.append('datos', JSON.stringify(datosLocales));
@@ -410,10 +418,10 @@
             });
 
             localStorage.removeItem('visitas_vcxc');
-            status.innerText = "¡Sincronización masiva exitosa en Google Sheets!";
+            status.innerText = "¡Sincronización institucional exitosa en Google Sheets!";
             actualizarContador();
         } catch (error) {
-            status.innerText = "Error al conectar con Google Sheets.";
+            status.innerText = "Fallo en la comunicación con el servidor central de Google.";
         }
     }
 
