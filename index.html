@@ -80,8 +80,6 @@
             <div class="geo-box"><span class="geo-label">Longitud</span><span id="lon-txt">-</span></div>
         </div>
     </div>
-
-    <!-- DATOS DE LA PERSONA ENTREVISTADA -->
     <h3>Datos de la Persona Entrevistada</h3>
     <div class="form-group"><label for="nombre">3. Nombre(s) *</label><input type="text" id="nombre"></div>
     <div class="form-group"><label for="apellido_paterno">4. Apellido paterno *</label><input type="text" id="apellido_paterno"></div>
@@ -172,29 +170,30 @@
     <div id="status" style="margin-top: 15px; font-weight: bold; color: #1a1a1a;"></div>
 </div>
 <script>
+    // IMPORTANTE: REEMPLAZA ESTA URL POR LA QUE TE DA GOOGLE APPS SCRIPT
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwcpwSnS2sCA9i-11nHVMlrIqmUEyGpW3_9Dd66IniysxEriWoPRWmIQWgfM8msqtlD/exec";
 
-    // BASE DE DATOS DE TRABAJADORES AUTORIZADOS (Asocia CURP con su Nombre Completo)
+    // BASE DE DATOS OFFLINE: Asocia CURP con su Nombre Completo
     const BASE_SERVIDORES = {
         "TEST999999HDFXYZ00": "VICTOR DANIEL PEREZ PRIETO",
-        "ABCD123456HDFXYZ01": "ALVARADO CORDERO MARIA GUADALUPE",
-        "ANDR010101HMKLLL02": "ANDRADE GALLEGOS SANDRA GABRIELA",
-        "AREL020202HMKLLL03": "ARELLANES CASTRO HILDA ARELY",
-        "ARGU030303HMKLLL04": "ARGUIJO MONTAÑEZ MARIA EDITH",
-        "ARME040404HMKLLL05": "ARMENDARIZ DE LA O PETRA",
-        "ARRE050505HMKLLL06": "ARREDONDO BUENO TANIA",
-        "GONZ060606HMKLLL07": "ARREDONDO GONZALEZ CARMEN ESPERANZA",
-        "HERN070707HMKLLL08": "ARREOLA HERNANDEZ SANDRA LETICIA",
-        "ARZO080808HMKLLL09": "ARZOLA GONZALEZ SONIA",
-        "AVAL090909HMKLLL10": "AVALOS MACHADO ROBERTO",
-        "AYAL101010HMKLLL11": "AYALA ZAVALA SELMA MARGARITA",
-        "BARB111111HMKLLL12": "BARBOZA GARCIA HECTOR JAIR",
-        "BARC121212HMKLLL13": "BARCENAS MARCHAND LUIS ERNESTO",
-        "BARR131313HMKLLL14": "BARRAZA ANDRADE ANTONIO",
-        "REYE141414HMKLLL15": "BARRAZA REYES FERMIN",
-        "PIZA151515HMKLLL16": "BARRETERO PIZAÑA ALMA ELIA",
-        "BECE161616HMKLLL17": "BECERRA RODRIGUEZ YESICA",
-        "BUST171717HMKLLL18": "BUSTAMANTE BUSTAMANTE LUIS CARLOS"
+        "ALVA010101HDFXYZ01": "ALVARADO CORDERO MARIA GUADALUPE",
+        "ANDR020202HDFXYZ02": "ANDRADE GALLEGOS SANDRA GABRIELA",
+        "AREL030303HDFXYZ03": "ARELLANES CASTRO HILDA ARELY",
+        "ARGU040404HDFXYZ04": "ARGUIJO MONTAÑEZ MARIA EDITH",
+        "ARME050505HDFXYZ05": "ARMENDARIZ DE LA O PETRA",
+        "ARRE060606HDFXYZ06": "ARREDONDO BUENO TANIA",
+        "GONZ070707HDFXYZ07": "ARREDONDO GONZALEZ CARMEN ESPERANZA",
+        "HERN080808HDFXYZ08": "ARREOLA HERNANDEZ SANDRA LETICIA",
+        "ARZO090909HDFXYZ09": "ARZOLA GONZALEZ SONIA",
+        "AVAL101010HDFXYZ10": "AVALOS MACHADO ROBERTO",
+        "AYAL111111HDFXYZ11": "AYALA ZAVALA SELMA MARGARITA",
+        "BARB121212HDFXYZ12": "BARBOZA GARCIA HECTOR JAIR",
+        "BARC131313HDFXYZ13": "BARCENAS MARCHAND LUIS ERNESTO",
+        "BARR141414HDFXYZ14": "BARRAZA ANDRADE ANTONIO",
+        "REYE151515HDFXYZ15": "BARRAZA REYES FERMIN",
+        "PIZA161616HDFXYZ16": "BARRETERO PIZAÑA ALMA ELIA",
+        "BECE171717HDFXYZ17": "BECERRA RODRIGUEZ YESICA",
+        "BUST181818HDFXYZ18": "BUSTAMANTE BUSTAMANTE LUIS CARLOS"
     };
 
     let latitudActual = ""; let longitudActual = ""; let nombreServidorDeducido = "";
@@ -206,20 +205,20 @@
         const mainForm = document.getElementById('main-form');
 
         if (!curpIngresada) {
-            loginError.innerText = "Por favor, introduzca una CURP."; loginError.style.display = "block"; return;
+            loginError.innerText = "Por favor, introduzca una CURP."; 
+            loginError.style.display = "block"; 
+            return;
         }
 
-        // Si la CURP existe en la base de datos de personal
         if (BASE_SERVIDORES[curpIngresada]) {
             nombreServidorDeducido = BASE_SERVIDORES[curpIngresada];
             document.getElementById('servidor-activo').innerText = nombreServidorDeducido;
-            
             loginError.style.display = "none";
             loginScreen.style.display = "none";
             mainForm.style.display = "block";
             actualizarContador();
         } else {
-            loginError.innerText = "Acceso denegado: Esta CURP no coincide con ningún Servidor Público registrado.";
+            loginError.innerText = "Acceso denegado: Esta CURP no coincide con ningún Servidor Público.";
             loginError.style.display = "block";
         }
     }
@@ -237,7 +236,6 @@
             (err) => { status.innerText = "Error: Active la ubicación de su equipo móvil."; }, { enableHighAccuracy: true, timeout: 10000 }
         );
     }
-<script>
     function guardarFormularioValidado() {
         const status = document.getElementById('status'); const errorBox = document.getElementById('error-box');
         const nombre = document.getElementById('nombre').value.trim(); const appat = document.getElementById('apellido_paterno').value.trim();
@@ -344,6 +342,7 @@
             localStorage.removeItem('visitas_vcxc'); alert("Historial del teléfono borrado."); actualizarContador();
         }
     }
+    actualizarContador();
 </script>
 </body>
 </html>
