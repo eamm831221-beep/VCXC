@@ -21,12 +21,8 @@
             background-size: cover; background-position: center; background-attachment: fixed; background-color: #1a1a1a; text-align: center; color: #1a1a1a; 
         }
         
-        /* Tarjetas base de la aplicación */
-        .card { max-width: 480px; margin: 20px auto; padding: 30px; border-radius: 4px; box-shadow: 0 6px 20px rgba(0,0,0,0.7); border-top: 8px solid #66001c; box-sizing: border-box; transition: all 0.3s ease; }
-        
-        /* Variaciones de color por pantalla (Claro para inicio, Oscuro para captura/historial) */
-        .card.light-theme { background: rgba(255, 255, 255, 0.98); color: #1a1a1a; }
-        .card.dark-theme { background: rgba(18, 18, 18, 0.96); color: #ffffff; border-top: 8px solid #b4924c; box-shadow: 0 8px 25px rgba(0,0,0,0.9); }
+        /* Tarjeta institucional unificada en Blanco y Guinda */
+        .card { max-width: 480px; margin: 20px auto; background: rgba(255, 255, 255, 0.98); padding: 30px; border-radius: 4px; box-shadow: 0 6px 20px rgba(0,0,0,0.7); border-top: 8px solid #66001c; box-sizing: border-box; }
         
         .banner-container { width: 100%; display: flex; justify-content: center; margin-bottom: 20px; }
         .banner-img { width: 100%; max-width: 280px; height: auto; display: block; object-fit: contain; }
@@ -34,100 +30,59 @@
         
         .app-screen { display: none; }
         .app-screen.active { display: block; }
-        h2 { margin-top: 15px; margin-bottom: 5px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 22px; }
-        .light-theme h2 { color: #66001c; }
-        .dark-theme h2 { color: #dfb15b; }
-        
-        .subtitle { font-size: 13px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
-        .light-theme .subtitle { color: #b4924c; }
-        .dark-theme .subtitle { color: #ffffff; opacity: 0.8; }
-        
-        h3 { border-bottom: 2px solid #b4924c; padding-bottom: 5px; margin-top: 35px; text-align: left; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
-        .light-theme h3 { color: #66001c; }
-        .dark-theme h3 { color: #dfb15b; }
+        h2 { color: #66001c; margin-top: 15px; margin-bottom: 5px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 22px; }
+        .subtitle { color: #b4924c; font-size: 13px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
+        h3 { color: #66001c; border-bottom: 2px solid #b4924c; padding-bottom: 5px; margin-top: 35px; text-align: left; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
         
         .form-group { margin-bottom: 20px; text-align: left; }
-        label { display: block; font-weight: bold; margin-bottom: 6px; font-size: 14px; }
-        .light-theme label { color: #1a1a1a; }
-        .dark-theme label { color: #ffffff; }
+        label { display: block; font-weight: bold; margin-bottom: 6px; color: #1a1a1a; font-size: 14px; }
         
-        .servidor-box { border-radius: 2px; padding: 12px; font-size: 15px; font-weight: bold; text-align: center; margin-top: 5px; text-transform: uppercase; }
-        .light-theme .servidor-box { background: #1a1a1a; border: 1px solid #b4924c; color: #dfb15b; }
-        .dark-theme .servidor-box { background: #333333; border: 1px solid #dfb15b; color: #ffffff; }
+        .servidor-box { background: #1a1a1a; border: 1px solid #b4924c; color: #dfb15b; padding: 12px; font-size: 15px; font-weight: bold; text-align: center; border-radius: 2px; margin-top: 5px; text-transform: uppercase; }
         
         .metrics-grid { display: flex; gap: 10px; margin-bottom: 20px; }
-        .metric-card { flex: 1; background: #ffffff; border: 1px solid #1a1a1a; border-top: 4px solid #b4924c; padding: 12px; border-radius: 2px; text-align: center; }
+        .metric-card { flex: 1; background: #ffffff; border: 1px solid #1a1a1a; border-top: 4px solid #b4924c; padding: 12px; border-radius: 2px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .metric-val { display: block; font-size: 24px; font-weight: bold; color: #66001c; margin-top: 5px; }
         .metric-lbl { font-size: 11px; text-transform: uppercase; color: #1a1a1a; font-weight: bold; letter-spacing: 0.5px; }
-        /* Campos de texto adaptativos (Claro / Oscuro) */
-        input[type="text"], input[type="tel"], input[type="number"], select, textarea { width: 100%; padding: 12px; font-size: 15px; border-radius: 2px; box-sizing: border-box; font-family: Arial, sans-serif; transition: all 0.2s ease; }
-        .light-theme input, .light-theme select, .light-theme textarea { border: 1px solid #1a1a1a; background-color: #fdfdfd; color: #333; }
-        .dark-theme input, .dark-theme select, .dark-theme textarea { border: 1px solid #b4924c; background-color: #1a1a1a; color: #ffffff; }
         
-        input[type="text"]:focus, input[type="tel"]:focus, input[type="number"]:focus, select:focus, textarea:focus { outline: none; }
-        .light-theme input:focus, .light-theme select:focus, .light-theme textarea:focus { border-color: #66001c; box-shadow: 0 0 5px rgba(102,0,28,0.3); }
-        .dark-theme input:focus, .dark-theme select:focus, .dark-theme textarea:focus { border-color: #ffffff; box-shadow: 0 0 5px rgba(255,255,255,0.4); }
+        input[type="text"], input[type="tel"], input[type="number"], select, textarea { width: 100%; padding: 12px; font-size: 15px; border-radius: 2px; border: 1px solid #1a1a1a; box-sizing: border-box; font-family: Arial, sans-serif; background-color: #fdfdfd; color: #333; }
+        input[type="text"]:focus, input[type="tel"]:focus, input[type="number"]:focus, select:focus, textarea:focus { border-color: #66001c; outline: none; box-shadow: 0 0 5px rgba(102,0,28,0.3); }
         
         .geo-grid { display: flex; gap: 10px; margin-top: 10px; }
-        .geo-box { flex: 1; border: 1px solid #b4924c; padding: 10px; border-radius: 2px; font-size: 14px; font-weight: bold; text-align: center; }
-        .light-theme .geo-box { background: #fdfaf2; color: #66001c; }
-        .dark-theme .geo-box { background: #2a2a2a; color: #dfb15b; }
-        .geo-label { font-size: 11px; text-transform: uppercase; display: block; margin-bottom: 4px; }
-        .light-theme .geo-label { color: #1a1a1a; }
-        .dark-theme .geo-label { color: #ffffff; opacity: 0.7; }
+        .geo-box { flex: 1; background: #fdfaf2; border: 1px solid #b4924c; padding: 10px; border-radius: 2px; font-size: 14px; font-weight: bold; text-align: center; color: #66001c; }
+        .geo-label { font-size: 11px; text-transform: uppercase; color: #666; display: block; margin-bottom: 4px; }
         .radio-tile-group { display: flex; gap: 10px; margin-top: 5px; }
         .radio-tile-group.vertical { flex-direction: column; gap: 8px; }
-        .radio-tile { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 2px; cursor: pointer; text-align: center; font-weight: bold; font-size: 14px; transition: all 0.2s ease; }
+        .radio-tile { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #1a1a1a; padding: 12px; border-radius: 2px; cursor: pointer; text-align: center; background: #ffffff; font-weight: bold; font-size: 14px; transition: all 0.2s ease; }
         .radio-tile input { position: absolute; opacity: 0; }
-        
-        .light-theme .radio-tile { border: 1px solid #1a1a1a; background: #ffffff; color: #1a1a1a; }
-        .light-theme .radio-tile:has(input:checked) { border-color: #66001c; background-color: #66001c; color: #dfb15b; box-shadow: inset 0 0 0 1px #b4924c; }
-        
-        .dark-theme .radio-tile { border: 1px solid #b4924c; background: #1a1a1a; color: #ffffff; }
-        .dark-theme .radio-tile:has(input:checked) { border-color: #ffffff; background-color: #b4924c; color: #1a1a1a; }
+        .radio-tile:has(input:checked) { border-color: #66001c; background-color: #66001c; color: #dfb15b; box-shadow: inset 0 0 0 1px #b4924c; }
         
         button { width: 100%; padding: 15px; font-size: 14px; font-weight: bold; border: 1px solid transparent; border-radius: 2px; cursor: pointer; margin-bottom: 15px; box-sizing: border-box; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s ease; }
         .btn-guinda { background-color: #66001c; color: #ffffff; border: 1px solid #66001c; }
         .btn-guinda:hover { background-color: #4a0014; border-color: #4a0014; }
         .btn-guinda:disabled { background-color: #e0e0e0; border-color: #b3b3b3; color: #888; cursor: not-allowed; }
         
-        .dark-theme .btn-guinda { background-color: #b4924c; color: #1a1a1a; border: 1px solid #b4924c; }
-        .dark-theme .btn-guinda:hover { background-color: #dfb15b; }
-        
         .btn-negro { background-color: #1a1a1a; color: #dfb15b; border: 1px solid #b4924c; }
         .btn-negro:hover { background-color: #2a2a2a; color: #ffffff; }
         
-        .dark-theme .btn-negro { background-color: #ffffff; color: #1a1a1a; border: 1px solid #ffffff; }
-        .dark-theme .btn-negro:hover { background-color: #e0e0e0; }
+        /* Contenedor NUEVO en grid para alinear botones lado a lado */
+        .btn-row-grid { display: flex; gap: 10px; width: 100%; box-sizing: border-box; }
+        .btn-row-grid button { flex: 1; }
         
-        .status-box { padding: 14px; font-weight: bold; font-size: 14px; border-radius: 2px; margin-bottom: 20px; text-align: left; }
-        .light-theme .status-box { background: #fdfaf2; color: #66001c; border: 1px solid #b4924c; border-left: 6px solid #66001c; }
-        .dark-theme .status-box { background: #2a2a2a; color: #dfb15b; border: 1px solid #dfb15b; border-left: 6px solid #b4924c; }
-        
+        .status-box { background: #fdfaf2; color: #66001c; padding: 14px; font-weight: bold; font-size: 14px; border-radius: 2px; margin-bottom: 20px; border: 1px solid #b4924c; border-left: 6px solid #66001c; text-align: left; }
         .error-alert { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 12px; border-radius: 2px; text-align: left; font-size: 14px; margin-top: 15px; display: none; line-height: 1.5; }
         
-        .table-container { width: 100%; overflow-x: auto; margin-top: 10px; border-radius: 2px; box-sizing: border-box; }
-        .light-theme .table-container { background: #fff; border: 1px solid #1a1a1a; }
-        .dark-theme .table-container { background: #1a1a1a; border: 1px solid #b4924c; }
-        
+        .table-container { width: 100%; overflow-x: auto; margin-top: 10px; background: #fff; border: 1px solid #1a1a1a; border-radius: 2px; }
         table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; }
-        th { padding: 10px; font-weight: bold; text-transform: uppercase; font-size: 11px; border-bottom: 2px solid #b4924c; }
-        .light-theme th { background: #66001c; color: #dfb15b; }
-        .dark-theme th { background: #2a2a2a; color: #dfb15b; }
-        
-        td { padding: 10px; border-bottom: 1px solid #e0e0e0; }
-        .light-theme td { color: #1a1a1a; }
-        .dark-theme td { color: #ffffff; border-bottom: 1px solid #333; }
-        .light-theme tr:nth-child(even) { background: #fdfaf2; }
-        .dark-theme tr:nth-child(even) { background: #222222; }
-        
-        .badge-pend { font-weight: bold; text-transform: uppercase; font-size: 11px; color: #ff5252; }
-        .badge-sinc { font-weight: bold; text-transform: uppercase; font-size: 11px; color: #4caf50; }
+        th { background: #66001c; color: #dfb15b; padding: 10px; font-weight: bold; text-transform: uppercase; font-size: 11px; border-bottom: 2px solid #b4924c; }
+        td { padding: 10px; border-bottom: 1px solid #e0e0e0; color: #1a1a1a; }
+        tr:nth-child(even) { background: #fdfaf2; }
+        .badge-pend { color: #66001c; font-weight: bold; text-transform: uppercase; font-size: 11px; }
+        .badge-sinc { color: #2e7d32; font-weight: bold; text-transform: uppercase; font-size: 11px; }
     </style>
 </head>
 <body>
-<div id="app-card" class="card light-theme">
-    <!-- PANTALLA 1: ACCESO (TEMA CLARO) -->
+<div class="card">
+    <!-- PANTALLA 1: ACCESO -->
     <div id="screen-1" class="app-screen active">
         <div class="banner-container"><img class="banner-img" alt="Casa por casa" src="https://postimg.cc"></div>
         <h2>Acceso Restringido</h2>
@@ -140,7 +95,7 @@
         <div id="login-error" style="color: #66001c; font-weight: bold; font-size: 14px; margin-top: 10px; display: none;"></div>
     </div>
 
-    <!-- PANTALLA 2: PANEL DE CONTROL (TEMA CLARO) -->
+    <!-- PANTALLA 2: PANEL DE CONTROL -->
     <div id="screen-2" class="app-screen">
         <img class="banner-img-wide" alt="Bienestar" src="https://bienestar.gob.mx">
         <h2>Panel de Control</h2>
@@ -169,10 +124,10 @@
             </div>
         </div>
         
-        <button type="button" id="btn-next-to-capture" class="btn-guinda" style="margin-top: 10px;" onclick="cambiarFondoYPantalla(3, 'dark')" disabled>Comenzar Nueva Captura ➡️</button>
-        <button type="button" class="btn-negro" onclick="cambiarFondoYPantalla(4, 'dark')">Ver Historial de la Jornada 📂</button>
+        <button type="button" id="btn-next-to-capture" class="btn-guinda" style="margin-top: 10px;" onclick="irAPantalla(3)" disabled>Comenzar Nueva Captura ➡️</button>
+        <button type="button" class="btn-negro" onclick="irAPantalla(4)">Ver Historial de la Jornada 📂</button>
     </div>
-    <!-- PANTALLA 3: PREGUNTAS EN CAMPO (NUEVO TEMA OSCURO EJECUTIVO) -->
+    <!-- PANTALLA 3: PREGUNTAS EN CAMPO -->
     <div id="screen-3" class="app-screen">
         <img class="banner-img-wide" alt="Bienestar" src="https://bienestar.gob.mx">
         <h2>Captura de Datos</h2>
@@ -257,9 +212,10 @@
         
         <button type="button" class="btn-guinda" onclick="guardarFormularioValidado()">💾 Guardar Formulario</button>
         <div id="error-box" class="error-alert"></div>
-        <button type="button" class="btn-negro" onclick="cambiarFondoYPantalla(2, 'light')">⬅️ Cancelar y Volver</button>
+        <button type="button" class="btn-negro" onclick="irAPantalla(2)">⬅️ Cancelar y Volver</button>
     </div>
-    <!-- PANTALLA 4: HISTORIAL Y AUDITORÍA (NUEVO TEMA OSCURO EJECUTIVO) -->
+
+    <!-- PANTALLA 4: HISTORIAL Y AUDITORÍA -->
     <div id="screen-4" class="app-screen">
         <img class="banner-img-wide" alt="Bienestar" src="https://bienestar.gob.mx">
         <h2>Historial Central</h2>
@@ -268,8 +224,12 @@
         <div id="contador" class="status-box">📂 Visitas pendientes por sincronizar: 0</div>
         
         <button type="button" class="btn-guinda" onclick="sincronizarGSheets()">🔄 Sincronizar a Google Sheets VCXC</button>
-        <button type="button" class="btn-negro" onclick="descargarReporteCSV()">📥 Descargar Respaldo de Hoy (.CSV)</button>
         
+        <!-- NUEVO: Fusión de Botones Descargar y Limpiar alineados lado a lado en un mismo renglón -->
+        <div class="btn-row-grid">
+            <button type="button" class="btn-negro" onclick="descargarReporteCSV()">📥 Respaldar (.CSV)</button>
+            <button type="button" class="btn-guinda" style="background-color: #4a0014; border-color: #4a0014;" onclick="eliminarHistorialLocal()">⚠️ Limpiar Memo</button>
+        </div>
         <div class="table-container">
             <table>
                 <thead>
@@ -280,24 +240,24 @@
                     </tr>
                 </thead>
                 <tbody id="historial-body">
-                    <!-- Se llena automáticamente -->
+                    <!-- Se llena automáticamente con JS -->
                 </tbody>
             </table>
         </div>
         
-        <button type="button" class="btn-guinda" style="background-color: #4a0014; border-color: #4a0014; margin-top: 25px;" onclick="eliminarHistorialLocal()">⚠️ Limpiar Historial del Teléfono</button>
-        <button type="button" class="btn-negro" onclick="cambiarFondoYPantalla(2, 'light')">➕ Agregar Nueva Visita</button>
+        <button type="button" class="btn-negro" style="margin-top: 15px;" onclick="irAPantalla(2)">➕ Agregar Nueva Visita</button>
     </div>
     
-    <div id="status" style="margin-top: 15px; font-weight: bold; font-size: 14px;"></div>
+    <div id="status" style="margin-top: 15px; font-weight: bold; color: #1a1a1a; font-size: 14px;"></div>
 </div>
+
 <script>
     // IMPORTANTE: REEMPLAZA ESTA URL POR LA QUE TE DA GOOGLE APPS SCRIPT
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwCC2QFQ0wciCyvW4ELgGldAyK7lpS22S2WElNzJ3s4PkISdXJ_OZcp59Zi0x0fgR5R/exec";
 
     // BASE DE DATOS OFFLINE: Relación de CURPs con el Nombre del Servidor Público
     const BASE_SERVIDORES = {
-"AACG640516MCLLRD01": "ALVARADO CORDERO MARIA GUADALUPE",
+        "AACG640516MCLLRD01": "ALVARADO CORDERO MARIA GUADALUPE",
 "AAGS650227MDGNLN04": "ANDRADE GALLEGOS SANDRA GABRIELA",
 "AECH920906MDGRSL08": "ARELLANES CASTRO HILDA ARELY",
 "AUME921203MDGRND04": "ARGUIJO MONTAÑEZ MARIA EDITH",
@@ -448,16 +408,7 @@
         }
         actualizarContador();
     });
-
-    // NUEVA FUNCIÓN: Cambia dinámicamente el estilo de la tarjeta (Claro u Oscuro) al navegar
-    function cambiarFondoYPantalla(screenNumber, themeMode) {
-        const cardElement = document.getElementById('app-card');
-        if (themeMode === 'dark') {
-            cardElement.className = "card dark-theme";
-        } else {
-            cardElement.className = "card light-theme";
-        }
-        
+    function irAPantalla(screenNumber) {
         document.querySelectorAll('.app-screen').forEach(screen => screen.classList.remove('active'));
         document.getElementById('screen-' + screenNumber).classList.add('active');
         document.getElementById('status').innerText = "";
@@ -477,7 +428,7 @@
             document.getElementById('servidor-activo').innerText = nombreServidorDeducido;
             loginError.style.display = "none";
             localStorage.setItem('ultima_curp_vcxc', curpIngresada);
-            cambiarFondoYPantalla(2, 'light');
+            irAPantalla(2);
         } else {
             loginError.innerText = "Acceso denegado: Esta CURP no se encuentra en la lista autorizada de Bienestar.";
             loginError.style.display = "block";
@@ -542,7 +493,7 @@
         document.getElementById('btn-next-to-capture').disabled = true;
         
         alert("¡Visita guardada localmente con éxito!");
-        cambiarFondoYPantalla(2, 'light');
+        irAPantalla(2);
     }
 
     function actualizarContador() {
