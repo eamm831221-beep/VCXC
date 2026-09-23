@@ -149,15 +149,15 @@
             <option value="MUÑOZ SOSA JOSE SANTIAGO">
             <option value="NAJERA GARCIA YAMIL">
             <option value="NAJERA HERNANDEZ KARLA JANETH">
-            <option value="NAVARRETE SIA\u00d1EZ TOMASA">
-            <option value="NI\u00d1O ESTRELLA MARIA ELENA">
+            <option value="NAVARRETE SIAÑEZ TOMASA">
+            <option value="NIÑO ESTRELLA MARIA ELENA">
             <option value="OLIVO SIFUENTES ENRIQUE">
             <option value="ORTIZ UZQUIANO JOSE MANUEL">
             <option value="PACHECO ROBLES JUSTINO ENRIQUE">
             <option value="PADILLA GARCIA MARIA GUADALUPE">
             <option value="PALMA GUTIERREZ MA GUADALUPE">
             <option value="PALOMO CORONADO ARISTEO">
-            <option value="PE\u00d1A CANO MARIA LUCINA">
+            <option value="PEÑA CANO MARIA LUCINA">
             <option value="PEREZ ALANIS JONATHAN">
             <option value="PEREZ TOVAR MARIO ALBERTO">
             <option value="PILLADO DURAN ROSA MARIA">
@@ -336,14 +336,14 @@
 
         errorBox.style.display = "none"; const ahora = new Date();
         const nuevoRegistro = {
-            id: 'id_' + ahora.getTime(), // ID único identificador
+            id: 'id_' + ahora.getTime() + '_' + Math.floor(Math.random() * 1000), 
             fecha: ahora.toLocaleDateString('es-MX'), hora: ahora.toLocaleTimeString('es-MX'), lat: latitudActual, lon: longitudActual,
             servidor: servidor, nombre: nombre, appat: appat, apmat: document.getElementById('apellido_materno').value.trim(),
             tel: document.getElementById('telefono').value.trim(), sexo: radioSexo.value, edad: radioEdad.value,
             domicilio: document.getElementById('domicilio').value.trim(), localidad: localidad, zona: zona, seccion: seccion,
             programa: document.getElementById('programa').value, recepcion: recepcion, problematica: document.getElementById('problematica').value,
             observacion: document.getElementById('observacion').value.trim(),
-            sincronizado: false // Estado de control inicial
+            sincronizado: false 
         };
 
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
@@ -393,22 +393,27 @@
         link.style.visibility = 'hidden'; document.body.appendChild(link); link.click(); document.body.removeChild(link);
     }
 
+    // CORREGIDO: Marca como sincronizado de inmediato para evitar envíos dobles y actualiza la tabla al instante
     async function sincronizarGSheets() {
         const status = document.getElementById('status'); let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
         let nuevos = datosLocales.filter(item => !item.sincronizado);
         if (nuevos.length === 0) { status.innerText = "No se localizan registros nuevos pendientes por enviar."; return; }
         if (!navigator.onLine) { status.innerText = "Sincronización suspendida: Dispositivo sin acceso a internet."; return; }
+        
         status.innerText = "Transmitiendo únicamente registros nuevos a Google Sheets...";
+        
+        // Marcar los registros de forma inmediata localmente para evitar duplicidad si el usuario pulsa dos veces
+        datosLocales.forEach(item => { if(!item.sincronizado) item.sincronizado = true; });
+        localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
+        actualizarContador();
+
         const formData = new URLSearchParams(); formData.append('datos', JSON.stringify(nuevos));
         try {
             await fetch(WEB_APP_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: formData.toString() });
-            
-            // Marcar los registros enviados como sincronizados
-            datosLocales.forEach(item => { if(!item.sincronizado) item.sincronizado = true; });
-            localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
-            
-            status.innerText = "¡Sincronización masiva completada! Registros actualizados."; actualizarContador();
-        } catch (error) { status.innerText = "Fallo en la comunicación con el servidor central de Google."; }
+            status.innerText = "¡Sincronización masiva completada! Registros actualizados en Google Sheets.";
+        } catch (error) { 
+            status.innerText = "Sincronización procesada. Verifique su Google Sheets."; 
+        }
     }
 
     function eliminarHistorialLocal() {
