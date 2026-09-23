@@ -19,8 +19,8 @@
         h3 { color: #66001c; border-bottom: 1px solid #8a6d3b; padding-bottom: 5px; margin-top: 35px; text-align: left; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
         .form-group { margin-bottom: 20px; text-align: left; }
         label { display: block; font-weight: bold; margin-bottom: 6px; color: #1a1a1a; font-size: 14px; }
-        input[type="text"], input[type="tel"], select, textarea { width: 100%; padding: 12px; font-size: 15px; border-radius: 2px; border: 1px solid #b3b3b3; box-sizing: border-box; font-family: Arial, sans-serif; background-color: #fcfcfc; }
-        input[type="text"]:focus, input[type="tel"]:focus, select:focus, textarea:focus { border-color: #66001c; outline: none; background-color: #fff; }
+        input[type="text"], input[type="tel"], input[type="number"], select, textarea { width: 100%; padding: 12px; font-size: 15px; border-radius: 2px; border: 1px solid #b3b3b3; box-sizing: border-box; font-family: Arial, sans-serif; background-color: #fcfcfc; }
+        input[type="text"]:focus, input[type="tel"]:focus, input[type="number"]:focus, select:focus, textarea:focus { border-color: #66001c; outline: none; background-color: #fff; }
         .geo-grid { display: flex; gap: 10px; margin-top: 10px; }
         .geo-box { flex: 1; background: #f9f9f9; border: 1px solid #b3b3b3; padding: 10px; border-radius: 2px; font-size: 14px; font-weight: bold; text-align: center; }
         .geo-label { font-size: 11px; text-transform: uppercase; color: #666; display: block; margin-bottom: 4px; }
@@ -41,6 +41,8 @@
         th { background: #66001c; color: #dfb15b; padding: 10px; font-weight: bold; text-transform: uppercase; font-size: 11px; }
         td { padding: 10px; border-bottom: 1px solid #e0e0e0; color: #333; }
         tr:nth-child(even) { background: #fdfaf2; }
+        .badge-pend { color: #8a6d3b; font-weight: bold; }
+        .badge-sinc { color: #2e7d32; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -81,6 +83,34 @@
             <option value="BUSTAMANTE CORDOVA ANA JHOSSEMIN">
             <option value="BUSTAMANTES CORDOVA MARTHA IMELDA">
             <option value="CABRALES CASTAÑEDA MARIA DE LOS ANGELES">
+            <option value="CARRERA CALDERON GUILLERMA GUADALUPE">
+            <option value="CARRETE POSADA IRMA ROCIO">
+            <option value="CARRETE RODRIGUEZ CATALINA">
+            <option value="CASTOR HOLGUIN ROSA IRENE">
+            <option value="CASTRO ALVAREZ ERIKA GUADALUPE">
+            <option value="CASTRO SALCEDO VICTOR MANUEL">
+            <option value="CERVANTES SALGADO MARIA DEL SOCORRO">
+            <option value="CHACON OCHOA MARIA DE JESUS">
+            <option value="CHAVEZ GAMEZ WENDY YADIRA">
+            <option value="COMPEAN RAMIREZ JESUS">
+            <option value="CORCHADO LEYVA ANA KAREN">
+            <option value="CORDOVA ALCAZAR MARCO ANTONIO">
+            <option value="CORTEZ CERVANTES CAROLINA">
+            <option value="CUEVAS RIOS BERTHA ALICIA">
+            <option value="DAVILA TOVAR BERENICE">
+            <option value="DE SANTIAGO SAUCEDO LAEYDY KARINA">
+            <option value="DIAZ NAVARRETE ESPERANZA">
+            <option value="DIAZ TRUJILLO RAMON DE JESUS">
+            <option value="DOMINGUEZ CORCHADO SERGIO ALBERTO">
+            <option value="ELIZALDE REYES IVETTE SARAI">
+            <option value="ESQUIVEL MASCORRO NANCY ACELA">
+            <option value="ESTRADA MOLINA MIGUEL DE JESUS">
+            <option value="EZQUEDA MARIA MAYELA">
+            <option value="FAVELA SERRANO RAQUEL">
+            <option value="FIERRO GARCIA MARIA ELIZABETH">
+            <option value="FIGUEROA LOPEZ LAURA YANIRA">
+            <option value="FLORES ADAME MARGARITA">
+            <option value="FLORES TORRES LESLY YAMILETH">
             <option value="FUENTES HERNANDEZ CITLALI SARAHI">
             <option value="GANDARILLA RAMIREZ LUCILA">
             <option value="GARCIA ENCERRADO JUAN JOSE">
@@ -119,15 +149,15 @@
             <option value="MUÑOZ SOSA JOSE SANTIAGO">
             <option value="NAJERA GARCIA YAMIL">
             <option value="NAJERA HERNANDEZ KARLA JANETH">
-            <option value="NAVARRETE SIAÑEZ TOMASA">
-            <option value="NIÑO ESTRELLA MARIA ELENA">
+            <option value="NAVARRETE SIA\u00d1EZ TOMASA">
+            <option value="NI\u00d1O ESTRELLA MARIA ELENA">
             <option value="OLIVO SIFUENTES ENRIQUE">
             <option value="ORTIZ UZQUIANO JOSE MANUEL">
             <option value="PACHECO ROBLES JUSTINO ENRIQUE">
             <option value="PADILLA GARCIA MARIA GUADALUPE">
             <option value="PALMA GUTIERREZ MA GUADALUPE">
             <option value="PALOMO CORONADO ARISTEO">
-            <option value="PEÑA CANO MARIA LUCINA">
+            <option value="PE\u00d1A CANO MARIA LUCINA">
             <option value="PEREZ ALANIS JONATHAN">
             <option value="PEREZ TOVAR MARIO ALBERTO">
             <option value="PILLADO DURAN ROSA MARIA">
@@ -201,8 +231,8 @@
         <textarea id="domicilio" rows="3" placeholder="Dirección detallada..."></textarea>
     </div>
     <div class="form-group"><label for="localidad">10. Localidad *</label><input type="text" id="localidad"></div>
-    <div class="form-group"><label for="zona">11. Zona *</label><input type="text" id="zona" placeholder="Identificador numérico o texto"></div>
-    <div class="form-group"><label for="seccion">12. Sección *</label><input type="text" id="seccion" placeholder="Identificador numérico o texto"></div>
+    <div class="form-group"><label for="zona">11. Zona *</label><input type="number" id="zona" pattern="[0-9]*" placeholder="Solo números"></div>
+    <div class="form-group"><label for="seccion">12. Sección *</label><input type="number" id="seccion" pattern="[0-9]*" placeholder="Solo números"></div>
     <h3>Información Complementaria</h3>
     <div class="form-group">
         <label for="programa">13. Programa al que pertenece</label>
@@ -231,7 +261,7 @@
         </select>
     </div>
     <div class="form-group">
-        <label ask="problematica">15. Problemática detectada</label>
+        <label for="problematica">15. Problemática detectada</label>
         <select id="problematica">
             <option value="">Selecciona una opción...</option>
             <option value="AGUA">AGUA</option>
@@ -251,13 +281,13 @@
     <hr>
     <button type="button" class="btn-guinda" onclick="guardarFormularioValidado()">💾 Guardar Formulario</button>
     <div id="error-box" class="error-alert"></div>
-    <div id="contador" class="status-box">📂 Visitas guardadas en el teléfono: 0</div>
+    <div id="contador" class="status-box">📂 Visitas pendientes por sincronizar: 0</div>
     <button type="button" class="btn-guinda" onclick="sincronizarGSheets()">🔄 Sincronizar a Google Sheets VCXC</button>
     <h3>Historial de Capturas de la Jornada</h3>
     <button type="button" class="btn-negro" onclick="descargarReporteCSV()">📥 Descargar Respaldo de Hoy (.CSV)</button>
     <div class="table-container">
         <table>
-            <thead><tr><th>Hora</th><th>Persona Entrevistada</th><th>Sección</th></tr></thead>
+            <thead><tr><th>Hora</th><th>PERSONA ENTREVISTADA</th><th>Estado</th></tr></thead>
             <tbody id="historial-body"></tbody>
         </table>
     </div>
@@ -297,7 +327,7 @@
         if (!servidor) errores.push("• 2. Servidor Público"); if (!nombre) errores.push("• 3. Nombre(s)");
         if (!appat) errores.push("• 4. Apellido paterno"); if (!radioSexo) errores.push("• 7. Sexo");
         if (!radioEdad) errores.push("• 8. Grupo de edad"); if (!localidad) errores.push("• 10. Localidad");
-        if (!zona) errores.push("• 11. Zona"); if (!seccion) errores.push("• 12. Sección"); if (!recepcion) errores.push("• 14. Recepción del mensaje");
+        if (!zona) errores.push("• 11. Zona (Campo vacío)"); if (!seccion) errores.push("• 12. Sección (Campo vacío)"); if (!recepcion) errores.push("• 14. Recepción del mensaje");
 
         if (errores.length > 0) {
             status.innerText = ""; boxText = "<strong>Falta llenar o corregir los siguientes campos obligatorios:</strong><br>";
@@ -306,12 +336,14 @@
 
         errorBox.style.display = "none"; const ahora = new Date();
         const nuevoRegistro = {
+            id: 'id_' + ahora.getTime(), // ID único identificador
             fecha: ahora.toLocaleDateString('es-MX'), hora: ahora.toLocaleTimeString('es-MX'), lat: latitudActual, lon: longitudActual,
             servidor: servidor, nombre: nombre, appat: appat, apmat: document.getElementById('apellido_materno').value.trim(),
             tel: document.getElementById('telefono').value.trim(), sexo: radioSexo.value, edad: radioEdad.value,
             domicilio: document.getElementById('domicilio').value.trim(), localidad: localidad, zona: zona, seccion: seccion,
             programa: document.getElementById('programa').value, recepcion: recepcion, problematica: document.getElementById('problematica').value,
-            observacion: document.getElementById('observacion').value.trim()
+            observacion: document.getElementById('observacion').value.trim(),
+            sincronizado: false // Estado de control inicial
         };
 
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
@@ -323,19 +355,23 @@
         document.getElementById('programa').value = ""; document.getElementById('recepcion').value = ""; document.getElementById('problematica').value = "";
         document.getElementById('observacion').value = ""; if(radioSexo) radioSexo.checked = false; if(radioEdad) radioEdad.checked = false;
         
+        latitudActual = ""; longitudActual = ""; document.getElementById('lat-txt').innerText = "-"; document.getElementById('lon-txt').innerText = "-";
         status.innerText = "Registro verificado y guardado localmente."; actualizarContador();
     }
 
     function actualizarContador() {
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
-        document.getElementById('contador').innerText = "📂 Visitas guardadas en el teléfono: " + datosLocales.length;
+        let pendientes = datosLocales.filter(item => !item.sincronizado).length;
+        document.getElementById('contador').innerText = "📂 Visitas pendientes por sincronizar: " + pendientes;
+        
         const tbody = document.getElementById('historial-body'); tbody.innerHTML = "";
         if(datosLocales.length === 0) {
             tbody.innerHTML = "<tr><td colspan='3' style='text-align:center; color:#999;'>No hay capturas acumuladas hoy.</td></tr>"; return;
         }
         datosLocales.forEach((item) => {
             const row = document.createElement('tr');
-            row.innerHTML = `<td>${item.hora}</td><td>${item.nombre} ${item.appat}</td><td>${item.seccion}</td>`;
+            const estadoTexto = item.sincronizado ? '<span class="badge-sinc">Sincronizado</span>' : '<span class="badge-pend">Falta Sincronizar</span>';
+            row.innerHTML = `<td>${item.hora}</td><td>${item.nombre} ${item.appat}</td><td>${estadoTexto}</td>`;
             tbody.appendChild(row);
         });
     }
@@ -343,12 +379,12 @@
     function descargarReporteCSV() {
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
         if (datosLocales.length === 0) { alert("No hay datos capturados hoy para descargar."); return; }
-        let csvContent = "\uFEFF"; csvContent += "Fecha,Hora,Latitud,Longitud,Servidor,Nombre,ApPaterno,ApMaterno,Telefono,Sexo,Edad,Domicilio,Localidad,Zona,Seccion,Programa,Recepcion,Problematica,Observacion\n";
+        let csvContent = "\uFEFF"; csvContent += "Fecha,Hora,Latitud,Longitud,Servidor,Nombre,ApPaterno,ApMaterno,Telefono,Sexo,Edad,Domicilio,Localidad,Zona,Seccion,Programa,Recepcion,Problematica,Observacion,Sincronizado\n";
         datosLocales.forEach(item => {
             let fila = [
                 `"${item.fecha}"`, `"${item.hora}"`, `"${item.lat}"`, `"${item.lon}"`, `"${item.servidor}"`, `"${item.nombre}"`, `"${item.appat}"`, `"${item.apmat}"`,
                 `"${item.tel}"`, `"${item.sexo}"`, `"${item.edad}"`, `"${item.domicilio}"`, `"${item.localidad}"`, `"${item.zona}"`, `"${item.seccion}"`, `"${item.programa}"`,
-                `"${item.recepcion}"`, `"${item.problematica}"`, `"${item.observacion}"`
+                `"${item.recepcion}"`, `"${item.problematica}"`, `"${item.observacion}"`, `"${item.sincronizado ? 'SI' : 'NO'}"`
             ];
             csvContent += fila.join(",") + "\n";
         });
@@ -359,21 +395,27 @@
 
     async function sincronizarGSheets() {
         const status = document.getElementById('status'); let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
-        if (datosLocales.length === 0) { status.innerText = "No se localizan registros listos para envío."; return; }
+        let nuevos = datosLocales.filter(item => !item.sincronizado);
+        if (nuevos.length === 0) { status.innerText = "No se localizan registros nuevos pendientes por enviar."; return; }
         if (!navigator.onLine) { status.innerText = "Sincronización suspendida: Dispositivo sin acceso a internet."; return; }
-        status.innerText = "Estableciendo conexión y transmitiendo registros masivos...";
-        const formData = new URLSearchParams(); formData.append('datos', JSON.stringify(datosLocales));
+        status.innerText = "Transmitiendo únicamente registros nuevos a Google Sheets...";
+        const formData = new URLSearchParams(); formData.append('datos', JSON.stringify(nuevos));
         try {
             await fetch(WEB_APP_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: formData.toString() });
-            status.innerText = "¡Sincronización exitosa! Datos guardados en Google Sheets. (Historial conservado en el teléfono)"; actualizarContador();
+            
+            // Marcar los registros enviados como sincronizados
+            datosLocales.forEach(item => { if(!item.sincronizado) item.sincronizado = true; });
+            localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
+            
+            status.innerText = "¡Sincronización masiva completada! Registros actualizados."; actualizarContador();
         } catch (error) { status.innerText = "Fallo en la comunicación con el servidor central de Google."; }
     }
 
     function eliminarHistorialLocal() {
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
         if (datosLocales.length === 0) { alert("El historial ya se encuentra completamente vacío."); return; }
-        if (confirm("⚠️ ¿Está seguro de que desea eliminar permanentemente todas las visitas guardadas en este teléfono? Asegúrese de haber sincronizado o descargado su respaldo primero.")) {
-            localStorage.removeItem('visitas_vcxc'); alert("Historial del teléfono borrado correctamente."); actualizarContador();
+        if (confirm("⚠️ ¿Desea eliminar permanentemente todas las visitas guardadas en este teléfono? Asegúrese de haber sincronizado primero.")) {
+            localStorage.removeItem('visitas_vcxc'); alert("Historial del teléfono borrado."); actualizarContador();
         }
     }
     actualizarContador();
