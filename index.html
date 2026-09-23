@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Institucional VCXC</title>
+    <title>Sistema de Registro VCXC</title>
     <style>
         body { 
             font-family: 'Times New Roman', Times, serif, Arial; 
@@ -11,16 +11,27 @@
             background-image: url('https://postimg.cc'); 
             background-size: cover; background-position: center; background-attachment: fixed; background-color: #1a1a1a; text-align: center; color: #333; 
         }
-        .login-card { max-width: 400px; margin: 60px auto; background: #ffffff; padding: 35px; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.7); border-top: 8px solid #66001c; }
-        .card { max-width: 480px; margin: 20px auto; background: rgba(255, 255, 255, 0.96); padding: 30px; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); border-top: 8px solid #66001c; display: none; }
+        .card { max-width: 480px; margin: 20px auto; background: rgba(255, 255, 255, 0.96); padding: 30px; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); border-top: 8px solid #66001c; box-sizing: border-box; }
         .banner-container { width: 100%; display: flex; justify-content: center; margin-bottom: 20px; }
         .banner-img { width: 100%; max-width: 280px; height: auto; display: block; object-fit: contain; }
+        
+        /* Sistema de navegación por pantallas */
+        .app-screen { display: none; }
+        .app-screen.active { display: block; }
+        
         h2 { color: #66001c; margin-bottom: 5px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 24px; }
         .subtitle { color: #8a6d3b; font-size: 14px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
         h3 { color: #66001c; border-bottom: 1px solid #8a6d3b; padding-bottom: 5px; margin-top: 35px; text-align: left; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
         .form-group { margin-bottom: 20px; text-align: left; }
         label { display: block; font-weight: bold; margin-bottom: 6px; color: #1a1a1a; font-size: 14px; }
-        .servidor-box { background: #f0f4f1; border: 1px dashed #66001c; color: #66001c; padding: 12px; font-size: 16px; font-weight: bold; text-align: center; border-radius: 2px; margin-top: 5px; letter-spacing: 0.5px; }
+        .servidor-box { background: #f0f4f1; border: 1px dashed #66001c; color: #66001c; padding: 12px; font-size: 16px; font-weight: bold; text-align: center; border-radius: 2px; margin-top: 5px; }
+        
+        /* Métricas de la pantalla de bienvenida */
+        .metrics-grid { display: flex; gap: 10px; margin-bottom: 20px; }
+        .metric-card { flex: 1; background: #fafafa; border: 1px solid #b3b3b3; padding: 12px; border-radius: 2px; text-align: center; }
+        .metric-val { display: block; font-size: 22px; font-weight: bold; color: #66001c; margin-top: 5px; }
+        .metric-lbl { font-size: 11px; text-transform: uppercase; color: #666; font-weight: bold; }
+        
         input[type="text"], input[type="tel"], input[type="number"], select, textarea { width: 100%; padding: 12px; font-size: 15px; border-radius: 2px; border: 1px solid #b3b3b3; box-sizing: border-box; font-family: Arial, sans-serif; background-color: #fcfcfc; }
         input[type="text"]:focus, input[type="tel"]:focus, input[type="number"]:focus, select:focus, textarea:focus { border-color: #66001c; outline: none; background-color: #fff; }
         .geo-grid { display: flex; gap: 10px; margin-top: 10px; }
@@ -34,6 +45,7 @@
         button { width: 100%; padding: 15px; font-size: 15px; font-weight: bold; border: 1px solid transparent; border-radius: 2px; cursor: pointer; margin-bottom: 15px; box-sizing: border-box; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s ease; }
         .btn-guinda { background-color: #66001c; color: #ffffff; border-color: #66001c; }
         .btn-guinda:hover { background-color: #4a0014; }
+        .btn-guinda:disabled { background-color: #b3b3b3; border-color: #b3b3b3; color: #777; cursor: not-allowed; }
         .btn-negro { background-color: #1a1a1a; color: #dfb15b; border: 1px solid #8a6d3b; }
         .btn-negro:hover { background-color: #2a2a2a; }
         .status-box { background: #fdfaf2; color: #1a1a1a; padding: 14px; font-weight: bold; font-size: 15px; border-radius: 2px; margin-bottom: 20px; border: 1px solid #8a6d3b; border-left: 6px solid #8a6d3b; text-align: left; }
@@ -43,137 +55,178 @@
         th { background: #66001c; color: #dfb15b; padding: 10px; font-weight: bold; text-transform: uppercase; font-size: 11px; }
         td { padding: 10px; border-bottom: 1px solid #e0e0e0; color: #333; }
         tr:nth-child(even) { background: #fdfaf2; }
-        .badge-pend { color: #8a6d3b; font-weight: bold; }
+        .badge-pend { color: #b71c1c; font-weight: bold; }
         .badge-sinc { color: #2e7d32; font-weight: bold; }
     </style>
 </head>
 <body>
-
-<div id="login-screen" class="login-card">
+<div class="card">
     <div class="banner-container"><img class="banner-img" alt="Casa por casa" src="https://postimg.cc"></div>
-    <h2>Acceso Restringido</h2>
-    <div class="subtitle">Validación de Personal VCXC</div>
-    <div class="form-group" style="margin-top: 25px;">
-        <label for="input-curp">Ingrese su CURP para ingresar *</label>
-        <input type="text" id="input-curp" maxlength="18" placeholder="18 caracteres" style="text-transform: uppercase;">
-    </div>
-    <button type="button" class="btn-guinda" onclick="validarAccesoCURP()">Validar Identidad</button>
-    <div id="login-error" style="color: #b71c1c; font-weight: bold; font-size: 14px; margin-top: 10px; display: none;"></div>
-</div>
-<div id="main-form" class="card">
-    <div class="banner-container"><img class="banner-img" alt="Casa por casa" src="https://postimg.cc"></div>
-    <h2>Sistema de Registro</h2>
-    <div class="subtitle">Visitas Institucionales VCXC</div>
 
-    <!-- Nombre del Servidor Cargado Automáticamente -->
-    <div class="form-group">
-        <label>Servidor Público Activo</label>
-        <div id="servidor-activo" class="servidor-box">-</div>
+    <!-- PANTALLA 1: ACCESO -->
+    <div id="screen-1" class="app-screen active">
+        <h2>Acceso Restringido</h2>
+        <div class="subtitle">Validación de Personal VCXC</div>
+        <div class="form-group" style="margin-top: 25px;">
+            <label for="input-curp">Ingrese su CURP para ingresar *</label>
+            <input type="text" id="input-curp" maxlength="18" placeholder="18 caracteres" style="text-transform: uppercase;">
+        </div>
+        <button type="button" class="btn-guinda" onclick="validarAccesoCURP()">Validar Identidad</button>
+        <div id="login-error" style="color: #b71c1c; font-weight: bold; font-size: 14px; margin-top: 10px; display: none;"></div>
     </div>
+    <!-- PANTALLA 2: BIENVENIDA Y GPS -->
+    <div id="screen-2" class="app-screen">
+        <h2>Panel de Control</h2>
+        <div class="subtitle">Servidor Público Activo</div>
+        <div class="form-group">
+            <div id="servidor-activo" class="servidor-box">-</div>
+        </div>
+        
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <span class="metric-lbl">Total Visitas</span>
+                <span id="metric-total" class="metric-val">0</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-lbl">Pendientes</span>
+                <span id="metric-pendientes" class="metric-val">0</span>
+            </div>
+        </div>
 
-    <!-- 1. GPS -->
-    <div class="form-group">
-        <label>1. Geolocalización (GPS) *</label>
-        <button type="button" class="btn-guinda" onclick="buscarGPS()">📍 Buscar Georreferencia</button>
-        <div class="geo-grid">
-            <div class="geo-box"><span class="geo-label">Latitud</span><span id="lat-txt">-</span></div>
-            <div class="geo-box"><span class="geo-label">Longitud</span><span id="lon-txt">-</span></div>
+        <div class="form-group">
+            <label>Paso Obligatorio: Fijar Geolocalización (GPS) *</label>
+            <button type="button" class="btn-guinda" onclick="buscarGPS()">📍 Buscar Georreferencia</button>
+            <div class="geo-grid">
+                <div class="geo-box"><span class="geo-label">Latitud</span><span id="lat-txt">-</span></div>
+                <div class="geo-box"><span class="geo-label">Longitud</span><span id="lon-txt">-</span></div>
+            </div>
         </div>
+        
+        <button type="button" id="btn-next-to-capture" class="btn-guinda" style="margin-top: 10px;" onclick="irAPantalla(3)" disabled>Comenzar Nueva Captura ➡️</button>
+        <button type="button" class="btn-negro" onclick="irAPantalla(4)">Ver Historial de la Jornada 📂</button>
     </div>
-    <h3>Datos de la Persona Entrevistada</h3>
-    <div class="form-group"><label for="nombre">3. Nombre(s) *</label><input type="text" id="nombre"></div>
-    <div class="form-group"><label for="apellido_paterno">4. Apellido paterno *</label><input type="text" id="apellido_paterno"></div>
-    <div class="form-group"><label for="apellido_materno">5. Apellido materno</label><input type="text" id="apellido_materno"></div>
-    <div class="form-group"><label for="telefono">6. Teléfono</label><input type="tel" id="telefono" pattern="[0-9]{10}" placeholder="10 dígitos numéricos"></div>
-    <div class="form-group">
-        <label>7. Sexo *</label>
-        <div class="radio-tile-group">
-            <label class="radio-tile"><input type="radio" name="sexo" value="Hombre"><span>Hombre</span></label>
-            <label class="radio-tile"><input type="radio" name="sexo" value="Mujer"><span>Mujer</span></label>
+    <!-- PANTALLA 3: PREGUNTAS EN CAMPO -->
+    <div id="screen-3" class="app-screen">
+        <h2>Captura de Datos</h2>
+        <div class="subtitle">Programa Casa por Casa</div>
+        
+        <h3>Datos de la Persona Entrevistada</h3>
+        <div class="form-group"><label for="nombre">3. Nombre(s) *</label><input type="text" id="nombre"></div>
+        <div class="form-group"><label for="apellido_paterno">4. Apellido paterno *</label><input type="text" id="apellido_paterno"></div>
+        <div class="form-group"><label for="apellido_materno">5. Apellido materno</label><input type="text" id="apellido_materno"></div>
+        <div class="form-group"><label for="telefono">6. Teléfono</label><input type="tel" id="telefono" pattern="[0-9]{10}" placeholder="10 dígitos numéricos"></div>
+        
+        <div class="form-group">
+            <label>7. Sexo *</label>
+            <div class="radio-tile-group">
+                <label class="radio-tile"><input type="radio" name="sexo" value="Hombre"><span>Hombre</span></label>
+                <label class="radio-tile"><input type="radio" name="sexo" value="Mujer"><span>Mujer</span></label>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label>8. Grupo de edad *</label>
-        <div class="radio-tile-group vertical">
-            <label class="radio-tile"><input type="radio" name="grupo_edad" value="Joven de 15 a 29 años"><span>Joven de 15 a 29 años</span></label>
-            <label class="radio-tile"><input type="radio" name="grupo_edad" value="Adulto de 30 a 64 años"><span>Adulto de 30 a 64 años</span></label>
-            <label class="radio-tile"><input type="radio" name="grupo_edad" value="Adulto Mayor de 65 años"><span>Adulto Mayor de 65 años</span></label>
+        
+        <div class="form-group">
+            <label>8. Grupo de edad *</label>
+            <div class="radio-tile-group vertical">
+                <label class="radio-tile"><input type="radio" name="grupo_edad" value="Joven de 15 a 29 años"><span>Joven de 15 a 29 años</span></label>
+                <label class="radio-tile"><input type="radio" name="grupo_edad" value="Adulto de 30 a 64 años"><span>Adulto de 30 a 64 años</span></label>
+                <label class="radio-tile"><input type="radio" name="grupo_edad" value="Adulto Mayor de 65 años"><span>Adulto Mayor de 65 años</span></label>
+            </div>
         </div>
+        <h3>Domicilio Geográfico</h3>
+        <div class="form-group">
+            <label for="domicilio">9. Calle, Número, Colonia</label>
+            <textarea id="domicilio" rows="3" placeholder="Dirección detallada..."></textarea>
+        </div>
+        <div class="form-group"><label for="localidad">10. Localidad *</label><input type="text" id="localidad"></div>
+        <div class="form-group"><label for="zona">11. Zona *</label><input type="number" id="zona" pattern="[0-9]*" placeholder="Solo números"></div>
+        <div class="form-group"><label for="seccion">12. Sección *</label><input type="number" id="seccion" pattern="[0-9]*" placeholder="Solo números"></div>
+        
+        <h3>Información Complementaria</h3>
+        <div class="form-group">
+            <label for="programa">13. Programa al que pertenece</label>
+            <select id="programa">
+                <option value="">Selecciona una opción...</option>
+                <option value="Adulto Mayor">Adulto Mayor</option>
+                <option value="Discapacidad">Discapacidad</option>
+                <option value="Mujeres Bienestar">Mujeres Bienestar</option>
+                <option value="Beca Benito Juarez">Beca Benito Juarez</option>
+                <option value="Beca Rita Cetina">Beca Rita Cetina</option>
+                <option value="Jovenes Construyendo el Futuro">Jovenes Construyendo el Futuro</option>
+                <option value="Boxeando por la Paz">Boxeando por la Paz</option>
+                <option value="Ninguno">Ninguno</option>
+                <option value="Otro">Otro</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="recepcion">14. ¿Cómo califica la recepción del mensaje? *</label>
+            <select id="recepcion">
+                <option value="">Selecciona una opción...</option>
+                <option value="Excelente">Excelente</option>
+                <option value="Bueno">Bueno</option>
+                <option value="Regular">Regular</option>
+                <option value="Mala">Mala</option>
+                <option value="Muy mala">Muy mala</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="problematica">15. Problemática detectada</label>
+            <select id="problematica">
+                <option value="">Selecciona una opción...</option>
+                <option value="AGUA">AGUA</option>
+                <option value="ELECTRICIDAD">ELECTRICIDAD</option>
+                <option value="VIVIENDA">VIVIENDA</option>
+                <option value="SALUD">SALUD</option>
+                <option value="EDUCACION">EDUCACION</option>
+                <option value="TRANSPORTE">TRANSPORTE</option>
+                <option value="SERVICIOS PUBLICOS">SERVICIOS PUBLICOS</option>
+                <option value="MEDIO AMBIENTE">MEDIO AMBIENTE</option>
+                <option value="PROGRAMAS SOCIALES">PROGRAMAS SOCIALES</option>
+                <option value="TRAMITES">TRAMITES</option>
+                <option value="OTRO">OTRO</option>
+            </select>
+        </div>
+        <div class="form-group"><label for="observacion">16. OBSERVACIÓN/INCIDENCIA</label><textarea id="observacion" rows="3" placeholder="Anotaciones de campo..."></textarea></div>
+        
+        <button type="button" class="btn-guinda" onclick="guardarFormularioValidado()">💾 Guardar Formulario</button>
+        <div id="error-box" class="error-alert"></div>
+        <button type="button" class="btn-negro" onclick="irAPantalla(2)">⬅️ Cancelar y Volver</button>
     </div>
-    <h3>Domicilio Geográfico</h3>
-    <div class="form-group">
-        <label for="domicilio">9. Calle, Número, Colonia</label>
-        <textarea id="domicilio" rows="3" placeholder="Dirección detallada..."></textarea>
+    <!-- PANTALLA 4: HISTORIAL Y AUDITORÍA -->
+    <div id="screen-4" class="app-screen">
+        <h2>Historial Central</h2>
+        <div class="subtitle">Auditoría de Encuestas Locales</div>
+        
+        <div id="contador" class="status-box">📂 Visitas pendientes por sincronizar: 0</div>
+        
+        <button type="button" class="btn-guinda" onclick="sincronizarGSheets()">🔄 Sincronizar a Google Sheets VCXC</button>
+        <button type="button" class="btn-negro" onclick="descargarReporteCSV()">📥 Descargar Respaldo de Hoy (.CSV)</button>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hora</th>
+                        <th>PERSONA ENTREVISTADA</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="historial-body">
+                    <!-- Se llena automáticamente -->
+                </tbody>
+            </table>
+        </div>
+        
+        <button type="button" class="btn-guinda" style="background-color: #4a0014; margin-top: 25px;" onclick="eliminarHistorialLocal()">⚠️ Limpiar Historial del Teléfono</button>
+        <button type="button" class="btn-negro" style="border-color: #66001c; color: #66001c;" onclick="irAPantalla(2)">➕ Agregar Nueva Visita</button>
     </div>
-    <div class="form-group"><label for="localidad">10. Localidad *</label><input type="text" id="localidad"></div>
-    <div class="form-group"><label for="zona">11. Zona *</label><input type="number" id="zona" pattern="[0-9]*" placeholder="Solo números"></div>
-    <div class="form-group"><label for="seccion">12. Sección *</label><input type="number" id="seccion" pattern="[0-9]*" placeholder="Solo números"></div>
-    <h3>Información Complementaria</h3>
-    <div class="form-group">
-        <label for="programa">13. Programa al que pertenece</label>
-        <select id="programa">
-            <option value="">Selecciona una opción...</option>
-            <option value="Adulto Mayor">Adulto Mayor</option>
-            <option value="Discapacidad">Discapacidad</option>
-            <option value="Mujeres Bienestar">Mujeres Bienestar</option>
-            <option value="Beca Benito Juarez">Beca Benito Juarez</option>
-            <option value="Beca Rita Cetina">Beca Rita Cetina</option>
-            <option value="Jovenes Construyendo el Futuro">Jovenes Construyendo el Futuro</option>
-            <option value="Boxeando por la Paz">Boxeando por la Paz</option>
-            <option value="Ninguno">Ninguno</option>
-            <option value="Otro">Otro</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="recepcion">14. ¿Cómo califica la recepción del mensaje? *</label>
-        <select id="recepcion">
-            <option value="">Selecciona una opción...</option>
-            <option value="Excelente">Excelente</option>
-            <option value="Bueno">Bueno</option>
-            <option value="Regular">Regular</option>
-            <option value="Mala">Mala</option>
-            <option value="Muy mala">Muy mala</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="problematica">15. Problemática detectada</label>
-        <select id="problematica">
-            <option value="">Selecciona una opción...</option>
-            <option value="AGUA">AGUA</option>
-            <option value="ELECTRICIDAD">ELECTRICIDAD</option>
-            <option value="VIVIENDA">VIVIENDA</option>
-            <option value="SALUD">SALUD</option>
-            <option value="EDUCACION">EDUCACION</option>
-            <option value="TRANSPORTE">TRANSPORTE</option>
-            <option value="SERVICIOS PUBLICOS">SERVICIOS PUBLICOS</option>
-            <option value="MEDIO AMBIENTE">MEDIO AMBIENTE</option>
-            <option value="PROGRAMAS SOCIALES">PROGRAMAS SOCIALES</option>
-            <option value="TRAMITES">TRAMITES</option>
-            <option value="OTRO">OTRO</option>
-        </select>
-    </div>
-    <div class="form-group"><label for="observacion">16. OBSERVACIÓN/INCIDENCIA</label><textarea id="observacion" rows="3" placeholder="Anotaciones de observaciones en campo..."></textarea></div>
-    <hr>
-    <button type="button" class="btn-guinda" onclick="guardarFormularioValidado()">💾 Guardar Formulario</button>
-    <div id="error-box" class="error-alert"></div>
-    <div id="contador" class="status-box">📂 Visitas pendientes por sincronizar: 0</div>
-    <button type="button" class="btn-guinda" onclick="sincronizarGSheets()">🔄 Sincronizar a Google Sheets VCXC</button>
-    <h3>Historial de Capturas de la Jornada</h3>
-    <button type="button" class="btn-negro" onclick="descargarReporteCSV()">📥 Descargar Respaldo de Hoy (.CSV)</button>
-    <div class="table-container">
-        <table>
-            <thead><tr><th>Hora</th><th>PERSONA ENTREVISTADA</th><th>Estado</th></tr></thead>
-            <tbody id="historial-body"></tbody>
-        </table>
-    </div>
-    <button type="button" class="btn-guinda" style="background-color: #4a0014; margin-top: 20px;" onclick="eliminarHistorialLocal()">⚠️ Limpiar Historial del Teléfono</button>
-    <div id="status" style="margin-top: 15px; font-weight: bold; color: #1a1a1a;"></div>
+    
+    <div id="status" style="margin-top: 15px; font-weight: bold; color: #1a1a1a; font-size: 14px;"></div>
 </div>
 <script>
     // IMPORTANTE: REEMPLAZA ESTA URL POR LA QUE TE DA GOOGLE APPS SCRIPT
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwcpwSnS2sCA9i-11nHVMlrIqmUEyGpW3_9Dd66IniysxEriWoPRWmIQWgfM8msqtlD/exec";
 
-    // BASE DE DATOS OFFLINE: Asocia CURP con su Nombre Completo
+    // BASE DE DATOS OFFLINE: Relación de CURPs con el Nombre del Servidor Público
     const BASE_SERVIDORES = {
         "TEST999999HDFXYZ00": "VICTOR DANIEL PEREZ PRIETO",
         "ALVA010101HDFXYZ01": "ALVARADO CORDERO MARIA GUADALUPE",
@@ -198,27 +251,30 @@
 
     let latitudActual = ""; let longitudActual = ""; let nombreServidorDeducido = "";
 
+    function irAPantalla(screenNumber) {
+        // Oculta todas las pantallas
+        document.querySelectorAll('.app-screen').forEach(screen => screen.classList.remove('active'));
+        // Muestra la pantalla indicada
+        document.getElementById('screen-' + screenNumber).classList.add('active');
+        document.getElementById('status').innerText = "";
+        actualizarContador();
+    }
+
     function validarAccesoCURP() {
         const curpIngresada = document.getElementById('input-curp').value.trim().toUpperCase();
         const loginError = document.getElementById('login-error');
-        const loginScreen = document.getElementById('login-screen');
-        const mainForm = document.getElementById('main-form');
 
         if (!curpIngresada) {
-            loginError.innerText = "Por favor, introduzca una CURP."; 
-            loginError.style.display = "block"; 
-            return;
+            loginError.innerText = "Por favor, introduzca una CURP."; loginError.style.display = "block"; return;
         }
 
         if (BASE_SERVIDORES[curpIngresada]) {
             nombreServidorDeducido = BASE_SERVIDORES[curpIngresada];
             document.getElementById('servidor-activo').innerText = nombreServidorDeducido;
             loginError.style.display = "none";
-            loginScreen.style.display = "none";
-            mainForm.style.display = "block";
-            actualizarContador();
+            irAPantalla(2);
         } else {
-            loginError.innerText = "Acceso denegado: Esta CURP no coincide con ningún Servidor Público.";
+            loginError.innerText = "Acceso denegado: Esta CURP no se encuentra en la lista autorizada.";
             loginError.style.display = "block";
         }
     }
@@ -231,7 +287,8 @@
             (pos) => {
                 latitudActual = pos.coords.latitude; longitudActual = pos.coords.longitude;
                 document.getElementById('lat-txt').innerText = latitudActual; document.getElementById('lon-txt').innerText = longitudActual;
-                status.innerText = "Coordenadas fijadas con éxito."; document.getElementById('error-box').style.display = "none";
+                status.innerText = "Coordenadas fijadas con éxito.";
+                document.getElementById('btn-next-to-capture').disabled = false; // Desbloquea botón avanzar
             },
             (err) => { status.innerText = "Error: Active la ubicación de su equipo móvil."; }, { enableHighAccuracy: true, timeout: 10000 }
         );
@@ -244,7 +301,6 @@
         const radioSexo = document.querySelector('input[name="sexo"]:checked'); const radioEdad = document.querySelector('input[name="grupo_edad"]:checked');
         let errores = [];
 
-        if (!latitudActual || !longitudActual) errores.push("• 1. Geolocalización (Falta pulsar botón GPS)");
         if (!nombre) errores.push("• 3. Nombre(s)"); if (!appat) errores.push("• 4. Apellido paterno");
         if (!radioSexo) errores.push("• 7. Sexo"); if (!radioEdad) errores.push("• 8. Grupo de edad");
         if (!localidad) errores.push("• 10. Localidad"); if (!zona) errores.push("• 11. Zona");
@@ -269,23 +325,36 @@
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
         datosLocales.push(nuevoRegistro); localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
         
+        // Limpieza de campos
         document.getElementById('nombre').value = ""; document.getElementById('apellido_paterno').value = ""; document.getElementById('apellido_materno').value = "";
         document.getElementById('telefono').value = ""; document.getElementById('domicilio').value = ""; document.getElementById('localidad').value = "";
         document.getElementById('zona').value = ""; document.getElementById('seccion').value = ""; document.getElementById('programa').value = "";
         document.getElementById('recepcion').value = ""; document.getElementById('problematica').value = ""; document.getElementById('observacion').value = "";
         if(radioSexo) radioSexo.checked = false; if(radioEdad) radioEdad.checked = false;
         
+        // Bloquear avance de nuevo para forzar GPS en la siguiente visita
         latitudActual = ""; longitudActual = ""; document.getElementById('lat-txt').innerText = "-"; document.getElementById('lon-txt').innerText = "-";
-        status.innerText = "Registro verificado y guardado localmente."; actualizarContador();
+        document.getElementById('btn-next-to-capture').disabled = true;
+        
+        alert("¡Visita guardada localmente con éxito!");
+        irAPantalla(2);
     }
 
     function actualizarContador() {
-        if (document.getElementById('main-form').style.display === "none") return;
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
         let pendientes = datosLocales.filter(item => !item.sincronizado).length;
-        document.getElementById('contador').innerText = "📂 Visitas pendientes por sincronizar: " + pendientes;
         
-        const tbody = document.getElementById('historial-body'); tbody.innerHTML = "";
+        // Actualizar métricas de Pantalla 2
+        if (document.getElementById('metric-total')) document.getElementById('metric-total').innerText = datosLocales.length;
+        if (document.getElementById('metric-pendientes')) document.getElementById('metric-pendientes').innerText = pendientes;
+        
+        // Actualizar contenedor de Pantalla 4
+        if (document.getElementById('contador')) document.getElementById('contador').innerText = "📂 Visitas pendientes por sincronizar: " + pendientes;
+        
+        const tbody = document.getElementById('historial-body'); 
+        if (!tbody) return;
+        tbody.innerHTML = "";
+        
         if(datosLocales.length === 0) {
             tbody.innerHTML = "<tr><td colspan='3' style='text-align:center; color:#999;'>No hay capturas acumuladas hoy.</td></tr>"; return;
         }
@@ -342,7 +411,6 @@
             localStorage.removeItem('visitas_vcxc'); alert("Historial del teléfono borrado."); actualizarContador();
         }
     }
-    actualizarContador();
 </script>
 </body>
 </html>
