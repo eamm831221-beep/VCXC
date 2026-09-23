@@ -11,7 +11,8 @@
             background-image: url('https://postimg.cc'); 
             background-size: cover; background-position: center; background-attachment: fixed; background-color: #1a1a1a; text-align: center; color: #333; 
         }
-        .card { max-width: 480px; margin: 20px auto; background: rgba(255, 255, 255, 0.96); padding: 30px; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); border-top: 8px solid #66001c; }
+        .login-card { max-width: 400px; margin: 60px auto; background: #ffffff; padding: 35px; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.7); border-top: 8px solid #66001c; }
+        .card { max-width: 480px; margin: 20px auto; background: rgba(255, 255, 255, 0.96); padding: 30px; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); border-top: 8px solid #66001c; display: none; }
         .banner-container { width: 100%; display: flex; justify-content: center; margin-bottom: 20px; }
         .banner-img { width: 100%; max-width: 280px; height: auto; display: block; object-fit: contain; }
         h2 { color: #66001c; margin-bottom: 5px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 24px; }
@@ -19,6 +20,7 @@
         h3 { color: #66001c; border-bottom: 1px solid #8a6d3b; padding-bottom: 5px; margin-top: 35px; text-align: left; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
         .form-group { margin-bottom: 20px; text-align: left; }
         label { display: block; font-weight: bold; margin-bottom: 6px; color: #1a1a1a; font-size: 14px; }
+        .servidor-box { background: #f0f4f1; border: 1px dashed #66001c; color: #66001c; padding: 12px; font-size: 16px; font-weight: bold; text-align: center; border-radius: 2px; margin-top: 5px; letter-spacing: 0.5px; }
         input[type="text"], input[type="tel"], input[type="number"], select, textarea { width: 100%; padding: 12px; font-size: 15px; border-radius: 2px; border: 1px solid #b3b3b3; box-sizing: border-box; font-family: Arial, sans-serif; background-color: #fcfcfc; }
         input[type="text"]:focus, input[type="tel"]:focus, input[type="number"]:focus, select:focus, textarea:focus { border-color: #66001c; outline: none; background-color: #fff; }
         .geo-grid { display: flex; gap: 10px; margin-top: 10px; }
@@ -46,10 +48,30 @@
     </style>
 </head>
 <body>
-<div class="card">
+
+<div id="login-screen" class="login-card">
+    <div class="banner-container"><img class="banner-img" alt="Casa por casa" src="https://postimg.cc"></div>
+    <h2>Acceso Restringido</h2>
+    <div class="subtitle">Validación de Personal VCXC</div>
+    <div class="form-group" style="margin-top: 25px;">
+        <label for="input-curp">Ingrese su CURP para ingresar *</label>
+        <input type="text" id="input-curp" maxlength="18" placeholder="18 caracteres" style="text-transform: uppercase;">
+    </div>
+    <button type="button" class="btn-guinda" onclick="validarAccesoCURP()">Validar Identidad</button>
+    <div id="login-error" style="color: #b71c1c; font-weight: bold; font-size: 14px; margin-top: 10px; display: none;"></div>
+</div>
+<div id="main-form" class="card">
     <div class="banner-container"><img class="banner-img" alt="Casa por casa" src="https://postimg.cc"></div>
     <h2>Sistema de Registro</h2>
     <div class="subtitle">Visitas Institucionales VCXC</div>
+
+    <!-- Nombre del Servidor Cargado Automáticamente -->
+    <div class="form-group">
+        <label>Servidor Público Activo</label>
+        <div id="servidor-activo" class="servidor-box">-</div>
+    </div>
+
+    <!-- 1. GPS -->
     <div class="form-group">
         <label>1. Geolocalización (GPS) *</label>
         <button type="button" class="btn-guinda" onclick="buscarGPS()">📍 Buscar Georreferencia</button>
@@ -58,153 +80,8 @@
             <div class="geo-box"><span class="geo-label">Longitud</span><span id="lon-txt">-</span></div>
         </div>
     </div>
-    <div class="form-group">
-        <label for="servidor">2. Servidor Público (Filtro predictivo) *</label>
-        <input list="lista-servidores" id="servidor" placeholder="Escriba apellido o nombre para buscar...">
-        <datalist id="lista-servidores">
-            <option value="ALVARADO CORDERO MARIA GUADALUPE">
-            <option value="ANDRADE GALLEGOS SANDRA GABRIELA">
-            <option value="ARELLANES CASTRO HILDA ARELY">
-            <option value="ARGUIJO MONTAÑEZ MARIA EDITH">
-            <option value="ARMENDARIZ DE LA O PETRA">
-            <option value="ARREDONDO BUENO TANIA">
-            <option value="ARREDONDO GONZALEZ CARMEN ESPERANZA">
-            <option value="ARREOLA HERNANDEZ SANDRA LETICIA">
-            <option value="ARZOLA GONZALEZ SONIA">
-            <option value="AVALOS MACHADO ROBERTO">
-            <option value="AYALA ZAVALA SELMA MARGARITA">
-            <option value="BARBOZA GARCIA HECTOR JAIR">
-            <option value="BARCENAS MARCHAND LUIS ERNESTO">
-            <option value="BARRAZA ANDRADE ANTONIO">
-            <option value="BARRAZA REYES FERMIN">
-            <option value="BARRETERO PIZAÑA ALMA ELIA">
-            <option value="BECERRA RODRIGUEZ YESICA">
-            <option value="BUSTAMANTE BUSTAMANTE LUIS CARLOS">
-            <option value="BUSTAMANTE CORDOVA ANA JHOSSEMIN">
-            <option value="BUSTAMANTES CORDOVA MARTHA IMELDA">
-            <option value="CABRALES CASTAÑEDA MARIA DE LOS ANGELES">
-            <option value="CARRERA CALDERON GUILLERMA GUADALUPE">
-            <option value="CARRETE POSADA IRMA ROCIO">
-            <option value="CARRETE RODRIGUEZ CATALINA">
-            <option value="CASTOR HOLGUIN ROSA IRENE">
-            <option value="CASTRO ALVAREZ ERIKA GUADALUPE">
-            <option value="CASTRO SALCEDO VICTOR MANUEL">
-            <option value="CERVANTES SALGADO MARIA DEL SOCORRO">
-            <option value="CHACON OCHOA MARIA DE JESUS">
-            <option value="CHAVEZ GAMEZ WENDY YADIRA">
-            <option value="COMPEAN RAMIREZ JESUS">
-            <option value="CORCHADO LEYVA ANA KAREN">
-            <option value="CORDOVA ALCAZAR MARCO ANTONIO">
-            <option value="CORTEZ CERVANTES CAROLINA">
-            <option value="CUEVAS RIOS BERTHA ALICIA">
-            <option value="DAVILA TOVAR BERENICE">
-            <option value="DE SANTIAGO SAUCEDO LAEYDY KARINA">
-            <option value="DIAZ NAVARRETE ESPERANZA">
-            <option value="DIAZ TRUJILLO RAMON DE JESUS">
-            <option value="DOMINGUEZ CORCHADO SERGIO ALBERTO">
-            <option value="ELIZALDE REYES IVETTE SARAI">
-            <option value="ESQUIVEL MASCORRO NANCY ACELA">
-            <option value="ESTRADA MOLINA MIGUEL DE JESUS">
-            <option value="EZQUEDA MARIA MAYELA">
-            <option value="FAVELA SERRANO RAQUEL">
-            <option value="FIERRO GARCIA MARIA ELIZABETH">
-            <option value="FIGUEROA LOPEZ LAURA YANIRA">
-            <option value="FLORES ADAME MARGARITA">
-            <option value="FLORES TORRES LESLY YAMILETH">
-            <option value="FUENTES HERNANDEZ CITLALI SARAHI">
-            <option value="GANDARILLA RAMIREZ LUCILA">
-            <option value="GARCIA ENCERRADO JUAN JOSE">
-            <option value="GARCIA ESPINO GUADALUPE DEL SOCORRO">
-            <option value="GUERECA VILLAGRANA GABRIELA">
-            <option value="GUILLEN PEREZ FELIPE">
-            <option value="HERNANDEZ CAMPOS BERA TOMASA">
-            <option value="HERNANDEZ MUÑOZ JOSE RAMON">
-            <option value="HERNANDEZ ORTIZ MARY CRUZ">
-            <option value="HERNANDEZ PUENTES LUIS AGUSTIN">
-            <option value="HERNANDEZ TORRES DIEGO ALFONSO">
-            <option value="HERNANDEZ SANTOYO ROCIO">
-            <option value="JACQUEZ LOPEZ LUIS RENE">
-            <option value="LEAL BECERRA MARGARITA">
-            <option value="LIRA HERNANDEZ JESUS ANTONIO">
-            <option value="LLAMAS DIAZ MARIA GUADALUPE">
-            <option value="LOPEZ CAZARES JOSE ANGEL">
-            <option value="LOPEZ GARCIA RODOLFO">
-            <option value="LOZANO MARQUEZ ERIKA LILIANA">
-            <option value="MACIEL CHAVEZ ANDREA IDALY">
-            <option value="MAGALLANES VERA CLAUDIA JAQUELINE">
-            <option value="MARQUEZ ARREOLA JESUS HERNAN">
-            <option value="MARTINEZ CAMPOS ALEJANDRA">
-            <option value="MARTINEZ HERRADA GRISELDA YADIRA">
-            <option value="MARTINEZ RIOS DIAMAR">
-            <option value="MARTINEZ VALLES EVARISTA MARIA LORENA">
-            <option value="MAYA CARRIZALES CECILIA LIZBETH">
-            <option value="MEDINA ARELLANO MARIA ISABEL">
-            <option value="MEDRANO VALENZUELA ZAIRA YAMILETH">
-            <option value="MENDEZ TOVAR OLGA LETICIA">
-            <option value="MOJICA CASTAÑEDA GRISELDA">
-            <option value="MOLINA CASTILLO YAZMIN">
-            <option value="MORENO ANDRADE MARTHA PATRICIA">
-            <option value="MORILLON MUÑOZ MARTHA LETICIA">
-            <option value="MUÑOZ QUIROZ ANGEL">
-            <option value="MUÑOZ SOSA JOSE SANTIAGO">
-            <option value="NAJERA GARCIA YAMIL">
-            <option value="NAJERA HERNANDEZ KARLA JANETH">
-            <option value="NAVARRETE SIAÑEZ TOMASA">
-            <option value="NIÑO ESTRELLA MARIA ELENA">
-            <option value="OLIVO SIFUENTES ENRIQUE">
-            <option value="ORTIZ UZQUIANO JOSE MANUEL">
-            <option value="PACHECO ROBLES JUSTINO ENRIQUE">
-            <option value="PADILLA GARCIA MARIA GUADALUPE">
-            <option value="PALMA GUTIERREZ MA GUADALUPE">
-            <option value="PALOMO CORONADO ARISTEO">
-            <option value="PEÑA CANO MARIA LUCINA">
-            <option value="PEREZ ALANIS JONATHAN">
-            <option value="PEREZ TOVAR MARIO ALBERTO">
-            <option value="PILLADO DURAN ROSA MARIA">
-            <option value="PUGA TORRES JUANA MARIA">
-            <option value="RAMIREZ ARZOLA SONIA INGRID">
-            <option value="RAMOREZ HINOJOSA MISAEL">
-            <option value="RAMOS GUTIERREZ KARINA">
-            <option value="RETANA OLIVAS ARTEMIO">
-            <option value="REYES CARRILLO MAELBI BELEN">
-            <option value="REYES CONTRERAS JULIANA IVETTE">
-            <option value="REZA MERAZ CINDY PAMELA">
-            <option value="RIVAS MERAZ YOSIMAR">
-            <option value="RIVERA PEREZ MIRIAM">
-            <option value="ROCHA ENRIQUEZ BLANCA ESTELA">
-            <option value="RODRIGUEZ DE LA CRUZ FLOR IVET">
-            <option value="RODRIGUEZ ESQUIVEL CELIA">
-            <option value="RODRIGUEZ FERRER GABRIELA DEL PILAR">
-            <option value="RODRIGUEZ NUÑEZ ALMA ANGELICA">
-            <option value="RODRIGUEZ NUÑEZ FLOR AIDE">
-            <option value="RODRIGUEZ REYES LUIS">
-            <option value="RODRIGUEZ SALAZAR NADIA">
-            <option value="RODRIGUEZ SANCHEZ JESUS GUADALUPE">
-            <option value="RODRIGUEZ SANCHEZ LAURA CECILIA">
-            <option value="ROJAS MAZUCA BRENDA PATRICIA">
-            <option value="SALAZAR ROCHA AZUL MICHELLE">
-            <option value="SALAS SAMANIEGO ANA BEATRIZ">
-            <option value="SALAZAR AROÑA DULCE LILIANA">
-            <option value="SANTOYO SERRATO ANA LILIA">
-            <option value="SANCODO MARTINEZ ALEJANDRA VIRIDIANA">
-            <option value="SERRANO VEGA FRANCISCA">
-            <option value="TEJEDA GARCIA ANDREA">
-            <option value="TORRES MARTINEZ DANIEL">
-            <option value="SOSA HERNANDEZ FABIOLA LIZETTE">
-            <option value="VALDEZ CHAVEZ BRENDA LILIANA">
-            <option value="VALENCIA LAZOS VALENTE">
-            <option value="VAZQUEZ CARDOZA SILVIA PATRICIA">
-            <option value="VAZQUEZ MELENDEZ ALMA ROSA">
-            <option value="VILLA MORENO MA DE LA LUZ">
-            <option value="VILLELA ACOSTA NORMA KARENTH ARELY">
-            <option value="ZAMARRIPA VELAZQUEZ AGUILERA SEGUNDO">
-            <option value="VICTOR DANIEL PEREZ PRIETO">
-            <option value="LLAJAYRA MAYELA PULIDO MARQUEZ">
-            <option value="JUAN CARLOS REVELES ANDRADE">
-            <option value="SALVADOR MELCHOR REYES">
-            <option value="GERARDO REYES">
-        </datalist>
-    </div>
+
+    <!-- DATOS DE LA PERSONA ENTREVISTADA -->
     <h3>Datos de la Persona Entrevistada</h3>
     <div class="form-group"><label for="nombre">3. Nombre(s) *</label><input type="text" id="nombre"></div>
     <div class="form-group"><label for="apellido_paterno">4. Apellido paterno *</label><input type="text" id="apellido_paterno"></div>
@@ -295,10 +172,57 @@
     <div id="status" style="margin-top: 15px; font-weight: bold; color: #1a1a1a;"></div>
 </div>
 <script>
-    // IMPORTANTE: REEMPLAZA ESTA URL POR LA QUE TE DA GOOGLE APPS SCRIPT
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwTd2n4r5DR8NJDp2-8hYGpGZX5Ed61MMTAb72zlWNZrbAgLVg0nUTRRuY62MtLvbZD/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwcpwSnS2sCA9i-11nHVMlrIqmUEyGpW3_9Dd66IniysxEriWoPRWmIQWgfM8msqtlD/exec";
 
-    let latitudActual = ""; let longitudActual = "";
+    // BASE DE DATOS DE TRABAJADORES AUTORIZADOS (Asocia CURP con su Nombre Completo)
+    const BASE_SERVIDORES = {
+        "TEST999999HDFXYZ00": "VICTOR DANIEL PEREZ PRIETO",
+        "ABCD123456HDFXYZ01": "ALVARADO CORDERO MARIA GUADALUPE",
+        "ANDR010101HMKLLL02": "ANDRADE GALLEGOS SANDRA GABRIELA",
+        "AREL020202HMKLLL03": "ARELLANES CASTRO HILDA ARELY",
+        "ARGU030303HMKLLL04": "ARGUIJO MONTAÑEZ MARIA EDITH",
+        "ARME040404HMKLLL05": "ARMENDARIZ DE LA O PETRA",
+        "ARRE050505HMKLLL06": "ARREDONDO BUENO TANIA",
+        "GONZ060606HMKLLL07": "ARREDONDO GONZALEZ CARMEN ESPERANZA",
+        "HERN070707HMKLLL08": "ARREOLA HERNANDEZ SANDRA LETICIA",
+        "ARZO080808HMKLLL09": "ARZOLA GONZALEZ SONIA",
+        "AVAL090909HMKLLL10": "AVALOS MACHADO ROBERTO",
+        "AYAL101010HMKLLL11": "AYALA ZAVALA SELMA MARGARITA",
+        "BARB111111HMKLLL12": "BARBOZA GARCIA HECTOR JAIR",
+        "BARC121212HMKLLL13": "BARCENAS MARCHAND LUIS ERNESTO",
+        "BARR131313HMKLLL14": "BARRAZA ANDRADE ANTONIO",
+        "REYE141414HMKLLL15": "BARRAZA REYES FERMIN",
+        "PIZA151515HMKLLL16": "BARRETERO PIZAÑA ALMA ELIA",
+        "BECE161616HMKLLL17": "BECERRA RODRIGUEZ YESICA",
+        "BUST171717HMKLLL18": "BUSTAMANTE BUSTAMANTE LUIS CARLOS"
+    };
+
+    let latitudActual = ""; let longitudActual = ""; let nombreServidorDeducido = "";
+
+    function validarAccesoCURP() {
+        const curpIngresada = document.getElementById('input-curp').value.trim().toUpperCase();
+        const loginError = document.getElementById('login-error');
+        const loginScreen = document.getElementById('login-screen');
+        const mainForm = document.getElementById('main-form');
+
+        if (!curpIngresada) {
+            loginError.innerText = "Por favor, introduzca una CURP."; loginError.style.display = "block"; return;
+        }
+
+        // Si la CURP existe en la base de datos de personal
+        if (BASE_SERVIDORES[curpIngresada]) {
+            nombreServidorDeducido = BASE_SERVIDORES[curpIngresada];
+            document.getElementById('servidor-activo').innerText = nombreServidorDeducido;
+            
+            loginError.style.display = "none";
+            loginScreen.style.display = "none";
+            mainForm.style.display = "block";
+            actualizarContador();
+        } else {
+            loginError.innerText = "Acceso denegado: Esta CURP no coincide con ningún Servidor Público registrado.";
+            loginError.style.display = "block";
+        }
+    }
 
     function buscarGPS() {
         const status = document.getElementById('status');
@@ -313,21 +237,20 @@
             (err) => { status.innerText = "Error: Active la ubicación de su equipo móvil."; }, { enableHighAccuracy: true, timeout: 10000 }
         );
     }
-
+<script>
     function guardarFormularioValidado() {
         const status = document.getElementById('status'); const errorBox = document.getElementById('error-box');
-        const servidor = document.getElementById('servidor').value.trim(); const nombre = document.getElementById('nombre').value.trim();
-        const appat = document.getElementById('apellido_paterno').value.trim(); const localidad = document.getElementById('localidad').value.trim();
-        const zona = document.getElementById('zona').value.trim(); const seccion = document.getElementById('seccion').value.trim();
-        const recepcion = document.getElementById('recepcion').value;
+        const nombre = document.getElementById('nombre').value.trim(); const appat = document.getElementById('apellido_paterno').value.trim();
+        const localidad = document.getElementById('localidad').value.trim(); const zona = document.getElementById('zona').value.trim();
+        const seccion = document.getElementById('seccion').value.trim(); const recepcion = document.getElementById('recepcion').value;
         const radioSexo = document.querySelector('input[name="sexo"]:checked'); const radioEdad = document.querySelector('input[name="grupo_edad"]:checked');
         let errores = [];
 
         if (!latitudActual || !longitudActual) errores.push("• 1. Geolocalización (Falta pulsar botón GPS)");
-        if (!servidor) errores.push("• 2. Servidor Público"); if (!nombre) errores.push("• 3. Nombre(s)");
-        if (!appat) errores.push("• 4. Apellido paterno"); if (!radioSexo) errores.push("• 7. Sexo");
-        if (!radioEdad) errores.push("• 8. Grupo de edad"); if (!localidad) errores.push("• 10. Localidad");
-        if (!zona) errores.push("• 11. Zona (Campo vacío)"); if (!seccion) errores.push("• 12. Sección (Campo vacío)"); if (!recepcion) errores.push("• 14. Recepción del mensaje");
+        if (!nombre) errores.push("• 3. Nombre(s)"); if (!appat) errores.push("• 4. Apellido paterno");
+        if (!radioSexo) errores.push("• 7. Sexo"); if (!radioEdad) errores.push("• 8. Grupo de edad");
+        if (!localidad) errores.push("• 10. Localidad"); if (!zona) errores.push("• 11. Zona");
+        if (!seccion) errores.push("• 12. Sección"); if (!recepcion) errores.push("• 14. Recepción del mensaje");
 
         if (errores.length > 0) {
             status.innerText = ""; boxText = "<strong>Falta llenar o corregir los siguientes campos obligatorios:</strong><br>";
@@ -338,28 +261,28 @@
         const nuevoRegistro = {
             id: 'id_' + ahora.getTime() + '_' + Math.floor(Math.random() * 1000), 
             fecha: ahora.toLocaleDateString('es-MX'), hora: ahora.toLocaleTimeString('es-MX'), lat: latitudActual, lon: longitudActual,
-            servidor: servidor, nombre: nombre, appat: appat, apmat: document.getElementById('apellido_materno').value.trim(),
+            servidor: nombreServidorDeducido, nombre: nombre, appat: appat, apmat: document.getElementById('apellido_materno').value.trim(),
             tel: document.getElementById('telefono').value.trim(), sexo: radioSexo.value, edad: radioEdad.value,
             domicilio: document.getElementById('domicilio').value.trim(), localidad: localidad, zona: zona, seccion: seccion,
             programa: document.getElementById('programa').value, recepcion: recepcion, problematica: document.getElementById('problematica').value,
-            observacion: document.getElementById('observacion').value.trim(),
-            sincronizado: false 
+            observacion: document.getElementById('observacion').value.trim(), sincronizado: false 
         };
 
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
         datosLocales.push(nuevoRegistro); localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
         
-        document.getElementById('servidor').value = ""; document.getElementById('nombre').value = ""; document.getElementById('apellido_paterno').value = "";
-        document.getElementById('apellido_materno').value = ""; document.getElementById('telefono').value = ""; document.getElementById('domicilio').value = "";
-        document.getElementById('localidad').value = ""; document.getElementById('zona').value = ""; document.getElementById('seccion').value = "";
-        document.getElementById('programa').value = ""; document.getElementById('recepcion').value = ""; document.getElementById('problematica').value = "";
-        document.getElementById('observacion').value = ""; if(radioSexo) radioSexo.checked = false; if(radioEdad) radioEdad.checked = false;
+        document.getElementById('nombre').value = ""; document.getElementById('apellido_paterno').value = ""; document.getElementById('apellido_materno').value = "";
+        document.getElementById('telefono').value = ""; document.getElementById('domicilio').value = ""; document.getElementById('localidad').value = "";
+        document.getElementById('zona').value = ""; document.getElementById('seccion').value = ""; document.getElementById('programa').value = "";
+        document.getElementById('recepcion').value = ""; document.getElementById('problematica').value = ""; document.getElementById('observacion').value = "";
+        if(radioSexo) radioSexo.checked = false; if(radioEdad) radioEdad.checked = false;
         
         latitudActual = ""; longitudActual = ""; document.getElementById('lat-txt').innerText = "-"; document.getElementById('lon-txt').innerText = "-";
         status.innerText = "Registro verificado y guardado localmente."; actualizarContador();
     }
 
     function actualizarContador() {
+        if (document.getElementById('main-form').style.display === "none") return;
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
         let pendientes = datosLocales.filter(item => !item.sincronizado).length;
         document.getElementById('contador').innerText = "📂 Visitas pendientes por sincronizar: " + pendientes;
@@ -393,7 +316,6 @@
         link.style.visibility = 'hidden'; document.body.appendChild(link); link.click(); document.body.removeChild(link);
     }
 
-    // CORREGIDO: Marca como sincronizado de inmediato para evitar envíos dobles y actualiza la tabla al instante
     async function sincronizarGSheets() {
         const status = document.getElementById('status'); let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
         let nuevos = datosLocales.filter(item => !item.sincronizado);
@@ -402,7 +324,6 @@
         
         status.innerText = "Transmitiendo únicamente registros nuevos a Google Sheets...";
         
-        // Marcar los registros de forma inmediata localmente para evitar duplicidad si el usuario pulsa dos veces
         datosLocales.forEach(item => { if(!item.sincronizado) item.sincronizado = true; });
         localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
         actualizarContador();
@@ -423,7 +344,6 @@
             localStorage.removeItem('visitas_vcxc'); alert("Historial del teléfono borrado."); actualizarContador();
         }
     }
-    actualizarContador();
 </script>
 </body>
 </html>
