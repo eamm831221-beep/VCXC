@@ -9,62 +9,63 @@
             font-family: 'Times New Roman', Times, serif, Arial; 
             padding: 15px; 
             background-image: url('https://postimg.cc'); 
-            background-size: cover; background-position: center; background-attachment: fixed; background-color: #1a1a1a; text-align: center; color: #333; 
+            background-size: cover; background-position: center; background-attachment: fixed; background-color: #1a1a1a; text-align: center; color: #1a1a1a; 
         }
-        .card { max-width: 480px; margin: 20px auto; background: rgba(255, 255, 255, 0.96); padding: 30px; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); border-top: 8px solid #66001c; box-sizing: border-box; }
+        .card { max-width: 480px; margin: 20px auto; background: rgba(255, 255, 255, 0.98); padding: 30px; border-radius: 4px; box-shadow: 0 6px 20px rgba(0,0,0,0.7); border-top: 8px solid #66001c; box-sizing: border-box; }
         .banner-container { width: 100%; display: flex; justify-content: center; margin-bottom: 20px; }
         .banner-img { width: 100%; max-width: 280px; height: auto; display: block; object-fit: contain; }
+        .banner-img-wide { width: 100%; max-height: 110px; display: block; object-fit: cover; border-bottom: 2px solid #b4924c; border-radius: 2px; }
         
-        /* Sistema de navegación por pantallas */
         .app-screen { display: none; }
         .app-screen.active { display: block; }
         
-        h2 { color: #66001c; margin-bottom: 5px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 24px; }
-        .subtitle { color: #8a6d3b; font-size: 14px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
-        h3 { color: #66001c; border-bottom: 1px solid #8a6d3b; padding-bottom: 5px; margin-top: 35px; text-align: left; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
+        h2 { color: #66001c; margin-top: 15px; margin-bottom: 5px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 22px; }
+        .subtitle { color: #b4924c; font-size: 13px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
+        h3 { color: #66001c; border-bottom: 2px solid #b4924c; padding-bottom: 5px; margin-top: 35px; text-align: left; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
         .form-group { margin-bottom: 20px; text-align: left; }
         label { display: block; font-weight: bold; margin-bottom: 6px; color: #1a1a1a; font-size: 14px; }
-        .servidor-box { background: #f0f4f1; border: 1px dashed #66001c; color: #66001c; padding: 12px; font-size: 16px; font-weight: bold; text-align: center; border-radius: 2px; margin-top: 5px; }
-        
-        /* Métricas de la pantalla de bienvenida */
+        .servidor-box { background: #1a1a1a; border: 1px solid #b4924c; color: #dfb15b; padding: 12px; font-size: 15px; font-weight: bold; text-align: center; border-radius: 2px; margin-top: 5px; text-transform: uppercase; }
         .metrics-grid { display: flex; gap: 10px; margin-bottom: 20px; }
-        .metric-card { flex: 1; background: #fafafa; border: 1px solid #b3b3b3; padding: 12px; border-radius: 2px; text-align: center; }
-        .metric-val { display: block; font-size: 22px; font-weight: bold; color: #66001c; margin-top: 5px; }
-        .metric-lbl { font-size: 11px; text-transform: uppercase; color: #666; font-weight: bold; }
+        .metric-card { flex: 1; background: #ffffff; border: 1px solid #1a1a1a; border-top: 4px solid #b4924c; padding: 12px; border-radius: 2px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .metric-val { display: block; font-size: 24px; font-weight: bold; color: #66001c; margin-top: 5px; }
+        .metric-lbl { font-size: 11px; text-transform: uppercase; color: #1a1a1a; font-weight: bold; letter-spacing: 0.5px; }
         
-        input[type="text"], input[type="tel"], input[type="number"], select, textarea { width: 100%; padding: 12px; font-size: 15px; border-radius: 2px; border: 1px solid #b3b3b3; box-sizing: border-box; font-family: Arial, sans-serif; background-color: #fcfcfc; }
-        input[type="text"]:focus, input[type="tel"]:focus, input[type="number"]:focus, select:focus, textarea:focus { border-color: #66001c; outline: none; background-color: #fff; }
+        input[type="text"], input[type="tel"], input[type="number"], select, textarea { width: 100%; padding: 12px; font-size: 15px; border-radius: 2px; border: 1px solid #1a1a1a; box-sizing: border-box; font-family: Arial, sans-serif; background-color: #fdfdfd; }
+        input[type="text"]:focus, input[type="tel"]:focus, input[type="number"]:focus, select:focus, textarea:focus { border-color: #66001c; outline: none; box-shadow: 0 0 5px rgba(102,0,28,0.3); }
         .geo-grid { display: flex; gap: 10px; margin-top: 10px; }
-        .geo-box { flex: 1; background: #f9f9f9; border: 1px solid #b3b3b3; padding: 10px; border-radius: 2px; font-size: 14px; font-weight: bold; text-align: center; }
-        .geo-label { font-size: 11px; text-transform: uppercase; color: #666; display: block; margin-bottom: 4px; }
+        .geo-box { flex: 1; background: #fdfaf2; border: 1px solid #b4924c; padding: 10px; border-radius: 2px; font-size: 14px; font-weight: bold; text-align: center; color: #66001c; }
+        .geo-label { font-size: 11px; text-transform: uppercase; color: #1a1a1a; display: block; margin-bottom: 4px; }
+        
         .radio-tile-group { display: flex; gap: 10px; margin-top: 5px; }
         .radio-tile-group.vertical { flex-direction: column; gap: 8px; }
-        .radio-tile { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #b3b3b3; padding: 12px; border-radius: 2px; cursor: pointer; text-align: center; background: #f9f9f9; font-weight: bold; font-size: 14px; transition: all 0.2s ease; }
+        .radio-tile { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #1a1a1a; padding: 12px; border-radius: 2px; cursor: pointer; text-align: center; background: #ffffff; font-weight: bold; font-size: 14px; transition: all 0.2s ease; }
         .radio-tile input { position: absolute; opacity: 0; }
-        .radio-tile:has(input:checked) { border-color: #66001c; background-color: #66001c; color: #dfb15b; box-shadow: inset 0 0 0 1px #8a6d3b; }
-        button { width: 100%; padding: 15px; font-size: 15px; font-weight: bold; border: 1px solid transparent; border-radius: 2px; cursor: pointer; margin-bottom: 15px; box-sizing: border-box; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s ease; }
-        .btn-guinda { background-color: #66001c; color: #ffffff; border-color: #66001c; }
-        .btn-guinda:hover { background-color: #4a0014; }
-        .btn-guinda:disabled { background-color: #b3b3b3; border-color: #b3b3b3; color: #777; cursor: not-allowed; }
-        .btn-negro { background-color: #1a1a1a; color: #dfb15b; border: 1px solid #8a6d3b; }
-        .btn-negro:hover { background-color: #2a2a2a; }
-        .status-box { background: #fdfaf2; color: #1a1a1a; padding: 14px; font-weight: bold; font-size: 15px; border-radius: 2px; margin-bottom: 20px; border: 1px solid #8a6d3b; border-left: 6px solid #8a6d3b; text-align: left; }
+        .radio-tile:has(input:checked) { border-color: #66001c; background-color: #66001c; color: #dfb15b; box-shadow: inset 0 0 0 1px #b4924c; }
+        
+        button { width: 100%; padding: 15px; font-size: 14px; font-weight: bold; border: 1px solid transparent; border-radius: 2px; cursor: pointer; margin-bottom: 15px; box-sizing: border-box; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s ease; }
+        .btn-guinda { background-color: #66001c; color: #ffffff; border: 1px solid #66001c; }
+        .btn-guinda:hover { background-color: #4a0014; border-color: #4a0014; }
+        .btn-guinda:disabled { background-color: #e0e0e0; border-color: #b3b3b3; color: #888; cursor: not-allowed; }
+        .btn-negro { background-color: #1a1a1a; color: #dfb15b; border: 1px solid #b4924c; }
+        .btn-negro:hover { background-color: #2a2a2a; color: #ffffff; }
+        
+        .status-box { background: #fdfaf2; color: #66001c; padding: 14px; font-weight: bold; font-size: 14px; border-radius: 2px; margin-bottom: 20px; border: 1px solid #b4924c; border-left: 6px solid #66001c; text-align: left; }
         .error-alert { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 12px; border-radius: 2px; text-align: left; font-size: 14px; margin-top: 15px; display: none; line-height: 1.5; }
-        .table-container { width: 100%; overflow-x: auto; margin-top: 10px; background: #fff; border: 1px solid #b3b3b3; border-radius: 2px; }
+        .table-container { width: 100%; overflow-x: auto; margin-top: 10px; background: #fff; border: 1px solid #1a1a1a; border-radius: 2px; }
         table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; }
-        th { background: #66001c; color: #dfb15b; padding: 10px; font-weight: bold; text-transform: uppercase; font-size: 11px; }
-        td { padding: 10px; border-bottom: 1px solid #e0e0e0; color: #333; }
+        th { background: #66001c; color: #dfb15b; padding: 10px; font-weight: bold; text-transform: uppercase; font-size: 11px; border-bottom: 2px solid #b4924c; }
+        td { padding: 10px; border-bottom: 1px solid #e0e0e0; color: #1a1a1a; }
         tr:nth-child(even) { background: #fdfaf2; }
-        .badge-pend { color: #b71c1c; font-weight: bold; }
-        .badge-sinc { color: #2e7d32; font-weight: bold; }
+        .badge-pend { color: #66001c; font-weight: bold; text-transform: uppercase; font-size: 11px; }
+        .badge-sinc { color: #2e7d32; font-weight: bold; text-transform: uppercase; font-size: 11px; }
     </style>
 </head>
 <body>
 <div class="card">
-    <div class="banner-container"><img class="banner-img" alt="Casa por casa" src="https://postimg.cc"></div>
 
     <!-- PANTALLA 1: ACCESO -->
     <div id="screen-1" class="app-screen active">
+        <div class="banner-container"><img class="banner-img" alt="Casa por casa" src="https://i.postimg.cc/d0vkfb03/SIN-FONDO.png"></div>
         <h2>Acceso Restringido</h2>
         <div class="subtitle">Validación de Personal VCXC</div>
         <div class="form-group" style="margin-top: 25px;">
@@ -72,10 +73,11 @@
             <input type="text" id="input-curp" maxlength="18" placeholder="18 caracteres" style="text-transform: uppercase;">
         </div>
         <button type="button" class="btn-guinda" onclick="validarAccesoCURP()">Validar Identidad</button>
-        <div id="login-error" style="color: #b71c1c; font-weight: bold; font-size: 14px; margin-top: 10px; display: none;"></div>
+        <div id="login-error" style="color: #66001c; font-weight: bold; font-size: 14px; margin-top: 10px; display: none;"></div>
     </div>
     <!-- PANTALLA 2: BIENVENIDA Y GPS -->
     <div id="screen-2" class="app-screen">
+        <img class="banner-img-wide" alt="Bienestar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtFYaLUePVkDothanMui6C-2jL5Fs6E0dmJhISHkEcYRt8CUx0gX7_2g&s">
         <h2>Panel de Control</h2>
         <div class="subtitle">Servidor Público Activo</div>
         <div class="form-group">
@@ -107,6 +109,7 @@
     </div>
     <!-- PANTALLA 3: PREGUNTAS EN CAMPO -->
     <div id="screen-3" class="app-screen">
+        <img class="banner-img-wide" alt="Bienestar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtFYaLUePVkDothanMui6C-2jL5Fs6E0dmJhISHkEcYRt8CUx0gX7_2g&s">
         <h2>Captura de Datos</h2>
         <div class="subtitle">Programa Casa por Casa</div>
         
@@ -193,6 +196,7 @@
     </div>
     <!-- PANTALLA 4: HISTORIAL Y AUDITORÍA -->
     <div id="screen-4" class="app-screen">
+        <img class="banner-img-wide" alt="Bienestar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtFYaLUePVkDothanMui6C-2jL5Fs6E0dmJhISHkEcYRt8CUx0gX7_2g&s">
         <h2>Historial Central</h2>
         <div class="subtitle">Auditoría de Encuestas Locales</div>
         
@@ -216,8 +220,8 @@
             </table>
         </div>
         
-        <button type="button" class="btn-guinda" style="background-color: #4a0014; margin-top: 25px;" onclick="eliminarHistorialLocal()">⚠️ Limpiar Historial del Teléfono</button>
-        <button type="button" class="btn-negro" style="border-color: #66001c; color: #66001c;" onclick="irAPantalla(2)">➕ Agregar Nueva Visita</button>
+        <button type="button" class="btn-guinda" style="background-color: #4a0014; border-color: #4a0014; margin-top: 25px;" onclick="eliminarHistorialLocal()">⚠️ Limpiar Historial del Teléfono</button>
+        <button type="button" class="btn-negro" onclick="irAPantalla(2)">➕ Agregar Nueva Visita</button>
     </div>
     
     <div id="status" style="margin-top: 15px; font-weight: bold; color: #1a1a1a; font-size: 14px;"></div>
@@ -252,9 +256,7 @@
     let latitudActual = ""; let longitudActual = ""; let nombreServidorDeducido = "";
 
     function irAPantalla(screenNumber) {
-        // Oculta todas las pantallas
         document.querySelectorAll('.app-screen').forEach(screen => screen.classList.remove('active'));
-        // Muestra la pantalla indicada
         document.getElementById('screen-' + screenNumber).classList.add('active');
         document.getElementById('status').innerText = "";
         actualizarContador();
@@ -288,11 +290,13 @@
                 latitudActual = pos.coords.latitude; longitudActual = pos.coords.longitude;
                 document.getElementById('lat-txt').innerText = latitudActual; document.getElementById('lon-txt').innerText = longitudActual;
                 status.innerText = "Coordenadas fijadas con éxito.";
-                document.getElementById('btn-next-to-capture').disabled = false; // Desbloquea botón avanzar
+                document.getElementById('btn-next-to-capture').disabled = false;
             },
             (err) => { status.innerText = "Error: Active la ubicación de su equipo móvil."; }, { enableHighAccuracy: true, timeout: 10000 }
         );
     }
+</script>
+<script>
     function guardarFormularioValidado() {
         const status = document.getElementById('status'); const errorBox = document.getElementById('error-box');
         const nombre = document.getElementById('nombre').value.trim(); const appat = document.getElementById('apellido_paterno').value.trim();
@@ -325,14 +329,12 @@
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
         datosLocales.push(nuevoRegistro); localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
         
-        // Limpieza de campos
         document.getElementById('nombre').value = ""; document.getElementById('apellido_paterno').value = ""; document.getElementById('apellido_materno').value = "";
         document.getElementById('telefono').value = ""; document.getElementById('domicilio').value = ""; document.getElementById('localidad').value = "";
         document.getElementById('zona').value = ""; document.getElementById('seccion').value = ""; document.getElementById('programa').value = "";
         document.getElementById('recepcion').value = ""; document.getElementById('problematica').value = ""; document.getElementById('observacion').value = "";
         if(radioSexo) radioSexo.checked = false; if(radioEdad) radioEdad.checked = false;
         
-        // Bloquear avance de nuevo para forzar GPS en la siguiente visita
         latitudActual = ""; longitudActual = ""; document.getElementById('lat-txt').innerText = "-"; document.getElementById('lon-txt').innerText = "-";
         document.getElementById('btn-next-to-capture').disabled = true;
         
@@ -344,11 +346,8 @@
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
         let pendientes = datosLocales.filter(item => !item.sincronizado).length;
         
-        // Actualizar métricas de Pantalla 2
         if (document.getElementById('metric-total')) document.getElementById('metric-total').innerText = datosLocales.length;
         if (document.getElementById('metric-pendientes')) document.getElementById('metric-pendientes').innerText = pendientes;
-        
-        // Actualizar contenedor de Pantalla 4
         if (document.getElementById('contador')) document.getElementById('contador').innerText = "📂 Visitas pendientes por sincronizar: " + pendientes;
         
         const tbody = document.getElementById('historial-body'); 
@@ -411,6 +410,7 @@
             localStorage.removeItem('visitas_vcxc'); alert("Historial del teléfono borrado."); actualizarContador();
         }
     }
+    actualizarContador();
 </script>
 </body>
 </html>
