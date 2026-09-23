@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Registro VCXC</title>
+    
+    <!-- Vinculación del manifiesto para permitir la instalación en iPhone y Android -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#66001c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Registro VCXC">
+    <link rel="apple-touch-icon" href="https://postimg.cc">
+
     <style>
         body { 
             font-family: 'Times New Roman', Times, serif, Arial; 
@@ -18,13 +27,13 @@
         
         .app-screen { display: none; }
         .app-screen.active { display: block; }
-        
         h2 { color: #66001c; margin-top: 15px; margin-bottom: 5px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 22px; }
         .subtitle { color: #b4924c; font-size: 13px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
         h3 { color: #66001c; border-bottom: 2px solid #b4924c; padding-bottom: 5px; margin-top: 35px; text-align: left; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
         .form-group { margin-bottom: 20px; text-align: left; }
         label { display: block; font-weight: bold; margin-bottom: 6px; color: #1a1a1a; font-size: 14px; }
         .servidor-box { background: #1a1a1a; border: 1px solid #b4924c; color: #dfb15b; padding: 12px; font-size: 15px; font-weight: bold; text-align: center; border-radius: 2px; margin-top: 5px; text-transform: uppercase; }
+        
         .metrics-grid { display: flex; gap: 10px; margin-bottom: 20px; }
         .metric-card { flex: 1; background: #ffffff; border: 1px solid #1a1a1a; border-top: 4px solid #b4924c; padding: 12px; border-radius: 2px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .metric-val { display: block; font-size: 24px; font-weight: bold; color: #66001c; margin-top: 5px; }
@@ -35,7 +44,6 @@
         .geo-grid { display: flex; gap: 10px; margin-top: 10px; }
         .geo-box { flex: 1; background: #fdfaf2; border: 1px solid #b4924c; padding: 10px; border-radius: 2px; font-size: 14px; font-weight: bold; text-align: center; color: #66001c; }
         .geo-label { font-size: 11px; text-transform: uppercase; color: #666; display: block; margin-bottom: 4px; }
-        
         .radio-tile-group { display: flex; gap: 10px; margin-top: 5px; }
         .radio-tile-group.vertical { flex-direction: column; gap: 8px; }
         .radio-tile { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #1a1a1a; padding: 12px; border-radius: 2px; cursor: pointer; text-align: center; background: #ffffff; font-weight: bold; font-size: 14px; transition: all 0.2s ease; }
@@ -65,7 +73,7 @@
 
     <!-- PANTALLA 1: ACCESO -->
     <div id="screen-1" class="app-screen active">
-        <div class="banner-container"><img class="banner-img" alt="Casa por casa" src="https://i.postimg.cc/d0vkfb03/SIN-FONDO.png"></div>
+        <div class="banner-container"><img class="banner-img" alt="Casa por casa" src="https://postimg.cc"></div>
         <h2>Acceso Restringido</h2>
         <div class="subtitle">Validación de Personal VCXC</div>
         <div class="form-group" style="margin-top: 25px;">
@@ -77,8 +85,7 @@
     </div>
     <!-- PANTALLA 2: BIENVENIDA Y GPS -->
     <div id="screen-2" class="app-screen">
-        <!-- Banner Institucional Oficial de los Servidores de Bienestar -->
-        <img class="banner-img-wide" alt="Bienestar" src="https://pub.bienestar.gob.mx/static/media/padrones01.e4252fd6.jpg">
+        <img class="banner-img-wide" alt="Bienestar" src="https://bienestar.gob.mx">
         <h2>Panel de Control</h2>
         <div class="subtitle">Servidor Público Activo</div>
         <div class="form-group">
@@ -110,14 +117,14 @@
     </div>
     <!-- PANTALLA 3: PREGUNTAS EN CAMPO -->
     <div id="screen-3" class="app-screen">
-        <img class="banner-img-wide" alt="Bienestar" src="https://pub.bienestar.gob.mx/static/media/padrones01.e4252fd6.jpg">
+        <img class="banner-img-wide" alt="Bienestar" src="https://bienestar.gob.mx">
         <h2>Captura de Datos</h2>
         <div class="subtitle">Programa Casa por Casa</div>
         
         <h3>Datos de la Persona Entrevistada</h3>
         <div class="form-group"><label for="nombre">3. Nombre(s) *</label><input type="text" id="nombre"></div>
         <div class="form-group"><label for="apellido_paterno">4. Apellido paterno *</label><input type="text" id="apellido_paterno"></div>
-        <div class="form-group"><label for="apellido_materno">5. Apellido materno</label><input type="text" id="apellido_materno"></div>
+        <div class="form-group"><label له="apellido_materno">5. Apellido materno</label><input type="text" id="apellido_materno"></div>
         <div class="form-group"><label for="telefono">6. Teléfono</label><input type="tel" id="telefono" pattern="[0-9]{10}" placeholder="10 dígitos numéricos"></div>
         
         <div class="form-group">
@@ -197,7 +204,7 @@
     </div>
     <!-- PANTALLA 4: HISTORIAL Y AUDITORÍA -->
     <div id="screen-4" class="app-screen">
-        <img class="banner-img-wide" alt="Bienestar" src="https://pub.bienestar.gob.mx/static/media/padrones01.e4252fd6.jpg">
+        <img class="banner-img-wide" alt="Bienestar" src="https://bienestar.gob.mx">
         <h2>Historial Central</h2>
         <div class="subtitle">Auditoría de Encuestas Locales</div>
         
@@ -229,11 +236,11 @@
 </div>
 <script>
     // IMPORTANTE: REEMPLAZA ESTA URL POR LA QUE TE DA GOOGLE APPS SCRIPT
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwcpwSnS2sCA9i-11nHVMlrIqmUEyGpW3_9Dd66IniysxEriWoPRWmIQWgfM8msqtlD/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyxT8x6-U2t_kI23Y3wWE-qKjb2ujy_6Vshg1iVvvlLvOQ2gZO6btKzQIPEBfjQQwrf/exec";
 
     // BASE DE DATOS OFFLINE: Relación de CURPs con el Nombre del Servidor Público
     const BASE_SERVIDORES = {
-"AACG640516MCLLRD01": "ALVARADO CORDERO MARIA GUADALUPE",
+       "AACG640516MCLLRD01": "ALVARADO CORDERO MARIA GUADALUPE",
 "AAGS650227MDGNLN04": "ANDRADE GALLEGOS SANDRA GABRIELA",
 "AECH920906MDGRSL08": "ARELLANES CASTRO HILDA ARELY",
 "AUME921203MDGRND04": "ARGUIJO MONTAÑEZ MARIA EDITH",
@@ -367,19 +374,25 @@
 "VIAN821214MDGLCR05": "VILLELA ACOSTA NORMA",
 "ZAVK981206MDGMLR01": "KARENTH ARELY ZAMARRIPA VELAZQUEZ",
 
-
     };
 
     let latitudActual = ""; let longitudActual = ""; let nombreServidorDeducido = "";
 
     window.addEventListener('DOMContentLoaded', () => {
+        // Carga la CURP guardada para acelerar los accesos diarios en campo
         const ultimaCurpGuardada = localStorage.getItem('ultima_curp_vcxc');
         if (ultimaCurpGuardada) {
             document.getElementById('input-curp').value = ultimaCurpGuardada;
         }
+        
+        // Activa el Service Worker (sw.js) para permitir la instalación offline
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('Service Worker de Visitas VCXC activado con éxito.'))
+                .catch(err => console.log('Error al levantar Service Worker:', err));
+        }
         actualizarContador();
     });
-
     function irAPantalla(screenNumber) {
         document.querySelectorAll('.app-screen').forEach(screen => screen.classList.remove('active'));
         document.getElementById('screen-' + screenNumber).classList.add('active');
@@ -402,7 +415,7 @@
             localStorage.setItem('ultima_curp_vcxc', curpIngresada);
             irAPantalla(2);
         } else {
-            loginError.innerText = "Acceso denegado: Esta CURP no se encuentra en la lista autorizada.";
+            loginError.innerText = "Acceso denegado: Esta CURP no se encuentra en la lista autorizada de Bienestar.";
             loginError.style.display = "block";
         }
     }
@@ -421,8 +434,6 @@
             (err) => { status.innerText = "Error: Active la ubicación de su equipo móvil."; }, { enableHighAccuracy: true, timeout: 10000 }
         );
     }
-</script>
-<script>
     function guardarFormularioValidado() {
         const status = document.getElementById('status'); const errorBox = document.getElementById('error-box');
         const nombre = document.getElementById('nombre').value.trim(); const appat = document.getElementById('apellido_paterno').value.trim();
@@ -536,6 +547,7 @@
             localStorage.removeItem('visitas_vcxc'); alert("Historial del teléfono borrado."); actualizarContador();
         }
     }
+    actualizarContador();
 </script>
 </body>
 </html>
