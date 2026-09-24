@@ -216,17 +216,17 @@
     <!-- PANTALLA 4: HISTORIAL Y AUDITORÍA -->
     <div id="screen-4" class="app-screen">
         <img class="banner-img-wide" alt="Bienestar" src="https://pub.bienestar.gob.mx/static/media/padrones01.e4252fd6.jpg">
-        <h2>Historial Central</h2>
-        <div class="subtitle">Auditoría de Encuestas Locales</div>
+        <h2>Historial</h2>
+        <div class="subtitle">encuestas guardadas en el telefono</div>
         
         <div id="contador" class="status-box">📂 Visitas pendientes por sincronizar: 0</div>
         
-        <button type="button" class="btn-guinda" onclick="sincronizarGSheets()">🔄 Sincronizar a Google Sheets VCXC</button>
+        <button type="button" class="btn-guinda" onclick="sincronizarGSheets()">🔄 Sincronizar visitas</button>
         
         <!-- NUEVO: Fusión de Botones Descargar y Limpiar alineados lado a lado en un mismo renglón -->
         <div class="btn-row-grid">
-            <button type="button" class="btn-negro" onclick="descargarReporteCSV()">📥 Respaldar (.CSV)</button>
-            <button type="button" class="btn-guinda" style="background-color: #4a0014; border-color: #4a0014;" onclick="eliminarHistorialLocal()">⚠️ Limpiar Memo</button>
+            <button type="button" class="btn-negro" onclick="descargarReporteCSV()">📥 descargar visitas</button>
+            <button type="button" class="btn-guinda" style="background-color: #4a0014; border-color: #4a0014;" onclick="eliminarHistorialLocal()">⚠️ vaciar memoria del telefono</button>
         </div>
         <div class="table-container">
             <table>
