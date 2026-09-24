@@ -535,10 +535,10 @@
     async function sincronizarGSheets() {
         const status = document.getElementById('status'); let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
         let nuevos = datosLocales.filter(item => !item.sincronizado);
-        if (nuevos.length === 0) { status.innerText = "No se localizan registros nuevos pendientes por enviar."; return; }
+        if (nuevos.length === 0) { status.innerText = "No hay visitas pendientes por enviar."; return; }
         if (!navigator.onLine) { status.innerText = "Sincronización suspendida: Dispositivo sin acceso a internet."; return; }
         
-        status.innerText = "Transmitiendo únicamente registros nuevos a Google Sheets...";
+        status.innerText = "Transmitiendo visitas nuevas a Google Sheets...";
         datosLocales.forEach(item => { if(!item.sincronizado) item.sincronizado = true; });
         localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
         actualizarContador();
@@ -546,7 +546,7 @@
         const formData = new URLSearchParams(); formData.append('datos', JSON.stringify(nuevos));
         try {
             await fetch(WEB_APP_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: formData.toString() });
-            status.innerText = "¡Sincronización masiva completada! Registros actualizados en Google Sheets.";
+            status.innerText = "¡Sincronización de visitas completada!";
         } catch (error) { 
             status.innerText = "Sincronización procesada. Verifique su Google Sheets."; 
         }
