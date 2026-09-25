@@ -430,11 +430,19 @@
             loginError.style.display = "block";
         }
     }
-
     function buscarGPS() {
         const status = document.getElementById('status');
         if (!navigator.geolocation) { status.innerText = "El dispositivo no soporta localización GPS."; return; }
-        status.innerText = "Conectando con hardware GPS...";
+        
+        status.innerText = "Calculando posición (Alineando hardware GPS)...";
+        
+        // Configuración optimizada para alta velocidad en campo
+        const opcionesGPS = {
+            enableHighAccuracy: true, // Mantiene la precisión institucional
+            timeout: 30000,           // Ampliamos a 30 segundos para dar tiempo al chip de enganchar satélites
+            maximumAge: 60000         // TRUCO: Si el cel obtuvo el GPS hace menos de 1 minuto, usa esa misma para no tardar
+        };
+
         navigator.geolocation.getCurrentPosition(
             (pos) => {
                 latitudActual = pos.coords.latitude; longitudActual = pos.coords.longitude;
@@ -442,9 +450,25 @@
                 status.innerText = "Coordenadas fijadas con éxito.";
                 document.getElementById('btn-next-to-capture').disabled = false;
             },
-            (err) => { status.innerText = "Error: Active la ubicación de su equipo móvil."; }, { enableHighAccuracy: true, timeout: 10000 }
+            (err) => {
+                // Si falla por alta precisión (por estar techado), hace un segundo intento más rápido con GPS estándar
+                status.innerText = "Buscando señal alterna de respaldo...";
+                
+                navigator.geolocation.getCurrentPosition(
+                    (pos2) => {
+                        latitudActual = pos2.coords.latitude; longitudActual = pos2.coords.longitude;
+                        document.getElementById('lat-txt').innerText = latitudActual; document.getElementById('lon-txt').innerText = longitudActual;
+                        status.innerText = "Coordenadas fijadas (Señal de respaldo).";
+                        document.getElementById('btn-next-to-capture').disabled = false;
+                    },
+                    (err2) => { status.innerText = "Error: Salga a cielo abierto y reintente."; },
+                    { enableHighAccuracy: false, timeout: 15000, maximumAge: 60000 }
+                );
+            }, 
+            opcionesGPS
         );
     }
+
 </script>
 <script>
     function guardarFormularioValidado() {
