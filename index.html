@@ -255,6 +255,7 @@
     // BASE DE DATOS OFFLINE: Relación de CURPs con el Nombre del Servidor Público
     const BASE_SERVIDORES = {
         "AACG640516MCLLRD01": "ALVARADO CORDERO MARIA GUADALUPE",
+
 "AAGS650227MDGNLN04": "ANDRADE GALLEGOS SANDRA GABRIELA",
 "AECH920906MDGRSL08": "ARELLANES CASTRO HILDA ARELY",
 "AUME921203MDGRND04": "ARGUIJO MONTAÑEZ MARIA EDITH",
@@ -513,7 +514,7 @@
         latitudActual = ""; longitudActual = ""; document.getElementById('lat-txt').innerText = "-"; document.getElementById('lon-txt').innerText = "-";
         document.getElementById('btn-next-to-capture').disabled = true;
         
-        alert("¡Visita guardada localmente con éxito!");
+        alert("¡Visita guardada en el teléfono con éxito!");
         irAPantalla(2);
     }
 
@@ -563,7 +564,7 @@
         if (nuevos.length === 0) { status.innerText = "No hay visitas pendientes por enviar."; return; }
         if (!navigator.onLine) { status.innerText = "Sincronización suspendida: Dispositivo sin acceso a internet."; return; }
         
-        status.innerText = "Transmitiendo visitas nuevas a Google Sheets...";
+        status.innerText = "Transmitiendo visitas nuevas a Miguel...";
         datosLocales.forEach(item => { if(!item.sincronizado) item.sincronizado = true; });
         localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
         actualizarContador();
