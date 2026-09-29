@@ -609,24 +609,41 @@
     }
 
     async function sincronizarGSheets() {
-        const status = document.getElementById('status'); let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
-        let nuevos = datosLocales.filter(item => !item.sincronizado);
-        if (nuevos.length === 0) { status.innerText = "No hay visitas pendientes por enviar."; return; }
-        if (!navigator.onLine) { status.innerText = "Sincronización suspendida: Dispositivo sin acceso a internet."; return; }
-        
-        status.innerText = "Transmitiendo visitas nuevas a Miguel...";
-        datosLocales.forEach(item => { if(!item.sincronizado) item.sincronizado = true; });
-        localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
-        actualizarContador();
+    const status = document.getElementById('status'); 
+    let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
+    let nuevos = datosLocales.filter(item => !item.sincronizado);
+    
+    if (nuevos.length === 0) { status.innerText = "No se localizan registros nuevos pendientes por enviar."; return; }
+    if (!navigator.onLine) { status.innerText = "Sincronización suspendida: Dispositivo sin acceso a internet."; return; }
+    
+    status.innerText = "Transmitiendo registros y esperando confirmación de Google...";
 
-        const formData = new URLSearchParams(); formData.append('datos', JSON.stringify(nuevos));
-        try {
-            await fetch(WEB_APP_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: formData.toString() });
-            status.innerText = "¡Sincronización de visitas completada!";
-        } catch (error) { 
-            status.innerText = "Sincronización procesada. Verifique su Google Sheets."; 
+    const formData = new URLSearchParams(); 
+    formData.append('datos', JSON.stringify(nuevos));
+    
+    try {
+        // Quitamos el mode: "no-cors" para poder escuchar la respuesta real de Google
+        const respuesta = await fetch(WEB_APP_URL, { 
+            method: "POST", 
+            headers: { "Content-Type": "application/x-www-form-urlencoded" }, 
+            body: formData.toString() 
+        });
+        
+        // El celular SÓLO marcará como sincronizado si la red completó la tarea de verdad
+        if (respuesta.ok || respuesta.status === 0 || respuesta.type === 'opaque') {
+            datosLocales.forEach(item => { if(!item.sincronizado) item.sincronizado = true; });
+            localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
+            status.innerText = "¡Sincronización masiva completada con éxito en Google Sheets!";
+            if (typeof actualizarContador === "function") actualizarContador();
+        } else {
+            status.innerText = "⚠️ La red falló. Los datos siguen seguros en tu teléfono. Intenta de nuevo.";
         }
+    } catch (error) { 
+        // Si el internet es inestable o "falso", cae aquí y NO borra el estado pendiente del celular
+        status.innerText = "⚠️ Conexión inestable. Intenta sincronizar en una zona con mejor señal."; 
     }
+}
+
 
     function eliminarHistorialLocal() {
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
