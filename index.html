@@ -89,6 +89,16 @@
         tr:nth-child(even) { background: #fdfaf2; }
         .badge-pend { color: #66001c; font-weight: bold; text-transform: uppercase; font-size: 11px; }
         .badge-sinc { color: #2e7d32; font-weight: bold; text-transform: uppercase; font-size: 11px; }
+        /* Agrega esto al final de tu bloque <style> */
+@keyframes gpsPulse {
+    0% { background-color: #fdfaf2; border-color: #b4924c; box-shadow: 0 0 0 0 rgba(180,146,76,0.4); }
+    50% { background-color: #fffde6; border-color: #66001c; box-shadow: 0 0 10px 4px rgba(102,0,28,0.2); }
+    100% { background-color: #fdfaf2; border-color: #b4924c; box-shadow: 0 0 0 0 rgba(180,146,76,0.4); }
+}
+.geo-loading { 
+    animation: gpsPulse 1.5s infinite ease-in-out; 
+}
+
     </style>
 </head>
 <body>
@@ -129,8 +139,9 @@
             <label>Paso Obligatorio: Fijar Geolocalización (GPS) *</label>
             <button type="button" class="btn-guinda" onclick="buscarGPS()">📍 Buscar Georreferencia</button>
             <div class="geo-grid">
-                <div class="geo-box"><span class="geo-label">Latitud</span><span id="lat-txt">-</span></div>
-                <div class="geo-box"><span class="geo-label">Longitud</span><span id="lon-txt">-</span></div>
+                <!-- Verifica que tus casillas tengan estos IDs exactos en el HTML -->
+                <div id="box-lat" class="geo-box"><span class="geo-label">Latitud</span><span id="lat-txt">-</span></div>
+                <div id="box-lon" class="geo-box"><span class="geo-label">Longitud</span><span id="lon-txt">-</span></div>
             </div>
         </div>
         
@@ -465,47 +476,41 @@
             loginError.style.display = "block";
         }
     }
-    function buscarGPS() {
-        const status = document.getElementById('status');
-        if (!navigator.geolocation) { status.innerText = "El dispositivo no soporta localización GPS."; return; }
-        
-        status.innerText = "Calculando posición (Alineando hardware GPS)...";
-        
-        // Configuración optimizada para alta velocidad en campo
-        const opcionesGPS = {
-            enableHighAccuracy: true, // Mantiene la precisión institucional
-            timeout: 30000,           // Ampliamos a 30 segundos para dar tiempo al chip de enganchar satélites
-            maximumAge: 60000         // TRUCO: Si el cel obtuvo el GPS hace menos de 1 minuto, usa esa misma para no tardar
-        };
-
-        navigator.geolocation.getCurrentPosition(
-            (pos) => {
-                latitudActual = pos.coords.latitude; longitudActual = pos.coords.longitude;
-                document.getElementById('lat-txt').innerText = latitudActual; document.getElementById('lon-txt').innerText = longitudActual;
-                status.innerText = "Coordenadas fijadas con éxito.";
-                document.getElementById('btn-next-to-capture').disabled = false;
-            },
-            (err) => {
-                // Si falla por alta precisión (por estar techado), hace un segundo intento más rápido con GPS estándar
-                status.innerText = "Buscando señal alterna de respaldo...";
-                
-                navigator.geolocation.getCurrentPosition(
-                    (pos2) => {
-                        latitudActual = pos2.coords.latitude; longitudActual = pos2.coords.longitude;
-                        document.getElementById('lat-txt').innerText = latitudActual; document.getElementById('lon-txt').innerText = longitudActual;
-                        status.innerText = "Coordenadas fijadas (Señal de respaldo).";
-                        document.getElementById('btn-next-to-capture').disabled = false;
-                    },
-                    (err2) => { status.innerText = "Error: Salga a cielo abierto y reintente."; },
-                    { enableHighAccuracy: false, timeout: 15000, maximumAge: 60000 }
-                );
-            }, 
-            opcionesGPS
-        );
+   function buscarGPS() {
+    const status = document.getElementById('status');
+    const boxLat = document.getElementById('box-lat');
+    const boxLon = document.getElementById('box-lon');
+    
+    if (!navigator.geolocation) { 
+        if (status) status.innerText = "El dispositivo no soporta localización GPS."; 
+        return; 
     }
+    
+    if (status) status.innerText = "Conectando con hardware GPS...";
+    if (boxLat) boxLat.classList.add('geo-loading');
+    if (boxLon) boxLon.classList.add('geo-loading');
+    
+    navigator.geolocation.getCurrentPosition(
+        (pos) => {
+            latitudActual = pos.coords.latitude; 
+            longitudActual = pos.coords.longitude;
+            if (document.getElementById('lat-txt')) document.getElementById('lat-txt').innerText = latitudActual; 
+            if (document.getElementById('lon-txt')) document.getElementById('lon-txt').innerText = longitudActual;
+            if (status) status.innerText = "Coordenadas fijadas con éxito.";
+            
+            if (boxLat) boxLat.classList.remove('geo-loading');
+            if (boxLon) boxLon.classList.remove('geo-loading');
+            if (document.getElementById('btn-next-to-capture')) document.getElementById('btn-next-to-capture').disabled = false;
+        },
+        (err) => { 
+            if (status) status.innerText = "Error: Active la ubicación de su equipo móvil."; 
+            if (boxLat) boxLat.classList.remove('geo-loading');
+            if (boxLon) boxLon.classList.remove('geo-loading');
+        }, 
+        { enableHighAccuracy: true, timeout: 30000, maximumAge: 60000 }
+    );
+}
 
-</script>
-<script>
     function guardarFormularioValidado() {
         const status = document.getElementById('status'); const errorBox = document.getElementById('error-box');
         const nombre = document.getElementById('nombre').value.trim(); const appat = document.getElementById('apellido_paterno').value.trim();
