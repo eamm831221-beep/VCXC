@@ -1,39 +1,20 @@
 const CACHE_NAME = 'vcxc-cache-v1';
 const ASSETS = [
-  'index.html',
-  'manifest.json',
-  'https://postimg.cc',
-  'https://postimg.cc',
-  'https://bienestar.gob.mx'
+  '../index.html',
+  '../css/styles.css',
+  'app.js',
+  'https://i.postimg.cc/LXkqg9Dk/fondo.png',
+  'https://i.postimg.cc/d0vkfb03/SIN-FONDO.png'
 ];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS);
-    })
-  );
-});
-
-self.addEventListener('activate', (e) => {
-  e.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
-        })
-      );
-    })
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
   );
 });
 
 self.addEventListener('fetch', (e) => {
   e.respondWith(
-    caches.match(e.request).then((cachedResponse) => {
-      return cachedResponse || fetch(e.request);
-    })
+    caches.match(e.request).then((res) => res || fetch(e.request))
   );
 });
-
