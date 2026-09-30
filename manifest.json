@@ -1,23 +1,659 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Registro VCXC</title>
+    
+    <!-- Vinculación PWA para instalación en iPhone y Android -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#66001c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Registro VCXC">
+    <link rel="apple-touch-icon" href="https://postimg.cc">
 
-{
-  "name": "Sistema de Registro VCXC",
-  "short_name": "Registro VCXC",
-  "description": "Formulario Institucional Offline Casa por Casa",
-  "start_url": "index.html",
-  "display": "fullscreen",
-  "background_color": "#1a1a1a",
-  "theme_color": "#66001c",
-  "orientation": "portrait",
-  "icons": [
-    {
-      "src": "https://postimg.cc",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "https://postimg.cc",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+    <style>
+        body { 
+            font-family: 'Times New Roman', Times, serif, Arial; 
+            padding: 10px; 
+            background-image: url('https://i.postimg.cc/LXkqg9Dk/fondo.png'); 
+            background-size: cover; background-position: center; background-attachment: fixed; background-color: #1a1a1a; text-align: center; color: #1a1a1a; 
+        }
+        
+        /* Tarjeta institucional unificada en Blanco y Guinda */
+        .card { max-width: 480px; margin: 20px auto; background: rgba(255, 255, 255, 0.98); padding: 30px; border-radius: 4px; box-shadow: 0 6px 20px rgba(0,0,0,0.7); border-top: 8px solid #66001c; box-sizing: border-box; background-image: url('https://i.postimg.cc/LXkqg9Dk/fondo.png'); background-size: cover; background-position: center}
+        
+        .banner-container { width: 100%; display: flex; justify-content: center; margin-bottom: 20px; }
+        .banner-img { width: 100%; max-width: 280px; height: auto; display: block; object-fit: contain; }
+        .banner-img-wide { width: 100%; max-height: 110px; display: block; object-fit: cover; border-bottom: 2px solid #b4924c; border-radius: 2px; }
+        
+      /* Busca .app-screen y cámbiala por esto para activar el desvanecimiento */
+.app-screen { 
+    display: none; 
+    opacity: 0; 
+    transform: translateY(10px); 
+    transition: opacity 0.3s ease, transform 0.3s ease; 
 }
+.app-screen.active { 
+    display: block; 
+    opacity: 1; 
+    transform: translateY(0); 
+}
+
+        h2 { color: #66001c; margin-top: 5px; margin-bottom: 5px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 40px; }
+        .subtitle { color: #b4924c; font-size: 20px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
+        h3 { color: #66001c; border-bottom: 2px solid #b4924c; padding-bottom: 5px; margin-top: 35px; text-align: left; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .form-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; font-weight: bold; margin-bottom: 6px; color: #1a1a1a; font-size: 14px; }
+        
+       .servidor-box { color: #66001c; font-size: 25px; font-weight: bold; margin-bottom: 25px; text-align: center; text-transform: uppercase; letter-spacing: 2px; }
+
+        .metrics-grid { display: flex; gap: 10px; margin-bottom: 20px; }
+        .metric-card { flex: 1; background: #ffffff; border: 1px solid #1a1a1a; border-top: 4px solid #b4924c; padding: 12px; border-radius: 2px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .metric-val { display: block; font-size: 24px; font-weight: bold; color: #66001c; margin-top: 5px; }
+        .metric-lbl { font-size: 11px; text-transform: uppercase; color: #1a1a1a; font-weight: bold; letter-spacing: 0.5px; }
+        
+        input[type="text"], input[type="tel"], input[type="number"], select, textarea { width: 100%; padding: 12px; font-size: 15px; border-radius: 2px; border: 1px solid #1a1a1a; box-sizing: border-box; font-family: Arial, sans-serif; background-color: #fdfdfd; color: #333; }
+        input[type="text"]:focus, input[type="tel"]:focus, input[type="number"]:focus, select:focus, textarea:focus { border-color: #66001c; outline: none; box-shadow: 0 0 5px rgba(102,0,28,0.3); }
+        
+        .geo-grid { display: flex; gap: 10px; margin-top: 10px; }
+        .geo-box { flex: 1; background: #fdfaf2; border: 1px solid #b4924c; padding: 10px; border-radius: 2px; font-size: 14px; font-weight: bold; text-align: center; color: #66001c; }
+        .geo-label { font-size: 11px; text-transform: uppercase; color: #666; display: block; margin-bottom: 4px; }
+        .radio-tile-group { display: flex; gap: 10px; margin-top: 5px; }
+        .radio-tile-group.vertical { flex-direction: column; gap: 8px; }
+        .radio-tile { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #1a1a1a; padding: 12px; border-radius: 2px; cursor: pointer; text-align: center; background: #ffffff; font-weight: bold; font-size: 14px; transition: all 0.2s ease; }
+        .radio-tile input { position: absolute; opacity: 0; }
+        .radio-tile:has(input:checked) { border-color: #66001c; background-color: #66001c; color: #dfb15b; box-shadow: inset 0 0 0 1px #b4924c; }
+        
+        button { width: 100%; padding: 15px; font-size: 14px; font-weight: bold; border: 1px solid transparent; border-radius: 2px; cursor: pointer; margin-bottom: 15px; box-sizing: border-box; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s ease; }
+        .btn-guinda { background-color: #66001c; color: #ffffff; border: 1px solid #66001c; }
+        .btn-guinda:hover { background-color: #4a0014; border-color: #4a0014; }
+        .btn-guinda:disabled { background-color: #e0e0e0; border-color: #b3b3b3; color: #888; cursor: not-allowed; }
+        
+        .btn-negro { background-color: #1a1a1a; color: #dfb15b; border: 1px solid #b4924c; }
+        .btn-negro:hover { background-color: #2a2a2a; color: #ffffff; }
+        
+        /* Contenedor NUEVO en grid para alinear botones lado a lado */
+        .btn-row-grid { display: flex; gap: 10px; width: 100%; box-sizing: border-box; }
+        .btn-row-grid button { flex: 1; }
+        
+        .status-box { background: #fdfaf2; color: #66001c; padding: 14px; font-weight: bold; font-size: 14px; border-radius: 2px; margin-bottom: 20px; border: 1px solid #b4924c; border-left: 6px solid #66001c; text-align: left; }
+        .error-alert { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 12px; border-radius: 2px; text-align: left; font-size: 14px; margin-top: 15px; display: none; line-height: 1.5; }
+        
+        .table-container { width: 100%; overflow-x: auto; margin-top: 10px; background: #fff; border: 1px solid #1a1a1a; border-radius: 2px; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; }
+        th { background: #66001c; color: #dfb15b; padding: 10px; font-weight: bold; text-transform: uppercase; font-size: 11px; border-bottom: 2px solid #b4924c; }
+        td { padding: 10px; border-bottom: 1px solid #e0e0e0; color: #1a1a1a; }
+        tr:nth-child(even) { background: #fdfaf2; }
+        .badge-pend { color: #66001c; font-weight: bold; text-transform: uppercase; font-size: 11px; }
+        .badge-sinc { color: #2e7d32; font-weight: bold; text-transform: uppercase; font-size: 11px; }
+        /* Agrega esto al final de tu bloque <style> */
+@keyframes gpsPulse {
+    0% { background-color: #fdfaf2; border-color: #b4924c; box-shadow: 0 0 0 0 rgba(180,146,76,0.4); }
+    50% { background-color: #fffde6; border-color: #66001c; box-shadow: 0 0 10px 4px rgba(102,0,28,0.2); }
+    100% { background-color: #fdfaf2; border-color: #b4924c; box-shadow: 0 0 0 0 rgba(180,146,76,0.4); }
+}
+.geo-loading { 
+    animation: gpsPulse 1.5s infinite ease-in-out; 
+}
+/* Agrega este estilo en tu bloque <style> */
+.btn-row-grid { 
+    display: flex; 
+    gap: 10px; 
+    width: 100%; 
+    box-sizing: border-box; 
+}
+.btn-row-grid button { 
+    flex: 1; 
+}
+
+    </style>
+</head>
+<body>
+<div class="card">
+    <!-- PANTALLA 1: ACCESO -->
+    <div id="screen-1" class="app-screen active">
+        <div class="banner-container"><img class="banner-img" alt="Casa por casa" src="https://i.postimg.cc/d0vkfb03/SIN-FONDO.png"></div>
+        <h2>Acceso</h2>
+            <div class="form-group" style="margin-top: 25px;">
+            <label for="input-curp">Ingrese su CURP para ingresar *</label>
+            <input type="text" id="input-curp" maxlength="18" placeholder="18 caracteres" style="text-transform: uppercase;">
+        </div>
+        <button type="button" class="btn-guinda" onclick="validarAccesoCURP()">Validar Identidad</button>
+        <div id="login-error" style="color: #66001c; font-weight: bold; font-size: 14px; margin-top: 10px; display: none;"></div>
+    </div>
+
+    <!-- PANTALLA 2: PANEL DE CONTROL -->
+    <div id="screen-2" class="app-screen">
+        <img class="banner-img-wide" alt="Bienestar" src="https://pub.bienestar.gob.mx/static/media/padrones01.e4252fd6.jpg">
+        <h2>¡Bienvenido!</h2>
+        <div class="subtitle">SERVIDOR DE LA NACION</div>
+        <div class="form-group">
+            <div id="servidor-activo" class="servidor-box">-</div>
+        </div>
+        
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <span class="metric-lbl">Total de Visitas guardadas</span>
+                <span id="metric-total" class="metric-val">0</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-lbl">Pendientes de sincronizar</span>
+                <span id="metric-pendientes" class="metric-val">0</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Paso Obligatorio: Fijar Geolocalización (GPS) *</label>
+            <button type="button" class="btn-guinda" onclick="buscarGPS()">📍 Buscar Georreferencia</button>
+            <div class="geo-grid">
+                <!-- Verifica que tus casillas tengan estos IDs exactos en el HTML -->
+                <div id="box-lat" class="geo-box"><span class="geo-label">Latitud</span><span id="lat-txt">-</span></div>
+                <div id="box-lon" class="geo-box"><span class="geo-label">Longitud</span><span id="lon-txt">-</span></div>
+            </div>
+        </div>
+        
+        <button type="button" id="btn-next-to-capture" class="btn-guinda" style="margin-top: 10px;" onclick="irAPantalla(3)" disabled>+ Agregar nueva visita</button>
+        <button type="button" class="btn-negro" onclick="irAPantalla(4)">Ver panel de historial 📂</button>
+    </div>
+    <!-- PANTALLA 3: PREGUNTAS EN CAMPO -->
+    <div id="screen-3" class="app-screen">
+        <img class="banner-img-wide" alt="Bienestar" src="https://pub.bienestar.gob.mx/static/media/padrones01.e4252fd6.jpg">
+        <div class="servidor-box">Captura de visita.</div>
+        
+        <h3>Datos de la Persona Entrevistada</h3>
+        <div class="form-group"><label for="nombre">3. Nombre(s) *</label><input type="text" id="nombre"></div>
+        <div class="form-group"><label for="apellido_paterno">4. Apellido paterno *</label><input type="text" id="apellido_paterno"></div>
+        <div class="form-group"><label for="apellido_materno">5. Apellido materno</label><input type="text" id="apellido_materno"></div>
+        <div class="form-group"><label for="telefono">6. Teléfono</label><input type="tel" id="telefono" pattern="[0-9]{10}" placeholder="10 dígitos numéricos"></div>
+        
+        <div class="form-group">
+            <label>7. Sexo *</label>
+            <div class="radio-tile-group">
+                <label class="radio-tile"><input type="radio" name="sexo" value="Hombre"><span>Hombre</span></label>
+                <label class="radio-tile"><input type="radio" name="sexo" value="Mujer"><span>Mujer</span></label>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label>8. Grupo de edad *</label>
+            <div class="radio-tile-group vertical">
+                <label class="radio-tile"><input type="radio" name="grupo_edad" value="Joven de 15 a 29 años"><span>Joven de 15 a 29 años</span></label>
+                <label class="radio-tile"><input type="radio" name="grupo_edad" value="Adulto de 30 a 64 años"><span>Adulto de 30 a 64 años</span></label>
+                <label class="radio-tile"><input type="radio" name="grupo_edad" value="Adulto Mayor de 65 años"><span>Adulto Mayor de 65 años</span></label>
+            </div>
+        </div>
+        <h3>Domicilio</h3>
+        <div class="form-group">
+            <label for="domicilio">9. Calle, Número, Colonia</label>
+            <textarea id="domicilio" rows="3" placeholder="Dirección detallada..."></textarea>
+        </div>
+        <div class="form-group"><label for="localidad">10. Localidad *</label><input type="text" id="localidad"></div>
+        <div class="form-group"><label for="zona">11. Zona *</label><input type="number" id="zona" pattern="[0-9]*" placeholder="Solo números"></div>
+        <div class="form-group"><label for="seccion">12. Sección *</label><input type="number" id="seccion" pattern="[0-9]*" placeholder="Solo números"></div>
+        
+        <h3>Información Complementaria</h3>
+        <div class="form-group">
+            <label for="programa">13. Programa al que pertenece</label>
+            <select id="programa">
+                <option value="">Selecciona una opción...</option>
+                <option value="Adulto Mayor">Adulto Mayor</option>
+                <option value="Discapacidad">Discapacidad</option>
+                <option value="Mujeres Bienestar">Mujeres Bienestar</option>
+                <option value="Beca Benito Juarez">Beca Benito Juarez</option>
+                <option value="Beca Rita Cetina">Beca Rita Cetina</option>
+                <option value="Jovenes Construyendo el Futuro">Jovenes Construyendo el Futuro</option>
+                <option value="Boxeando por la Paz">Boxeando por la Paz</option>
+                <option value="Ninguno">Ninguno</option>
+                <option value="Otro">Otro</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="recepcion">14. ¿Cómo califica la recepción del mensaje? *</label>
+            <select id="recepcion">
+                <option value="">Selecciona una opción...</option>
+                <option value="Excelente">Excelente</option>
+                <option value="Bueno">Bueno</option>
+                <option value="Regular">Regular</option>
+                <option value="Mala">Mala</option>
+                <option value="Muy mala">Muy mala</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="problematica">15. Problemática detectada</label>
+            <select id="problematica">
+                <option value="">Selecciona una opción...</option>
+                <option value="AGUA">AGUA</option>
+                <option value="ELECTRICIDAD">ELECTRICIDAD</option>
+                <option value="VIVIENDA">VIVIENDA</option>
+                <option value="SALUD">SALUD</option>
+                <option value="EDUCACION">EDUCACION</option>
+                <option value="TRANSPORTE">TRANSPORTE</option>
+                <option value="SERVICIOS PUBLICOS">SERVICIOS PUBLICOS</option>
+                <option value="MEDIO AMBIENTE">MEDIO AMBIENTE</option>
+                <option value="PROGRAMAS SOCIALES">PROGRAMAS SOCIALES</option>
+                <option value="TRAMITES">TRAMITES</option>
+                <option value="OTRO">OTRO</option>
+            </select>
+        </div>
+        <div class="form-group"><label for="observacion">16. Observaciones e incidencias</label><textarea id="observacion" rows="3" placeholder="Anotaciones de campo..."></textarea></div>
+        
+        <button type="button" class="btn-guinda" onclick="guardarFormularioValidado()">💾 Guardar visita</button>
+        <div id="error-box" class="error-alert"></div>
+        <button type="button" class="btn-negro" onclick="irAPantalla(2)">⬅️ Cancelar y Volver</button>
+    </div>
+
+    <!-- PANTALLA 4: HISTORIAL Y AUDITORÍA -->
+    <div id="screen-4" class="app-screen">
+        <img class="banner-img-wide" alt="Bienestar" src="https://pub.bienestar.gob.mx/static/media/padrones01.e4252fd6.jpg">
+        <h2>Historial</h2>
+             
+        <div id="contador" class="status-box">📂 Visitas pendientes por sincronizar: 0</div>
+        
+        <button type="button" class="btn-guinda" onclick="sincronizarGSheets()">🔄 Sincronizar visitas</button>
+          <div id="status" style="margin: 15px; font-weight: bold; color: #1a1a1a; font-size: 14px;"></div>
+        
+<!-- Reemplaza tus dos botones viejos en la pantalla 4 por esta estructura unificada -->
+<div class="btn-row-grid">
+    <button type="button" class="btn-negro" onclick="descargarReporteCSV()">📥 DESCARGAR VISITAS (.CSV)</button>
+    <button type="button" class="btn-guinda" style="background-color: #4a0014; border-color: #4a0014; margin-bottom: 15px;" onclick="eliminarHistorialLocal()">⚠️ VACIAR MEMORIA DEL TELEFONO</button>
+</div>
+
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hora</th>
+                        <th>PERSONA ENTREVISTADA</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="historial-body">
+                    <!-- Se llena automáticamente con JS -->
+                </tbody>
+            </table>
+        </div>
+        
+        <button type="button" class="btn-guinda" style="margin-top: 15px;" onclick="irAPantalla(2)">➕ Agregar Nueva Visita</button>
+    </div>
+    
+</div>
+
+<script>
+    // IMPORTANTE: REEMPLAZA ESTA URL POR LA QUE TE DA GOOGLE APPS SCRIPT
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwCC2QFQ0wciCyvW4ELgGldAyK7lpS22S2WElNzJ3s4PkISdXJ_OZcp59Zi0x0fgR5R/exec";
+
+    // BASE DE DATOS OFFLINE: Relación de CURPs con el Nombre del Servidor Público
+    const BASE_SERVIDORES = {
+        "AACG640516MCLLRD01": "ALVARADO CORDERO MARIA GUADALUPE",
+        "NAST690922MDGVXM09": "NAVARRETE SIAÑEZ TOMASA",
+        "MEAI750720MDGDRS09": "MEDINA ARELLANO MARIA ISABEL",
+        "PIDR730501MDGLRS00": "PILLADO DURAN ROSA MARIA",
+"PUTJ701119MDGGRN04": "PUGA TORRES JUANA MARIA",
+"AAGS650227MDGNLN04": "ANDRADE GALLEGOS SANDRA GABRIELA",
+"AECH920906MDGRSL08": "ARELLANES CASTRO HILDA ARELY",
+"AUME921203MDGRND04": "ARGUIJO MONTAÑEZ MARIA EDITH",
+"AEOP700407MDGRXT08": "ARMENDARIZ DE LA O PETRA ",
+"AEBT950202MDGRNN01": "ARREDONDO BUENO TANIA",
+"AEGC860822MDGRNR01": "ARREDONDO GONZALEZ CARMEN ESPERANZA",
+"AEHS770422MCLRRN07": "ARREOLA HERNANDEZ SANDRA LETICIA",
+"AOGS731028MCLRNN06": "ARZOLA GONZALEZ SONIA",
+"AAMR590803HDGVCB02": "AVALOS MACHADO ROBERTO",
+"AAZS921017MDGYVL03": "AYALA ZAVALA SELMA MARGARITA",
+"BAGH020602HDGRRCA0": "BARBOZA GARCIA HECTOR JAIR",
+"BAML941107HDGRRS09": "BARCENAS MARCHAND LUIS ERNESTO",
+"BAAA830419HDGRNN02": "BARRAZA ANDRADE ANTONIO",
+"BARF730707HDGLRL03": "BARRAZA REYES FERMIN",
+"BAPA670424MDGRZL01": "BARRETERO PIZAÑA ALMA ELIA",
+        "BUMT890307MDGNDM02": "BUENO MEDINA MA TOMASA",
+"BERY830909MDGCDS08": "BECERRA RODRIGUEZ YESICA",
+"BUBL821105HDGSSS07": "BUSTAMANTE BUSTAMANTE LUIS CARLOS",
+"BUCA990525MDGSRN01": "BUSTAMANTE CORDOVA ANA JHOSSEMIN",
+"BUCM650916MDGSRR07": "BUSTAMANTES CORDOVA MARTHA IMELDA",
+"CXCA660709MDGBSN01": "CABRALES CASTAÑEDA MARIA DE LOS ANGELES",
+"CACG830625MDGRLL00": "CARRERA CALDERON GUILLERMA GUADALUPE",
+"CAPI691204MDGRSR04": "CARRETE POSADA IRMA ROCIO",
+"CARC790822MDGRDT00": "CARRETE RODRIGUEZ CATALINA",
+"CAHR830816MDGSLS00": "CASTOR HOLGUIN ROSA IRENE",
+"CAAE910530MDGSLR04": "CASTRO ALVAREZ ERIKA GUADALUPE",
+        "CXGA680320HDGSRL06": "CASTRO GARCIA JOSE ALFREDO",
+"CASV020905HCHSLCA3": "CASTRO SALCEDO VICTOR MANUEL",
+"CAOJ791217MCLHCS01": "CHACON OCHOA MARIA DE JESUS",
+"CORJ630506HCLMMS03": "COMPEAN RAMIREZ JESUS",
+"CXLA921207MCHRYN00": "CORCHADO LEYVA ANA KAREN",
+"COAM950819HDGRLR08": "CORDOVA ALCAZAR MARCO ANTONIO",
+"COCC980119MDGRRR06": "CORTEZ CERVANTES CAROLINA",
+"CURB700325MCHVSR06": "CUEVAS RIOS BERTHA ALICIA",
+"DATB950421MCHVVR03": "DAVILA TOVAR BERENICE",
+"SASL920713MDGNCY02": "DE SANTIAGO SAUCEDO LAEYDY KARINA",
+"DINE820731MDGZVS00": "DIAZ NAVARRETE ESPERANZA",
+"DITR851118HOCZRM07": "DIAZ TRUJILLO RAMON DE JESUS",
+"DOCS600411HDGMRR08": "DOMINGUEZ CORCHADO SERGIO ALBERTO",
+"EIRI840701MCLLYV07": "ELIZALDE REYES IVETTE SARAI",
+"EUMN780514MDGSSN08": "ESQUIVEL MASCORRO NANCY ACELA",
+"EAMM831221HDGSLG02": "ESTRADA MOLINA MIGUEL DE JESUS",
+"EUXM610213MCHZXY08": "EZQUEDA MARIA MAYELA",
+"FASR950828MDGVRQ09": "FAVELA SERRANO RAQUEL",
+"FIGE871118MDGRRL02": "FIERRO GARCIA MARIA ELIZABETH",
+"FILL850820MDGGPR07": "FIGUEROA LOPEZ LAURA YANIRA",
+"FOAM730906MCLLDR08": "FLORES ADAME MARGARITA",
+"FOTL920107MDGLRS07": "FLORES TORRES LESLY YAMILETH",
+"FUHC951110MCHNRT08": "FUENTES HERNANDEZ CITLALI SARAHI",
+"GARL790916MDGNMC09": "GANDARILLA RAMIREZ LUCILA",
+"GAEJ770121HDGRNN00": "GARCIA ENCERRADO JUAN JOSE",
+"GAEG960627MDGRSD07": "GARCIA ESPINO GUADALUPE DEL SOCORRO",
+"GUVG951127MDGRLB06": "GUERECA VILLAGRANA GABRIELA",
+"GUPF940515HDGLRL03": "GUILLEN PEREZ FELIPE",
+"HECB870318MDGRMR06": "HERNANDEZ CAMPOS BERA TOMASA",
+"HEMR651102HDGRXM09": "HERNANDEZ MUÑOZ JOSE RAMON",
+"HEOM840503MDGRRR01": "HERNANDEZ ORTIZ MARY CRUZ",
+"HEPL950226HZSRNS07": "HERNANDEZ PUENTES LUIS AGUSTIN",
+"HETD950530HCHRRG03": "HERNANDEZ TORRES DIEGO ALFONSO",
+"HESR870605MDGRNC07": "HERNANDEZ SANTOYO ROCIO",
+"JALL891212HDGCPS02": "JACQUEZ LOPEZ LUIS RENE",
+"LEBM670913MDGLCR07": "LEAL BECERRA MARGARITA",
+"LIHJ930427HCLRRS02": "LIRA HERNANDEZ JESUS ANTONIO",
+"LADG790906MDGLZD05": "LLAMAS DIAZ MARIA GUADALUPE",
+"LXCA780211HCLPZN00": "LOPEZ CAZARES JOSE ANGEL",
+"LOGR621117HDGPRD01": "LOPEZ GARCIA RODOLFO",
+"LOME820531MDGZRR04": "LOZANO MARQUEZ ERIKA LILIANA",
+"MACA960216MDGCHN02": "MACIEL CHAVEZ ANDREA IDALY",
+"MAVC910823MDGGRL00": "MAGALLANES VERA CLAUDIA JAQUELINE",
+"MAAJ900810HCHRRS04": "MARQUEZ ARREOLA JESUS HERNAN",
+"MACA720621MCLRML06": "MARTINEZ CAMPOS ALEJANDRA",
+"MAHG760119MCLRRR02": "MARTINEZ HERRADA GRISELDA YADIRA",
+"MARD981230MCHRSM03": "MARTINEZ RIOS DIAMAR",
+"MAVE671026MDGRLV08": "MARTINEZ VALLES EVARISTA MARIA LORENA",
+"MACC890225MCHYRC01": "MAYA CARRIZALES CECILIA LIZBETH",
+
+"MEVZ960910MDGDLR05": "MEDRANO VALENZUELA ZAIRA YAMILETH",
+"METO890919MDGNVL11": "MENDEZ TOVAR OLGA LETICIA",
+"MOCG781028MDGJSR03": "MOJICA CASTAÑEDA GRISELDA",
+"MOCY871212MCHLSZ06": "MOLINA CASTILLO YAZMIN",
+"MODV821010MDGNZR05": "MONARREZ DIAZ MARIA VERONICA",
+"MOAM711217MDGRNR10": "MORENO ANDRADE MARTHA PATRICIA",
+"MOMM650530MDGRXR00": "MORILLON MUÑOZ MARTHA LETICIA",
+"MUQA511002HOCXRN08": "MUÑOZ QUIROZ ANGEL",
+"MUSS970205HDGXSN06": "MUÑOZ SOSA JOSE SANTIAGO",
+"NAGY980110HCLJRM05": "NAJERA GARCIA YAMIL",
+"NAHK921126MDGJRR01": "NAJERA HERNANDEZ KARLA JANETH",
+"NAST690922MDGVXM09": "NAVARRETE SIAÑEZ TOMASA",
+        "NAHM930114MDGVRG09": "NAVARRETE HERRERA MAGALI",
+"NIEE680116MCLXSL08": "NIÑO ESTRELLA MARIA ELENA",
+"OISE800627HCLLFN09": "OLIVO SIFUENTES ENRIQUE",
+"OIUM780129HDGRZN08": "ORTIZ UZQUIANO JOSE MANUEL",
+"PARJ560313HJCCBS09": "PACHECO ROBLES JUSTINO ENRIQUE",
+"PAGG700212MDGDRD09": "PADILLA GARCIA MARIA GUADALUPE",
+"PAGG941107MDGLTD05": "PALMA GUTIERREZ MA GUADALUPE",
+"PACA730706HDGLRR08": "PALOMO CORONADO ARISTEO",
+"PECL820309MDGXNC04": "PEÑA CANO MARIA LUCINA",
+"PEAJ950611HDGRLN07": "PEREZ ALANIS JONATHAN",
+"PETM810125HDGRVR08": "PEREZ TOVAR MARIO ALBERTO",
+
+"PUTJ701119MDGGRN04": "PUGA TORRES JUANA MARIA",
+"RAAS951215MGTMRN02": "RAMIREZ ARZOLA SONIA INGRID",
+"RAHM870423HCLMNS05": "RAMIREZ HINOJOSA MISAEL",
+"RAGK980320MDGMTR00": "RAMOS GUTIERREZ KARINA",
+"REOA501020HDGTLR05": "RETANA OLIVAS ARTEMIO",
+"RECJ920809MCLYNL04": "REYES CONTRERAS JULIANA IVETTE",
+"REMC000415MDGZRNA3": "REZA MERAZ CINDY PAMELA",
+"RIMY870520HDGVRS03": "RIVAS MERAZ YOSIMAR",
+"RIPM820502MMNVRR09": "RIVERA PEREZ MIRIAM",
+"ROEB840509MDGCNL04": "ROCHA ENRIQUEZ BLANCA ESTELA",
+"ROCF950113MDGDRL02": "RODRIGUEZ DE LA CRUZ FLOR IVET ",
+"ROEC820112MDGDSL03": "RODRIGUEZ ESQUIVEL CELIA",
+        "BARF730707HDGRYR05": "BARRAZA REYES FERMIN",
+"ROFG661114MCLDRB04": "RODRIGUEZ FERRER GABRIELA DEL PILAR",
+"RONA881008MDGDXL06": "RODRIGUEZ NUÑEZ ALMA ANGELICA",
+"RONF800311MDGDXL07": "RODRIGUEZ NUÑEZ FLOR AIDE",
+"RORL740912HDGDYS06": "RODRIGUEZ REYES LUIS",
+"ROSN991026MDGDLD02": "RODRIGUEZ SALAZAR NADIA",
+"ROSJ940130HCLDNS03": "RODRIGUEZ SANCHEZ JESUS GUADALUPE",
+"ROSL761013MCLDNR18": "RODRIGUEZ SANCHEZ LAURA CECILIA",
+"ROMB941121MCHJZR09": "ROJAS MAZUCA BRENDA PATRICIA",
+"SARA010403MCHLCZA3": "SALAZAR ROCHA AZUL MICHELLE",
+"SASA960229MDGLMN02": "SALAS SAMANIEGO ANA BEATRIZ",
+"SAAD830130MDGLRL08": "SALAZAR AROÑA DULCE LILIANA",
+"SASA730417MDGNRN01": "SANTOYO SERRATO ANA LILIA",
+"SAMA010201MCLCRLA1": "SAUCEDO MARTINEZ ALEJANDRA VIRIDIANA",
+"SEVF730130MDGRGR04": "SERRANO VEGA FRANCISCA",
+"TOMD540814HCLRRN05": "TORRES MARTINEZ DANIEL",
+"SOHF941220MDGSRB01": "SOSA HERNANDEZ FABIOLA LIZETTE",
+"VACB810404MTSLHR05": "VALDEZ CHAVEZ BRENDA LILIANA",
+"VALV590521HDGLZL02": "VALENCIA LAZOS VALENTE",
+"VACS651102MDGZRL09": "VAZQUEZ CARDOZA SILVIA PATRICIA",
+"VAMA870830MDGZLL01": "VAZQUEZ MELENDEZ ALMA ROSA ",
+"VIML790425MDGLRZ09": "VILLA MORENO MA DE LA LUZ",
+        
+"VIAN821214MDGLCR05": "VILLELA ACOSTA NORMA",
+"ZAVK981206MDGMLR01": "KARENTH ARELY ZAMARRIPA VELAZQUEZ",
+"RACK980731MDGMBR07": "RAMIREZ CABRERA KAREN VIANEY",
+"CESS910708MDGRLC06": "CERVANTES SALGADO MARIA DEL SOCORRO",
+    };
+
+    let latitudActual = ""; let longitudActual = ""; let nombreServidorDeducido = "";
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const ultimaCurpGuardada = localStorage.getItem('ultima_curp_vcxc');
+        if (ultimaCurpGuardada) {
+            document.getElementById('input-curp').value = ultimaCurpGuardada;
+        }
+        
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('Service Worker registrado.'))
+                .catch(err => console.log('Error de Service Worker:', err));
+        }
+        actualizarContador();
+    });
+  function irAPantalla(screenNumber) {
+    const activeScreen = document.querySelector('.app-screen.active');
+    if (activeScreen) {
+        activeScreen.classList.remove('active');
+    }
+    
+    // Retraso milimétrico para ocultar y revelar con suavidad
+    setTimeout(() => {
+        document.querySelectorAll('.app-screen').forEach(screen => screen.style.display = 'none');
+        const targetScreen = document.getElementById('screen-' + screenNumber);
+        if (targetScreen) {
+            targetScreen.style.display = 'block';
+            setTimeout(() => {
+                targetScreen.classList.add('active');
+            }, 20);
+        }
+    }, 150);
+
+    if (typeof actualizarContador === "function") actualizarContador();
+}
+
+
+    function validarAccesoCURP() {
+        const curpIngresada = document.getElementById('input-curp').value.trim().toUpperCase();
+        const loginError = document.getElementById('login-error');
+
+        if (!curpIngresada) {
+            loginError.innerText = "Por favor, introduzca una CURP."; loginError.style.display = "block"; return;
+        }
+
+        if (BASE_SERVIDORES[curpIngresada]) {
+            nombreServidorDeducido = BASE_SERVIDORES[curpIngresada];
+            document.getElementById('servidor-activo').innerText = nombreServidorDeducido;
+            loginError.style.display = "none";
+            localStorage.setItem('ultima_curp_vcxc', curpIngresada);
+            irAPantalla(2);
+        } else {
+            loginError.innerText = "Acceso denegado: Esta CURP no se encuentra en la lista autorizada de Bienestar.";
+            loginError.style.display = "block";
+        }
+    }
+   function buscarGPS() {
+    const status = document.getElementById('status');
+    const boxLat = document.getElementById('box-lat');
+    const boxLon = document.getElementById('box-lon');
+    
+    if (!navigator.geolocation) { 
+        if (status) status.innerText = "El dispositivo no soporta localización GPS."; 
+        return; 
+    }
+    
+    if (status) status.innerText = "Conectando con hardware GPS...";
+    if (boxLat) boxLat.classList.add('geo-loading');
+    if (boxLon) boxLon.classList.add('geo-loading');
+    
+    navigator.geolocation.getCurrentPosition(
+        (pos) => {
+            latitudActual = pos.coords.latitude; 
+            longitudActual = pos.coords.longitude;
+            if (document.getElementById('lat-txt')) document.getElementById('lat-txt').innerText = latitudActual; 
+            if (document.getElementById('lon-txt')) document.getElementById('lon-txt').innerText = longitudActual;
+            if (status) status.innerText = "Coordenadas fijadas con éxito.";
+            
+            if (boxLat) boxLat.classList.remove('geo-loading');
+            if (boxLon) boxLon.classList.remove('geo-loading');
+            if (document.getElementById('btn-next-to-capture')) document.getElementById('btn-next-to-capture').disabled = false;
+        },
+        (err) => { 
+            if (status) status.innerText = "Error: Active la ubicación de su equipo móvil."; 
+            if (boxLat) boxLat.classList.remove('geo-loading');
+            if (boxLon) boxLon.classList.remove('geo-loading');
+        }, 
+        { enableHighAccuracy: true, timeout: 30000, maximumAge: 60000 }
+    );
+}
+
+    function guardarFormularioValidado() {
+        const status = document.getElementById('status'); const errorBox = document.getElementById('error-box');
+        const nombre = document.getElementById('nombre').value.trim(); const appat = document.getElementById('apellido_paterno').value.trim();
+        const localidad = document.getElementById('localidad').value.trim(); const zona = document.getElementById('zona').value.trim();
+        const seccion = document.getElementById('seccion').value.trim(); const recepcion = document.getElementById('recepcion').value;
+        const radioSexo = document.querySelector('input[name="sexo"]:checked'); const radioEdad = document.querySelector('input[name="grupo_edad"]:checked');
+        let errores = [];
+
+        if (!nombre) errores.push("• 3. Nombre(s)"); if (!appat) errores.push("• 4. Apellido paterno");
+        if (!radioSexo) errores.push("• 7. Sexo"); if (!radioEdad) errores.push("• 8. Grupo de edad");
+        if (!localidad) errores.push("• 10. Localidad"); if (!zona) errores.push("• 11. Zona");
+        if (!seccion) errores.push("• 12. Sección"); if (!recepcion) errores.push("• 14. Recepción del mensaje");
+
+        if (errores.length > 0) {
+            status.innerText = ""; boxText = "<strong>Falta llenar o corregir los siguientes campos obligatorios:</strong><br>";
+            errorBox.innerHTML = boxText + errores.join("<br>"); errorBox.style.display = "block"; errorBox.scrollIntoView({ behavior: 'smooth' }); return;
+        }
+
+        errorBox.style.display = "none"; const ahora = new Date();
+        const nuevoRegistro = {
+            id: 'id_' + ahora.getTime() + '_' + Math.floor(Math.random() * 1000), 
+            fecha: ahora.toLocaleDateString('es-MX'), hora: ahora.toLocaleTimeString('es-MX'), lat: latitudActual, lon: longitudActual,
+            servidor: nombreServidorDeducido, nombre: nombre, appat: appat, apmat: document.getElementById('apellido_materno').value.trim(),
+            tel: document.getElementById('telefono').value.trim(), sexo: radioSexo.value, edad: radioEdad.value,
+            domicilio: document.getElementById('domicilio').value.trim(), localidad: localidad, zona: zona, seccion: seccion,
+            programa: document.getElementById('programa').value, recepcion: recepcion, problematica: document.getElementById('problematica').value,
+            observacion: document.getElementById('observacion').value.trim(), sincronizado: false 
+        };
+
+        let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
+        datosLocales.push(nuevoRegistro); localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
+        
+        document.getElementById('nombre').value = ""; document.getElementById('apellido_paterno').value = ""; document.getElementById('apellido_materno').value = "";
+        document.getElementById('telefono').value = ""; document.getElementById('domicilio').value = ""; document.getElementById('localidad').value = "";
+        document.getElementById('zona').value = ""; document.getElementById('seccion').value = ""; document.getElementById('programa').value = "";
+        document.getElementById('recepcion').value = ""; document.getElementById('problematica').value = ""; document.getElementById('observacion').value = "";
+        if(radioSexo) radioSexo.checked = false; if(radioEdad) radioEdad.checked = false;
+        
+        latitudActual = ""; longitudActual = ""; document.getElementById('lat-txt').innerText = "-"; document.getElementById('lon-txt').innerText = "-";
+        document.getElementById('btn-next-to-capture').disabled = true;
+        
+        alert("¡Visita guardada en el teléfono con éxito!");
+        irAPantalla(2);
+    }
+
+    function actualizarContador() {
+        let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
+        let pendientes = datosLocales.filter(item => !item.sincronizado).length;
+        
+        if (document.getElementById('metric-total')) document.getElementById('metric-total').innerText = datosLocales.length;
+        if (document.getElementById('metric-pendientes')) document.getElementById('metric-pendientes').innerText = pendientes;
+        if (document.getElementById('contador')) document.getElementById('contador').innerText = "📂 Visitas pendientes por sincronizar: " + pendientes;
+        
+        const tbody = document.getElementById('historial-body'); 
+        if (!tbody) return;
+        tbody.innerHTML = "";
+        
+        if(datosLocales.length === 0) {
+            tbody.innerHTML = "<tr><td colspan='3' style='text-align:center; color:#999;'>No hay capturas acumuladas hoy.</td></tr>"; return;
+        }
+        datosLocales.forEach((item) => {
+            const row = document.createElement('tr');
+            const estadoTexto = item.sincronizado ? '<span class="badge-sinc">Sincronizado</span>' : '<span class="badge-pend">Falta Sincronizar</span>';
+            row.innerHTML = `<td>${item.hora}</td><td>${item.nombre} ${item.appat}</td><td>${estadoTexto}</td>`;
+            tbody.appendChild(row);
+        });
+    }
+
+    function descargarReporteCSV() {
+        let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
+        if (datosLocales.length === 0) { alert("No hay datos capturados hoy para descargar."); return; }
+        let csvContent = "\uFEFF"; csvContent += "Fecha,Hora,Latitud,Longitud,Servidor,Nombre,ApPaterno,ApMaterno,Telefono,Sexo,Edad,Domicilio,Localidad,Zona,Seccion,Programa,Recepcion,Problematica,Observacion,Sincronizado\n";
+        datosLocales.forEach(item => {
+            let fila = [
+                `"${item.fecha}"`, `"${item.hora}"`, `"${item.lat}"`, `"${item.lon}"`, `"${item.servidor}"`, `"${item.nombre}"`, `"${item.appat}"`, `"${item.apmat}"`,
+                `"${item.tel}"`, `"${item.sexo}"`, `"${item.edad}"`, `"${item.domicilio}"`, `"${item.localidad}"`, `"${item.zona}"`, `"${item.seccion}"`, `"${item.programa}"`,
+                `"${item.recepcion}"`, `"${item.problematica}"`, `"${item.observacion}"`, `"${item.sincronizado ? 'SI' : 'NO'}"`
+            ];
+            csvContent += fila.join(",") + "\n";
+        });
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' }); const link = document.createElement("a"); const url = URL.createObjectURL(blob);
+        link.setAttribute("href", url); link.setAttribute("download", `Respaldo_VCXC_${new Date().toLocaleDateString('es-MX').replace(/\//g, '-')}.csv`);
+        link.style.visibility = 'hidden'; document.body.appendChild(link); link.click(); document.body.removeChild(link);
+    }
+
+    async function sincronizarGSheets() {
+    const status = document.getElementById('status'); 
+    let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
+    let nuevos = datosLocales.filter(item => !item.sincronizado);
+    
+    if (nuevos.length === 0) { status.innerText = "No se localizan registros nuevos pendientes por enviar."; return; }
+    if (!navigator.onLine) { status.innerText = "Sincronización suspendida: Dispositivo sin acceso a internet."; return; }
+    
+    status.innerText = "Transmitiendo registros y esperando confirmación de Google...";
+
+    const formData = new URLSearchParams(); 
+    formData.append('datos', JSON.stringify(nuevos));
+    
+    try {
+        // Quitamos el mode: "no-cors" para poder escuchar la respuesta real de Google
+        const respuesta = await fetch(WEB_APP_URL, { 
+            method: "POST", 
+            headers: { "Content-Type": "application/x-www-form-urlencoded" }, 
+            body: formData.toString() 
+        });
+        
+        // El celular SÓLO marcará como sincronizado si la red completó la tarea de verdad
+        if (respuesta.ok || respuesta.status === 0 || respuesta.type === 'opaque') {
+            datosLocales.forEach(item => { if(!item.sincronizado) item.sincronizado = true; });
+            localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
+            status.innerText = "¡Sincronización masiva completada con éxito en Google Sheets!";
+            if (typeof actualizarContador === "function") actualizarContador();
+        } else {
+            status.innerText = "⚠️ La red falló. Los datos siguen seguros en tu teléfono. Intenta de nuevo.";
+        }
+    } catch (error) { 
+        // Si el internet es inestable o "falso", cae aquí y NO borra el estado pendiente del celular
+        status.innerText = "⚠️ Conexión inestable. Intenta sincronizar en una zona con mejor señal."; 
+    }
+}
+
+
+    function eliminarHistorialLocal() {
+        let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
+        if (datosLocales.length === 0) { alert("El historial ya se encuentra completamente vacío."); return; }
+        if (confirm("⚠️ ¿Desea eliminar permanentemente todas las visitas guardadas en este teléfono? Asegúrese de haber sincronizado primero.")) {
+            localStorage.removeItem('visitas_vcxc'); alert("Historial del teléfono borrado."); actualizarContador();
+        }
+    }
+</script>
+</body>
+</html>
