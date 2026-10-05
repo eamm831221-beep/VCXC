@@ -1,16 +1,21 @@
 {
-  "name": "Sistema de Registro VCXC",
-  "short_name": "Registro VCXC",
-  "start_url": "index.html",
-  "display": "standalone",
-  "background_color": "#1a1a1a",
-  "theme-color": "#66001c",
-  "orientation": "portrait",
+  "short_name": "R02-Derechos",
+  "name": "R02-Derechohabientes",
   "icons": [
     {
-      "src": "https://i.postimg.cc/d0vkfb03/SIN-FONDO.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
-  ]
+  ],
+  "start_url": "./index.html",
+  "background_color": "#621132",
+  "theme_color": "#621132",
+  "display": "standalone",
+  "orientation": "portrait"
 }
