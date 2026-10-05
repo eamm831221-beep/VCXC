@@ -1,41 +1,43 @@
-const CACHE_NAME = 'r02-v10';
+const CACHE_NAME = 'vcxc-cache-v1';
 const ASSETS = [
-    './',
-    './index.html',
-    './styles.css',
-    './app.js',
-    './manifest.json'
+  'index.html',
+  'manifest.json',
+  'https://postimg.cc',
+  'https://postimg.cc',
+  'https://bienestar.gob.mx'
 ];
 
-// Instalación e inyección limpia de archivos obligatorios
+// Instala el Service Worker y guarda los recursos en la memoria caché
 self.addEventListener('install', (e) => {
-    e.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => {
-            return cache.addAll(ASSETS);
-        }).then(() => self.skipWaiting())
-    );
+  e.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(ASSETS);
+    })
+  );
 });
 
-// Limpieza automática de cachés viejos
+// Activa el Service Worker y limpia versiones viejas de caché
 self.addEventListener('activate', (e) => {
-    e.waitUntil(
-        caches.keys().then((keys) => {
-            return Promise.all(
-                keys.map((key) => {
-                    if (key !== CACHE_NAME) {
-                        return caches.delete(key);
-                    }
-                })
-            );
-        }).then(() => self.clients.claim())
-    );
+  e.waitUntil(
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
+      );
+    })
+  );
 });
 
-// Estrategia de red: Intenta ir a internet, si no hay, usa la caché (A prueba de errores 404)
+// Sirve la aplicación desde la caché local cuando el brigadista está offline
 self.addEventListener('fetch', (e) => {
-    e.respondWith(
-        fetch(e.request).catch(() => {
-            return caches.match(e.request);
-        })
-    );
+  e.respondWith(
+    caches.match(e.request).then((cachedResponse) => {
+      return cachedResponse || fetch(e.request);
+    })
+  );
+});
+
 });
