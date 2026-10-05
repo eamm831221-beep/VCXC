@@ -232,16 +232,15 @@
     <!-- PANTALLA 4: HISTORIAL Y AUDITORÍA -->
     <div id="screen-4" class="app-screen">
         <img class="banner-img-wide" alt="Bienestar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSap4A_OenSxcNiOTBRpxDbx9GBBaFTkyaCg0E4Spx0&s">
-        <h2>Historial Central</h2>
-        <div class="subtitle">Auditoría de Encuestas Locales</div>
-        
+        <h2>Panel de Historial</h2>
+                
         <div id="contador" class="status-box">📂 Visitas pendientes por sincronizar: 0</div>
         
-        <button type="button" class="btn-guinda" onclick="sincronizarGSheets()">🔄 Sincronizar a Google Sheets VCXC</button>
+        <button type="button" class="btn-guinda" onclick="sincronizarGSheets()">🔄 Sincronizar visitas</button>
         
         <div class="btn-row-grid">
-            <button type="button" class="btn-negro" onclick="descargarReporteCSV()">📥 Respaldar (.CSV)</button>
-            <button type="button" class="btn-guinda" style="background-color: #4a0014; border-color: #4a0014;" onclick="eliminarHistorialLocal()">⚠️ Limpiar Memo</button>
+            <button type="button" class="btn-negro" onclick="descargarReporteCSV()">📥 Descargar visitas del dia (.CSV)</button>
+            <button type="button" class="btn-guinda" style="background-color: #4a0014; border-color: #4a0014;" onclick="eliminarHistorialLocal()">⚠️ Eliminar memoria del telefono</button>
         </div>
         <div class="table-container">
             <table>
