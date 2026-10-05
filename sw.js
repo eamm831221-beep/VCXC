@@ -1,20 +1,41 @@
-const CACHE_NAME = 'vcxc-cache-v1';
+const CACHE_NAME = 'r02-v10';
 const ASSETS = [
-  '../index.html',
-  '../css/styles.css',
-  'app.js',
-  'https://i.postimg.cc/LXkqg9Dk/fondo.png',
-  'https://i.postimg.cc/d0vkfb03/SIN-FONDO.png'
+    './',
+    './index.html',
+    './styles.css',
+    './app.js',
+    './manifest.json'
 ];
 
+// Instalación e inyección limpia de archivos obligatorios
 self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
-  );
+    e.waitUntil(
+        caches.open(CACHE_NAME).then((cache) => {
+            return cache.addAll(ASSETS);
+        }).then(() => self.skipWaiting())
+    );
 });
 
+// Limpieza automática de cachés viejos
+self.addEventListener('activate', (e) => {
+    e.waitUntil(
+        caches.keys().then((keys) => {
+            return Promise.all(
+                keys.map((key) => {
+                    if (key !== CACHE_NAME) {
+                        return caches.delete(key);
+                    }
+                })
+            );
+        }).then(() => self.clients.claim())
+    );
+});
+
+// Estrategia de red: Intenta ir a internet, si no hay, usa la caché (A prueba de errores 404)
 self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    caches.match(e.request).then((res) => res || fetch(e.request))
-  );
+    e.respondWith(
+        fetch(e.request).catch(() => {
+            return caches.match(e.request);
+        })
+    );
 });
