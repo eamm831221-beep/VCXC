@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vcxc-cache-v1';
+const CACHE_NAME = 'vcxc-cache-v2';
 const ASSETS = [
   'index.html',
   'manifest.json',
