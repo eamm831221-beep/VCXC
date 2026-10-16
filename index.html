@@ -148,7 +148,8 @@
         <h2>Visitas casa x casa</h2>
                 
         <h3>Datos de la Persona Entrevistada</h3>
-        <div class="form-group"><label for="nombre">3. Nombre(s) *</label><input type="text" id="nombre" style="text-transform: uppercase;"></div>
+        <div class="form-group"><label for="nombre">3. Nombre(s) *</label><input type="text" id="nombre" style="text-transform: uppercase;"  oninput="this.value = this.value.toUpperCase()"
+        required></div>
         <div class="form-group"><label for="apellido_paterno">4. Apellido paterno *</label><input type="text" id="apellido_paterno"></div>
         <div class="form-group"><label for="apellido_materno">5. Apellido materno</label><input type="text" id="apellido_materno"></div>
         <div class="form-group"><label for="telefono">6. Teléfono</label><input type="tel" id="telefono" pattern="[0-9]{10}" placeholder="10 dígitos numéricos"></div>
