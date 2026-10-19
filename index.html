@@ -266,7 +266,7 @@
 </div>
 <script>
     // Enlace de comunicación seguro con Google Apps Script
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby6XbneSCiwhreoO4YyLAEQtB4Je7LFMcZeTgOuK8z2-bdAxyC3J1gNDSpuQTslYQM5/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby5w5j7ls1IjfKv28jkj_TpbTYTi7DjjinFdc2UybFxptITDCdSrlIcYn-uH9mWdSA/exec";
 
     // BASE DE DATOS OFFLINE: Relación de CURPs con el Nombre del Servidor Público
    const BASE_SERVIDORES = {
@@ -569,29 +569,65 @@ Object.assign(BASE_SERVIDORES, {
         link.style.visibility = 'hidden'; document.body.appendChild(link); link.click(); document.body.removeChild(link);
     }
 
-    async function sincronizarGSheets() {
-        const status = document.getElementById('status'); let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
-        let nuevos = datosLocales.filter(item => !item.sincronizado);
-        if (nuevos.length === 0) { status.innerText = "No se localizan registros nuevos pendientes por enviar."; return; }
-        if (!navigator.onLine) { status.innerText = "Sincronización suspendida: Dispositivo sin acceso a internet."; return; }
+   async function sincronizarGSheets() {
+    const status = document.getElementById('status');
+    const btnSinc = document.querySelector('button[onclick="sincronizarGSheets()"]'); // Selecciona el botón
+    let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
+    let nuevos = datosLocales.filter(item => !item.sincronizado);
+    
+    if (nuevos.length === 0) { 
+        status.innerText = "No se localizan registros nuevos pendientes por enviar."; 
+        return; 
+    }
+    if (!navigator.onLine) { 
+        status.innerText = "Sincronización suspendida: Dispositivo sin acceso a internet."; 
+        return; 
+    }
+    
+    // Bloquear botón y avisar al usuario para evitar doble envío en redes lentas
+    btnSinc.disabled = true;
+    status.innerText = "Transmitiendo únicamente registros nuevos a Google Sheets... Por favor, espere.";
+    
+    try {
+        const formData = new URLSearchParams();
+        formData.append('datos', JSON.stringify(nuevos));
         
-        status.innerText = "Transmitiendo únicamente registros nuevos a Google Sheets...";
-        try {
-            const formData = new URLSearchParams(); formData.append('datos', JSON.stringify(nuevos));
-            const respuesta = await fetch(WEB_APP_URL, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: formData.toString() });
-            if (respuesta.ok || respuesta.status === 0 || respuesta.type === 'opaque') {
+        const respuesta = await fetch(WEB_APP_URL, { 
+            method: "POST", 
+            headers: { "Content-Type": "application/x-www-form-urlencoded" }, 
+            body: formData.toString() 
+        });
+        
+        if (respuesta.ok) {
+            const resultadoJson = await respuesta.json(); // Validamos la respuesta JSON del servidor
+            
+            if (resultadoJson && resultadoJson.status === "success") {
+                // SÓLO si el servidor confirma la escritura, actualizamos el estado local
                 datosLocales.forEach(item => { if(!item.sincronizado) item.sincronizado = true; });
                 localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
-                status.innerText = "¡Sincronización masiva completada! Registros actualizados en Google Sheets.";
+                status.style.color = "green";
+                status.innerText = "¡Sincronización masiva completada! Registros guardados en Google Sheets.";
                 actualizarContador();
-            } else { status.innerText = "⚠️ Conexión fallida. Datos resguardados localmente."; }
-        } catch (error) { 
-            status.innerText = "Sincronización procesada. Verifique su Google Sheets."; 
-            datosLocales.forEach(item => { if(!item.sincronizado) item.sincronizado = true; });
-            localStorage.setItem('visitas_vcxc', JSON.stringify(datosLocales));
-            actualizarContador();
+            } else {
+                status.style.color = "red";
+                status.innerText = "⚠️ Error en el servidor de Google: " + (resultadoJson.message || "No especificado");
+            }
+        } else { 
+            status.style.color = "red";
+            status.innerText = "⚠️ Conexión inestable. Los datos siguen resguardados de forma segura en el teléfono."; 
         }
+    } catch (error) { 
+        // CORRECCIÓN CLAVE: Si la red se cae a la mitad de la transmisión, NO asumimos éxito.
+        // Los registros permanecen intactos en el teléfono como 'falses' para la próxima oportunidad.
+        console.error("Fallo de red en campo:", error);
+        status.style.color = "orange";
+        status.innerText = "⚠️ Error de conexión en campo. Intente sincronizar cuando tenga mejor señal. Sus datos no se han perdido."; 
+    } finally {
+        // Reactivamos el botón siempre, falle o tenga éxito la operación
+        btnSinc.disabled = false;
     }
+}
+
 
     function eliminarHistorialLocal() {
         let datosLocales = JSON.parse(localStorage.getItem('visitas_vcxc')) || [];
