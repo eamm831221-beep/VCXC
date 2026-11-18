@@ -1,14 +1,12 @@
-const CACHE_NAME = 'vcxc-cache-v8';
+const CACHE_NAME = 'vcxc-cache-v9';
 const ASSETS = [
-  'index.html',
-  'manifest.json',
-  'https://i.postimg.cc/d0vkfb03/SIN-FONDO.png',
-  'https://i.postimg.cc/d0vkfb03/SIN-FONDO.png',
-  'https://bienestar.gob.mx'
+  './',
+  './index.html',
+  './manifest.json'
 ];
 
-// Instala el Service Worker y guarda los recursos en la memoria caché
 self.addEventListener('install', (e) => {
+  self.skipWaiting();
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(ASSETS);
@@ -16,7 +14,6 @@ self.addEventListener('install', (e) => {
   );
 });
 
-// Activa el Service Worker y limpia versiones viejas de caché
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keys) => {
@@ -29,15 +26,15 @@ self.addEventListener('activate', (e) => {
       );
     })
   );
+  return self.clients.claim();
 });
 
-// Sirve la aplicación desde la caché local cuando el brigadista está offline
 self.addEventListener('fetch', (e) => {
+  if (e.request.method !== 'GET') return;
+  
   e.respondWith(
     caches.match(e.request).then((cachedResponse) => {
-      return cachedResponse || fetch(e.request);
+      return cachedResponse || fetch(e.request).catch(() => caches.match('./index.html'));
     })
   );
-});
-
 });
