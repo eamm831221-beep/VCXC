@@ -2,8 +2,8 @@ const CACHE_NAME = 'vcxc-cache-v8';
 const ASSETS = [
   'index.html',
   'manifest.json',
-  'https://postimg.cc',
-  'https://postimg.cc',
+  'https://i.postimg.cc/d0vkfb03/SIN-FONDO.png',
+  'https://i.postimg.cc/d0vkfb03/SIN-FONDO.png',
   'https://bienestar.gob.mx'
 ];
 
