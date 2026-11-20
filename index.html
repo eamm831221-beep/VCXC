@@ -474,23 +474,54 @@ Object.assign(BASE_SERVIDORES, {
         }
     }
 
-    function buscarGPS() {
-        const status = document.getElementById('status'); const boxLat = document.getElementById('box-lat'); const boxLon = document.getElementById('box-lon');
-        if (!navigator.geolocation) { status.innerText = "El dispositivo no soporta localización GPS."; return; }
-        status.innerText = "Conectando con hardware GPS...";
-        if (boxLat) boxLat.classList.add('geo-loading'); if (boxLon) boxLon.classList.add('geo-loading');
+       function buscarGPS() {
+        const status = document.getElementById('status'); 
+        const boxLat = document.getElementById('box-lat'); 
+        const boxLon = document.getElementById('box-lon');
+        const btnSiguiente = document.getElementById('btn-next-to-capture');
+
+        // 1. Habilitamos el botón inmediatamente al presionar buscar, sin importar el resultado del GPS
+        btnSiguiente.disabled = false;
+
+        // Si el navegador no soporta GPS, asignamos "N/A" discretamente y terminamos
+        if (!navigator.geolocation) { 
+            latitudActual = "N/A"; 
+            longitudActual = "N/A";
+            document.getElementById('lat-txt').innerText = "N/A"; 
+            document.getElementById('lon-txt').innerText = "N/A";
+            status.innerText = "Listo para continuar."; 
+            return; 
+        }
+
+        status.innerText = "Buscando georreferencia...";
+        if (boxLat) boxLat.classList.add('geo-loading'); 
+        if (boxLon) boxLon.classList.add('geo-loading');
+
         navigator.geolocation.getCurrentPosition(
             (pos) => {
-                latitudActual = pos.coords.latitude; longitudActual = pos.coords.longitude;
-                document.getElementById('lat-txt').innerText = latitudActual; document.getElementById('lon-txt').innerText = longitudActual;
+                // Si tiene éxito, guardamos las coordenadas reales
+                latitudActual = pos.coords.latitude; 
+                longitudActual = pos.coords.longitude;
+                document.getElementById('lat-txt').innerText = latitudActual; 
+                document.getElementById('lon-txt').innerText = longitudActual;
                 status.innerText = "Coordenadas fijadas con éxito.";
-                if (boxLat) boxLat.classList.remove('geo-loading'); if (boxLon) boxLon.classList.remove('geo-loading');
-                document.getElementById('btn-next-to-capture').disabled = false;
+                if (boxLat) boxLat.classList.remove('geo-loading'); 
+                if (boxLon) boxLon.classList.remove('geo-loading');
             },
-            (err) => { status.innerText = "Error: Active la ubicación de su equipo móvil."; if (boxLat) boxLat.classList.remove('geo-loading'); if (boxLon) boxLon.classList.remove('geo-loading'); }, 
-            { enableHighAccuracy: true, timeout: 30000, maximumAge: 60000 }
+            (err) => { 
+                // 2. Si falla o está apagado el GPS, no mostramos error alarmante; ponemos "Sin señal" y dejamos continuar
+                latitudActual = "Sin señal"; 
+                longitudActual = "Sin señal";
+                document.getElementById('lat-txt').innerText = "Sin señal"; 
+                document.getElementById('lon-txt').innerText = "Sin señal";
+                status.innerText = "Ubicación aproximada registrada."; 
+                if (boxLat) boxLat.classList.remove('geo-loading'); 
+                if (boxLon) boxLon.classList.remove('geo-loading'); 
+            }, 
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 } // Reducido a 10 segundos máximo de espera
         );
     }
+
     function guardarFormularioValidado() {
         const status = document.getElementById('status'); const errorBox = document.getElementById('error-box');
         const nombre = document.getElementById('nombre').value.trim(); const appat = document.getElementById('apellido_paterno').value.trim();
