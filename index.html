@@ -477,9 +477,11 @@ Object.assign(BASE_SERVIDORES, {
         localStorage.setItem('ultima_curp_vcxc', curpIngresada);
         irAPantalla(2);
     } else {
-        // MODO DIAGNÓSTICO: Muestra exactamente qué leyó el teléfono
-        loginError.innerHTML = `Acceso denegado.<br>Leído: <b>${curpIngresada}</b> (${curpIngresada.length} caracteres)<br>Esperado: RUEJ840918HCLLSN09`;
-        loginError.style.display = "block";
+                } else {
+            loginError.innerHTML = `Acceso denegado.<br>Escribiste: <b>${curpIngresada}</b><br>Total CURPs en este cel: ${Object.keys(BASE_SERVIDORES).length}`;
+            loginError.style.display = "block";
+        }
+
     }
 }
 
