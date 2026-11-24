@@ -266,11 +266,11 @@
 </div>
 
 <!-- AQUÍ SE CONECTA TU ARCHIVO brigadistas.js -->
-<script src="../brigadistas.js"></script>
+<script src="brigadistas.js"></script>
 
 <script>
     // Enlace de comunicación seguro con Google Apps Script
-    const WEB_APP_URL = "https://google.com";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwVJHVc53XKtoNX6oj6fgiqn5htnSkbOmUKoXRkiMgaNHSUxn8tzifkHR8gKpIr8kY/exec";
 
     // BASE DE DATOS OFFLINE: Relación de CURPs con el Nombre del Servidor Público
     const BASE_SERVIDORES = {
@@ -424,9 +424,12 @@
         "CESS910708MDGRLC06": "MARIA DEL SOCORRO CERVANTES SALGADO"
     });
 
-    // FUSIONA TODAS LAS CURPS DE brigadistas.js AUTOMÁTICAMENTE
+    /    // FUSIONA AUTOMÁTICAMENTE TODAS LAS CURPS DE brigadistas.js EXTRAYENDO SU NOMBRE
     if (typeof AUTHORIZED_CURPS !== 'undefined') {
-        Object.assign(BASE_SERVIDORES, AUTHORIZED_CURPS);
+        Object.keys(AUTHORIZED_CURPS).forEach(function(curp) {
+            var dato = AUTHORIZED_CURPS[curp];
+            BASE_SERVIDORES[curp.toUpperCase()] = (typeof dato === 'object' && dato.name) ? dato.name : dato;
+        });
     }
 
 
