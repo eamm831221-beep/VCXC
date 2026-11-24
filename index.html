@@ -459,31 +459,28 @@ Object.assign(BASE_SERVIDORES, {
         actualizarContador();
     }
 
-   function validarAccesoCURP() {
-    const rawInput = document.getElementById('input-curp').value;
-    const curpIngresada = rawInput.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
-    const loginError = document.getElementById('login-error');
-
-    if (!curpIngresada) { 
-        loginError.innerText = "Por favor, introduzca una CURP."; 
-        loginError.style.display = "block"; 
-        return; 
-    }
-
-    if (BASE_SERVIDORES[curpIngresada]) {
-        nombreServidorDeducido = BASE_SERVIDORES[curpIngresada];
-        document.getElementById('servidor-activo').innerText = nombreServidorDeducido;
-        loginError.style.display = "none";
-        localStorage.setItem('ultima_curp_vcxc', curpIngresada);
-        irAPantalla(2);
-    } else {
-                } else {
-            loginError.innerHTML = `Acceso denegado.<br>Escribiste: <b>${curpIngresada}</b><br>Total CURPs en este cel: ${Object.keys(BASE_SERVIDORES).length}`;
+      function validarAccesoCURP() {
+        var curpIngresada = document.getElementById('input-curp').value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+        var loginError = document.getElementById('login-error');
+        
+        if (!curpIngresada) { 
+            loginError.innerText = "Por favor, introduzca una CURP."; 
+            loginError.style.display = "block"; 
+            return; 
+        }
+        
+        if (BASE_SERVIDORES[curpIngresada]) {
+            nombreServidorDeducido = BASE_SERVIDORES[curpIngresada];
+            document.getElementById('servidor-activo').innerText = nombreServidorDeducido;
+            loginError.style.display = "none";
+            localStorage.setItem('ultima_curp_vcxc', curpIngresada);
+            irAPantalla(2);
+        } else {
+            loginError.innerHTML = "Acceso denegado.<br>Escribiste: <b>" + curpIngresada + "</b><br>Total CURPs: " + Object.keys(BASE_SERVIDORES).length;
             loginError.style.display = "block";
         }
-
     }
-}
+
 
 
        function buscarGPS() {
