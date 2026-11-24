@@ -459,21 +459,30 @@ Object.assign(BASE_SERVIDORES, {
         actualizarContador();
     }
 
-    function validarAccesoCURP() {
-        const curpIngresada = document.getElementById('input-curp').value.trim().toUpperCase();
-        const loginError = document.getElementById('login-error');
-        if (!curpIngresada) { loginError.innerText = "Por favor, introduzca una CURP."; loginError.style.display = "block"; return; }
-        if (BASE_SERVIDORES[curpIngresada]) {
-            nombreServidorDeducido = BASE_SERVIDORES[curpIngresada];
-            document.getElementById('servidor-activo').innerText = nombreServidorDeducido;
-            loginError.style.display = "none";
-            localStorage.setItem('ultima_curp_vcxc', curpIngresada);
-            irAPantalla(2);
-        } else {
-            loginError.innerText = "Acceso denegado: Esta CURP no se encuentra en la lista autorizada.";
-            loginError.style.display = "block";
-        }
+   function validarAccesoCURP() {
+    const rawInput = document.getElementById('input-curp').value;
+    const curpIngresada = rawInput.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+    const loginError = document.getElementById('login-error');
+
+    if (!curpIngresada) { 
+        loginError.innerText = "Por favor, introduzca una CURP."; 
+        loginError.style.display = "block"; 
+        return; 
     }
+
+    if (BASE_SERVIDORES[curpIngresada]) {
+        nombreServidorDeducido = BASE_SERVIDORES[curpIngresada];
+        document.getElementById('servidor-activo').innerText = nombreServidorDeducido;
+        loginError.style.display = "none";
+        localStorage.setItem('ultima_curp_vcxc', curpIngresada);
+        irAPantalla(2);
+    } else {
+        // MODO DIAGNÓSTICO: Muestra exactamente qué leyó el teléfono
+        loginError.innerHTML = `Acceso denegado.<br>Leído: <b>${curpIngresada}</b> (${curpIngresada.length} caracteres)<br>Esperado: RUEJ840918HCLLSN09`;
+        loginError.style.display = "block";
+    }
+}
+
 
        function buscarGPS() {
         const status = document.getElementById('status'); 
